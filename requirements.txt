@@ -1,2 +1,4 @@
 yaml
 logging
+spacy
+https://github.com/explosion/spacy-models/releases/download/it_core_news_sm-2.2.5/it_core_news_sm-2.2.5.tar.gz#egg=it_core_news_sm

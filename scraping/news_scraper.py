@@ -61,3 +61,4 @@ if __name__ == '__main__':
 	news_scraper = NewsScraper()
 	query = 'language:IT AND title:coronavirus'
 	json_news = news_scraper.get_news_by_query(query, 'discover_date', 'desc')
+	pprint(json_news)
