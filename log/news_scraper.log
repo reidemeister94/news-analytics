@@ -1,3 +1,0 @@
-2020-03-05 15:36:21,849 - ERROR - <class 'json.decoder.JSONDecodeError'>, news.py, 47
-2020-03-05 15:38:04,599 - ERROR - 500, Invalid token, <class 'json.decoder.JSONDecodeError'>, news.py, 47
-2020-03-05 15:38:36,883 - ERROR - Response code: 500, Response text: Invalid token, <class 'json.decoder.JSONDecodeError'>, news.py, 47
