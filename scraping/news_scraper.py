@@ -34,7 +34,9 @@ class NewsScraper:
 		return logger
 
 	def get_news_by_query(self, query, sort_by=None, sort_order=None, limit=None):
-		# query is composed used Lucene syntax: see https://lucene.apache.org/core/2_9_4/queryparsersyntax.html for details
+		# query is composed used Lucene syntax:
+		# see https://lucene.apache.org/core/2_9_4/queryparsersyntax.html
+		# and https://console.newsriver.io/code-book for details
 		url = "https://api.newsriver.io/v2/search?query={}".format(query)
 		if sort_by is not None:
 			url += '&sortBy={}'.format(self.sort_by[sort_by])
