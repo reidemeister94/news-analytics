@@ -1,0 +1,9 @@
+scraper:
+  newsriver_api: sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
+  sort_by: 
+    score: _score 
+    discover_date: discoverDate
+    read_time: metadata.readTime.seconds
+  sort_order: 
+    asc: ASC
+    desc: DESC
