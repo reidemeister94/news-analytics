@@ -1,18 +1,19 @@
 import pandas as pd
 
-from utils import lda_utils
-from topic_extraction import lda_model
+import utils
+import lda_module
 
 
 data = pd.read_csv("./topic-lda/data_test.csv")
 
-lda_mod = lda_model(20)
-
 tokens = data['tokens'].tolist()
-print("tokens length", len(tokens))
 
-corpus = lda_mod.build_corpus(tokens)
+dictionary, tokens = lda_module.build_dictionary(tokens, use_collocations = False)
 
-model = lda_mod.build_lda_model(corpus)
+corpus = lda_module.build_corpus(dictionary, tokens)
 
-print(model.topics)
+model = lda_module.build_lda_model(dictionary, corpus)
+
+topics = lda_module.get_topics(model, corpus, len(tokens))
+
+print(len(topics))

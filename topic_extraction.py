@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 from gensim import corpora, models
 
@@ -10,25 +11,29 @@ class lda_model():
 		self.num_topics = num_topics # old value = 20
 		self.dictionary = corpora.Dictionary()
 		self.topics = []
+		self.tokens = []
+		#self.idx = 0
 
 
 	def build_corpus(tokens, use_collocations = True, doc_threshold = 3):
+		assert len(tokens) != 0, "Missing input tokens."
+
 		print("... Building corpus ...")
 		if(use_collocations):
 			print("... Finding collocations ...")
-			tokens = lda_utils.get_word_collocations(tokens)
-
-		assert len(tokens) != 0, "Missing input tokens."
+			self.tokens = lda_utils.get_word_collocations(tokens)
+		else:
+			self.tokens = tokens
 
 		# Build dictionary
-		self.dictionary = corpora.Dictionary(tokens)
+		self.dictionary = corpora.Dictionary(self.tokens)
 
 		# Keep tokens that appear at least in 3 documents
 		if(doc_threshold > 0):
 			self.dictionary.filter_extremes(no_below = doc_threshold)
 
 		# Build corpus as list of bags of words from the documents
-		corpus = [self.dictionary.doc2bow(list_of_tokens) for list_of_tokens in tokens]
+		corpus = [self.dictionary.doc2bow(list_of_tokens) for list_of_tokens in self.tokens]
 
 		return corpus
 
@@ -54,7 +59,7 @@ class lda_model():
 
 		assert len(self.topics != 0), "LDA model not present."
 
-		document_info = pd.DataFrame([(el[0], round(el[1],2), topics[el[0]][1]) for el in model[dictionary_LDA.doc2bow(tokens)]], \
+		document_info = pd.DataFrame([(el[0], round(el[1],2), topics[el[0]][1]) for el in model[dictionary_LDA.doc2bow(self.tokens)]], \
 									columns = ['topic #', 'weight', 'words in topic'])
 
 		return document_info
@@ -68,12 +73,21 @@ class lda_model():
 								.reset_index(drop = True).fillna(0)
 		return t2d_matrix
 
+	def __len__(self):
+		return len(self)
+'''
+	def __iter__(self):
+		return self
 
+	def __next__(self):
+		self.idx +=1
+		try:
+			return self.tokens[self.idx-1]
+		except IndexError:
+			self.idx = 0
+			raise StopIteration
+	next = __next__
 
-
-
-
-
-
-
-		
+	def __len__(self):
+		return len(self)
+'''
