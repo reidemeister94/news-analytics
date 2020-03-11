@@ -75,6 +75,7 @@ class NewsScraper:
         # self.CONFIG['scraper']['start_date'] = start_date_new
         # with open('../configuration/configuration.yaml', 'w') as f:
         #     yaml.dump(self.CONFIG, f)
+        
 
 
     def stop_condition(self, article):
