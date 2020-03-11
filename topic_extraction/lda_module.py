@@ -15,6 +15,23 @@ class LdaModule:
         self.topics = None
         self.utils = LdaUtils()
 
+    def __get_logger(self):
+        # create logger
+        logger = logging.getLogger('LdaModule')
+        logger.setLevel(logging.DEBUG)
+        # create console handler and set level to debug
+        log_path = '../log/LdaModule.log'
+        if not os.path.isdir('../log/'):
+            os.mkdir('../log/')
+        fh = logging.FileHandler(log_path)
+        fh.setLevel(logging.DEBUG)
+        # create formatter
+        formatter = logging.Formatter(
+            '%(asctime)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+        return logger
+
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
         assert len(self.tokens) != 0, "Missing input tokens."
 
@@ -72,7 +89,8 @@ class LdaModule:
     def get_document_topic(self, doc_tokens):
         # word_tokenize da importare
         assert len(self.topics != 0), "LDA model not present."
-        document_info = pd.DataFrame([(el[0], round(el[1], 2), topics[el[0]][1]) for el in self.model[self.dictionary.doc2bow(doc_tokens)]],
+        document_info = pd.DataFrame([(el[0], round(el[1], 2), topics[el[0]][1])
+                                      for el in self.model[self.dictionary.doc2bow(doc_tokens)]],
                                      columns=['topic #', 'weight', 'words in topic'])
         return document_info
 
