@@ -16,4 +16,4 @@ model = lda_module.build_lda_model(dictionary, corpus)
 
 topics = lda_module.get_topics(model, corpus, len(tokens))
 
-print(len(topics))
+print(topics)
