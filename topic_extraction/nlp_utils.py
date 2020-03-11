@@ -23,7 +23,7 @@ def sentence_tokenize(data):
 
 	The result is appended to data in the 'sentences' column
 	'''
-	data['sentences'] = data.articles.map(sent_tokenize)
+	data['sentences'] = data.articles.map(sent_tokenize) # <-- DA SISTEMARE CON LA COLONNA GIUSTA
 	return data
 
 def word_tokenize(data):
