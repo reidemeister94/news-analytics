@@ -1,16 +1,25 @@
-import pandas as pd
+import json
+#import pandas as pd
 
-from lda_utils import LdaUtils
 from lda_module import LdaModule
+from lda_utils import LdaUtils
 
+from nlp_utils import NLPUtils
 
-data = pd.read_csv("./data_test.csv")
+#data = pd.read_csv("./data_test.csv")
 
-tokens = data['tokens'].tolist()
+# Assuming a json file coming from mongoDB
+file = './old/data.json'
+with open(file, 'r') as texts:
+    data = json.load(texts)
 
-print('ciaone')
+num_docs = len(data['articles'])
 
-lda = LdaModule(len(data), tokens)
+# Some preparation before running LDA
+text_utils = NLPUtils(data)
+tokens = text_utils.parse_text('en')
+
+lda = LdaModule(num_docs, tokens)
 
 dictionary = lda.build_dictionary()
 
@@ -20,7 +29,10 @@ model = lda.build_lda_model()
 
 topics = lda.get_topics()
 
-print(topics[:4])
+flat_topics = [topic for sublist in topics for topic in sublist]
+
+print("I've assigned ", len(flat_topics), "topics.")
+# print(topics)
 
 '''
 dictionary, tokens = lda_module.build_dictionary(tokens, use_collocations = False)
