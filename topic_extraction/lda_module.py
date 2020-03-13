@@ -82,12 +82,10 @@ class LdaModule:
                        for i in range(self.num_docs)]
         return self.topics
 
-    '''
-	Return the topic(s) for a given document
-	'''
-
     def get_document_topic(self, doc_tokens):
-        # word_tokenize da importare
+        '''
+        Return the topic(s) for a given document
+        '''
         assert len(self.topics != 0), "LDA model not present."
         document_info = pd.DataFrame([(el[0], round(el[1], 2), topics[el[0]][1])
                                       for el in self.model[self.dictionary.doc2bow(doc_tokens)]],

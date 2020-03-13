@@ -17,6 +17,11 @@ class NLPUtils:
         self.data = data
 
     def parse_text(self, lang):
+        '''
+        General function to parse a set of texts
+
+        To-Do: add the option to 'toggle' only some of them
+        '''
         self.data = self.convert_to_df(self.data)
         self.data = self.filter_language(self.data, lang)
         self.data = self.sentence_tokenize(self.data)
@@ -29,14 +34,22 @@ class NLPUtils:
         return self.data['tokens'].tolist()
 
     def convert_to_df(self, data):
+        '''
+        Convert the JSON data into a Pandas dataframe.
+        Makes it easier to work with models from nltk and gensim.
+        '''
         return pd.DataFrame.from_dict(data)
 
-    def filter_language(self, data, lang):
+    def filter_language(self, data, lang=None):
         '''
+        Keep texts only from a given language
         - data: Pandas dataframe
-        - lang: string representing the language to keep
+        - lang: string representing the language to keep (like 'en')
         '''
-        return data.loc[data.lang == lang]
+        if lang is not None:
+            return data.loc[data.lang == lang]
+        else:
+            return data
 
     def sentence_tokenize(self, data):
         '''
@@ -57,12 +70,17 @@ class NLPUtils:
         return data
 
     def pos_tagging(self, data):
+        '''
+        Performs POS tagging on a list of tokens representing a sentence
+        '''
         data['POS_tokens'] = data['tokens_sentences'].map(
             lambda tokens_sentences: [pos_tag(tokens) for tokens in tokens_sentences])
         return data
 
     def _get_wordnet_pos(self, treebank_tag):
-        # Utility function to map from the Treebank corpus tag system to the wordnet one
+        '''
+        Utility function to map from the Treebank corpus tag system to the wordnet one
+        '''
         if treebank_tag.startswith('J'):
             return wordnet.ADJ
         elif treebank_tag.startswith('V'):
@@ -75,7 +93,9 @@ class NLPUtils:
             return ''
 
     def lemmatize_tokens(self, data):
-        # Lemmatizing each word with its POS tag, in each sentence
+        '''
+        Lemmatizing each word with its POS tag, in each sentence
+        '''
         lemmatizer = WordNetLemmatizer()
 
         data['tokens_sentences_lemmatized'] = data['POS_tokens'].map(
@@ -90,6 +110,9 @@ class NLPUtils:
         return data
 
     def remove_stopwords(self, data, lang, extra_stopwords=None):
+        '''
+        Remove very common words
+        '''
         to_remove = stopwords.words(lang)
 
         if extra_stopwords is not None:
