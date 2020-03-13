@@ -74,17 +74,22 @@ class NewsScraper:
                                                                                         exc_type, fname, exc_tb.tb_lineno))
             return None
     
-    def save_news_to_db(self):
+    def save_news_to_db(self, lang):
         # print(self.NEWS_API)
         #get correct db collection
-        collection = self.CLIENT['news']['article']
-        current_date = self.CONFIG['scraper']['start_date']
+        if lang == 'IT':
+            collection = self.CLIENT['news']['article']
+            current_date = self.CONFIG['scraper']['start_date']
+        else:
+            collection = self.CLIENT['news']['article_en']
+            current_date = self.CONFIG['scraper']['start_date_en']
         stop = False
         self.stop_date =  datetime.now()
         self.LOGGER.info('Starting scheduled news scraping...')
         self.LOGGER.info('Start Date: {}'.format(current_date))
         while not stop:
-            query = "language:IT AND title:coronavirus AND discoverDate:[{} TO *] ".format(datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+            query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+            print(query)
             json_news = self.get_news_by_query(query, 'discover_date', 'asc', 100)
             if json_news is None:
                 idx_api = self.get_new_api()
@@ -106,7 +111,10 @@ class NewsScraper:
                             exc_type, fname, exc_tb.tb_lineno))
                 last_article = json_news[-1]
                 stop, current_date = self.stop_condition(last_article, current_date)
-                self.CONFIG['scraper']['start_date'] = current_date
+                if lang == 'IT':
+                    self.CONFIG['scraper']['start_date'] = current_date
+                else:
+                    self.CONFIG['scraper']['start_date_en'] = current_date
                 with open('../configuration/configuration.yaml', 'w') as f:
                     yaml.dump(self.CONFIG, f)
                 self.LOGGER.info('Current Date: {}'.format(current_date))
