@@ -79,7 +79,8 @@ class NLPUtils:
 
     def _get_wordnet_pos(self, treebank_tag):
         '''
-        Utility function to map from the Treebank corpus tag system to the wordnet one
+        Utility function to map from the Treebank corpus tag set (used to
+        train the nltk POS tagger) to the WordNet tag set. 
         '''
         if treebank_tag.startswith('J'):
             return wordnet.ADJ
