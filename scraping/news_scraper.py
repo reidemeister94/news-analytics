@@ -6,16 +6,19 @@ import json
 import os
 import sys
 from datetime import datetime
-
+import random
+import dateparser
+from pymongo import MongoClient
 
 class NewsScraper:
     def __init__(self):
         with open('../configuration/configuration.yaml','r') as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
-        self.NEWS_API = self.CONFIG['scraper']['newsriver_api'][2]
+        self.NEWS_API = self.CONFIG['scraper']['newsriver_api'][random.randint(0,2)]
         self.LOGGER = self.__get_logger()
         self.sort_by = self.CONFIG['scraper']['sort_by']
         self.sort_order = self.CONFIG['scraper']['sort_order']
+        self.CLIENT = MongoClient(self.CONFIG['mongourl'])
 
     def __get_logger(self):
         # create logger
@@ -59,29 +62,45 @@ class NewsScraper:
             return None
     
     def save_news_to_db(self):
-        print(self.NEWS_API)
+        # print(self.NEWS_API)
+        #get correct db collection
+        collection = self.CLIENT['news']['article']
         current_date = self.CONFIG['scraper']['start_date']
         stop = False
+        n_tries = 5
         while not stop:
             query = "language:IT AND title:coronavirus AND discoverDate:[{} TO *] ".format(current_date)
             json_news = self.get_news_by_query(query, 'discover_date', 'asc', 100)
-            for article in json_news.items():
-                pprint(article)
+            if json_news is None:
+                n_tries -= 1
+                self.LOGGER.error('Retrying download news, changing API Token... Tentative number {}'.format(5 - n_tries))
+                self.NEWS_API = self.CONFIG['scraper']['newsriver_api'][random.randint(0,2)]
+            else:
+                for news in json_news:
+                    try:
+                        collection.insert_one(news)
+                    except Exception as e:
+                        exc_type, exc_obj, exc_tb = sys.exc_info()
+                        fname = os.path.split(
+                            exc_tb.tb_frame.f_code.co_filename)[1]
+                        self.logger.error('Error on DB Insert: {}, {}, {}'.format(
+                            exc_type, fname, exc_tb.tb_lineno))
+                last_article = json_news[-1]
+                stop, current_date = self.stop_condition(last_article, current_date)
+            # with open('data/articles.json', 'w') as w:
+            #         json.dump(json_news,w)
             stop = True
-                #stop = self.stop_condition(article)
-        # print(type(start_date))
-        # start_date = datetime.strptime(start_date, '%Y-%m-%d')
-        # start_date_new = '2020-02-01'
-        # self.CONFIG['scraper']['start_date'] = start_date_new
-        # with open('../configuration/configuration.yaml', 'w') as f:
-        #     yaml.dump(self.CONFIG, f)
+        self.CONFIG['scraper']['start_date'] = datetime.strptime(current_date, '%Y-%m-%d')
+        with open('../configuration/configuration.yaml', 'w') as f:
+            yaml.dump(self.CONFIG, f)
         
 
 
-    def stop_condition(self, article):
-        if article['timestamp'] >= datetime.now():
-            return True
-        return False
+    def stop_condition(self, article, current_date):
+        current_date = dateparser.parse(article['publishDate'])
+        if dateparse.parse(article['publishDate']) >= datetime.now():
+            return True, current_date
+        return False, current_date
 
 if __name__ == '__main__':
     news_scraper = NewsScraper()
