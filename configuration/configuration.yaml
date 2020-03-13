@@ -1,9 +1,14 @@
 scraper:
-  newsriver_api: sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
-  sort_by: 
-    score: _score 
+  newsriver_api: 
+    - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
+    - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXzq3w96QlMqw3KrGN772WETn2pHZrSf1gT2PUujH1YaQA
+    - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXwdTtlqoiFjohlircTRbjTVn2pHZrSf1gT2PUujH1YaQA
+  sort_by:
     discover_date: discoverDate
     read_time: metadata.readTime.seconds
-  sort_order: 
+    score: _score
+  sort_order:
     asc: ASC
     desc: DESC
+  start_date: 2020-01-01
+mongourl: mongodb://localhost:27017

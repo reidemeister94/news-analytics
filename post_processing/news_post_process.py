@@ -21,7 +21,8 @@ class NewsPostProcess:
 		mongourl = 'mongodb://localhost:27017/'
 		self.MONGO_CLIENT = MongoClient(mongourl)
 		self.news_json = news_json
-		self.nlp = spacy.load('it_core_news_sm')
+		self.nlp_it = spacy.load('it_core_news_sm')
+		self.nlp_en = spacy.load('en_core_web_sm')
 
 	def topic_extraction(self):
 		pass
@@ -32,15 +33,21 @@ class NewsPostProcess:
 	def named_entity_recognition(self):
 		collection = self.MONGO_CLIENT['news']['article']
 		# collection.insert_one(self.news_json[0])
-		doc = self.nlp(self.news_json[0]['text'])
+		doc = self.nlp_en(self.news_json[0]['text'])
+		print('News Text:')
+		print(doc)
+		print('"' * 75)
+		print('Elem, where is element (begin, inside, outside), Named entity type:')
 		pprint([(X, X.ent_iob_, X.ent_type_) for X in doc])
+		print('"' * 75)
 		labels = [x.label_ for x in doc.ents]
+		print('Labels:')
 		pprint(Counter(labels))
+		print('"' * 75)
 		items = [x.text for x in doc.ents]
+		print('{} Most common items in doc'.format(3))
 		pprint(Counter(items).most_common(3))
-		sentences = [x for x in doc.sents]
-		displacy.render(self.nlp(str(sentences[20])),
-		                style='dep', options={'distance': 120})
+		print('"' * 75)
 
 	def __get_logger(self):
 		# create logger
@@ -62,8 +69,7 @@ class NewsPostProcess:
 
 if __name__ == '__main__':
 	news_scraper = NewsScraper()
-	query = 'language:IT AND title:coronavirus'
+	query = 'language:EN AND title:coronavirus'
 	news_json = news_scraper.get_news_by_query(query, 'discover_date', 'desc')
-	# pprint(news_json[0])
 	news_post_process = NewsPostProcess(news_json)
 	news_post_process.named_entity_recognition()
