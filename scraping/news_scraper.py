@@ -9,16 +9,22 @@ from datetime import datetime
 import random
 import dateparser
 from pymongo import MongoClient
+import pytz
+import bson
 
 class NewsScraper:
     def __init__(self):
         with open('../configuration/configuration.yaml','r') as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
-        self.NEWS_API = self.CONFIG['scraper']['newsriver_api'][random.randint(0,2)]
+        self.NEWS_API_LIST = self.CONFIG['scraper']['newsriver_api']
         self.LOGGER = self.__get_logger()
         self.sort_by = self.CONFIG['scraper']['sort_by']
         self.sort_order = self.CONFIG['scraper']['sort_order']
         self.CLIENT = MongoClient(self.CONFIG['mongourl'])
+        self.used_tokens = {api: False for api in range(len(self.NEWS_API_LIST))}
+        index_api = random.randint(0,len(self.NEWS_API_LIST) - 1)
+        self.NEWS_API = self.NEWS_API_LIST[index_api]
+        self.used_tokens[index_api] = True
 
     def __get_logger(self):
         # create logger
@@ -36,6 +42,13 @@ class NewsScraper:
         fh.setFormatter(formatter)
         logger.addHandler(fh)
         return logger
+
+    def get_new_api(self):
+        for idx,used in self.used_tokens.items():
+            if not used:
+                self.used_tokens[idx] = True
+                return idx
+        return None
 
     def get_news_by_query(self, query, sort_by=None, sort_order=None, limit=None):
         # query is composed used Lucene syntax:
@@ -61,20 +74,31 @@ class NewsScraper:
                                                                                         exc_type, fname, exc_tb.tb_lineno))
             return None
     
-    def save_news_to_db(self):
+    def save_news_to_db(self, lang):
         # print(self.NEWS_API)
         #get correct db collection
-        collection = self.CLIENT['news']['article']
-        current_date = self.CONFIG['scraper']['start_date']
+        if lang == 'IT':
+            collection = self.CLIENT['news']['article']
+            current_date = self.CONFIG['scraper']['start_date']
+        else:
+            collection = self.CLIENT['news']['article_en']
+            current_date = self.CONFIG['scraper']['start_date_en']
         stop = False
-        n_tries = 5
+        self.stop_date =  datetime.now()
+        self.LOGGER.info('Starting scheduled news scraping...')
+        self.LOGGER.info('Start Date: {}'.format(current_date))
         while not stop:
-            query = "language:IT AND title:coronavirus AND discoverDate:[{} TO *] ".format(current_date)
+            query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+            print(query)
             json_news = self.get_news_by_query(query, 'discover_date', 'asc', 100)
             if json_news is None:
-                n_tries -= 1
-                self.LOGGER.error('Retrying download news, changing API Token... Tentative number {}'.format(5 - n_tries))
-                self.NEWS_API = self.CONFIG['scraper']['newsriver_api'][random.randint(0,2)]
+                idx_api = self.get_new_api()
+                if idx_api is None:
+                    stop = True
+                    self.LOGGER.error('Used all API keys, but none of them work')
+                    break
+                self.LOGGER.error('Retrying download news, changing API Token...')
+                self.NEWS_API = self.CONFIG['scraper']['newsriver_api'][idx_api]
             else:
                 for news in json_news:
                     try:
@@ -83,22 +107,26 @@ class NewsScraper:
                         exc_type, exc_obj, exc_tb = sys.exc_info()
                         fname = os.path.split(
                             exc_tb.tb_frame.f_code.co_filename)[1]
-                        self.logger.error('Error on DB Insert: {}, {}, {}'.format(
+                        self.LOGGER.error('Error on DB Insert: {}, {}, {}'.format(
                             exc_type, fname, exc_tb.tb_lineno))
                 last_article = json_news[-1]
                 stop, current_date = self.stop_condition(last_article, current_date)
+                if lang == 'IT':
+                    self.CONFIG['scraper']['start_date'] = current_date
+                else:
+                    self.CONFIG['scraper']['start_date_en'] = current_date
+                with open('../configuration/configuration.yaml', 'w') as f:
+                    yaml.dump(self.CONFIG, f)
+                self.LOGGER.info('Current Date: {}'.format(current_date))
             # with open('data/articles.json', 'w') as w:
             #         json.dump(json_news,w)
-            stop = True
-        self.CONFIG['scraper']['start_date'] = datetime.strptime(current_date, '%Y-%m-%d')
-        with open('../configuration/configuration.yaml', 'w') as f:
-            yaml.dump(self.CONFIG, f)
+        self.LOGGER.info('Scheduled News Scraping Done until {}'.format(current_date))
         
 
 
     def stop_condition(self, article, current_date):
-        current_date = dateparser.parse(article['publishDate'])
-        if dateparse.parse(article['publishDate']) >= datetime.now():
+        current_date = dateparser.parse(article['discoverDate']).replace(tzinfo=None)
+        if dateparser.parse(article['discoverDate']).replace(tzinfo=None) >= self.stop_date:
             return True, current_date
         return False, current_date
 

@@ -1,8 +1,12 @@
+mongourl: mongodb://localhost:27017
 scraper:
-  newsriver_api: 
-    - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
-    - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXzq3w96QlMqw3KrGN772WETn2pHZrSf1gT2PUujH1YaQA
-    - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXwdTtlqoiFjohlircTRbjTVn2pHZrSf1gT2PUujH1YaQA
+  newsriver_api:
+  - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXzq3w96QlMqw3KrGN772WETn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXwdTtlqoiFjohlircTRbjTVn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw0qEsNkUdZjT9lAgq0YtkxoDyiGAcVcfuEZOaoHNRgd_n2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw0qEsNkUdZjT9lAgq0YtkxqeWhxI2MWq4hxoWw_PQDAMn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw0qEsNkUdZjT9lAgq0Ytkxrcf3h1pG1qGQmmLqj3ICRtn2pHZrSf1gT2PUujH1YaQA
   sort_by:
     discover_date: discoverDate
     read_time: metadata.readTime.seconds
@@ -10,5 +14,5 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-01-01
-mongourl: mongodb://localhost:27017
+  start_date: 2020-03-13 16:58:33.150000
+  start_date_en: 2020-03-14 15:51:32.145000
