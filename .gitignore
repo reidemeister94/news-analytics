@@ -7,6 +7,6 @@ bert_model/
 
 __pycache__/
 
-.ipynb_checkpoints
+.vscode/
 
-.vscode
+.ipynb_checkpoints
