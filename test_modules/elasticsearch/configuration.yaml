@@ -1,0 +1,3 @@
+twitter_es:
+  host: http://145.100.57.231/es/
+  index: twitter.tweets
