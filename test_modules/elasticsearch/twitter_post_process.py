@@ -7,6 +7,9 @@ import dateutil
 import pytz
 from datetime import datetime
 
+import schedule
+import time
+
 
 class TwitterPostProcess:
 
@@ -84,8 +87,6 @@ class TwitterPostProcess:
         with open('./configuration.yaml', 'w') as f:
             yaml.dump(self.CONFIG, f)
 
-        # to-do scheduling
-
     # Può essere superfluo per ora dato che abbiamo solo roba sul Corona
 
     def topic_extraction(self):
@@ -126,5 +127,11 @@ if __name__ == '__main__':
 
     num_results = 0  # if 0 -> no 'size' in the request, elasticsearch defaults to 10 results
     twitter_post_process.scheduled_test(query_simple, num_results)
+
+    schedule.every(2).minutes.do(twitter_post_process.scheduled_test, query_simple, num_results)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
     #twitter_json = twitter_post_process.query_es(query, num_results)
     #results = twitter_post_process.format_results(twitter_json)
