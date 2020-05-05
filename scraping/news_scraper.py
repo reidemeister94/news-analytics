@@ -95,7 +95,10 @@ class NewsScraper:
         self.LOGGER.info('Starting scheduled news scraping...')
         self.LOGGER.info('Start Date: {}'.format(current_date))
         while not stop:
-            query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+            if self.lang == 'TR': 
+                query = "language:{} AND text:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+            else:
+                query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
             print(query)
             json_news = self.get_news_by_query(query, 'discover_date', 'asc', 100)
             if json_news is None:

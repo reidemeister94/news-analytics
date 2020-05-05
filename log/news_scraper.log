@@ -11404,3 +11404,13 @@ The server didn't respond in time.
 2020-05-05 20:13:22,606 - INFO - Current Date: 2020-05-05 18:12:47.783000
 2020-05-05 20:13:22,795 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
 2020-05-05 20:13:22,819 - INFO - Current Date: 2020-05-05 18:13:21.360000
+2020-05-05 21:00:01,833 - INFO - Starting scheduled news scraping...
+2020-05-05 21:00:01,833 - INFO - Start Date: 2020-05-05 18:13:21.360000
+2020-05-05 21:00:09,410 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 115
+2020-05-05 21:00:09,559 - INFO - Current Date: 2020-05-05 18:59:45.815000
+2020-05-05 21:00:17,011 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 115
+2020-05-05 21:00:17,036 - INFO - Current Date: 2020-05-05 18:59:45.815000
+2020-05-05 21:00:24,462 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 115
+2020-05-05 21:00:24,487 - INFO - Current Date: 2020-05-05 18:59:45.815000
+2020-05-05 21:00:35,998 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 115
+2020-05-05 21:00:36,023 - INFO - Current Date: 2020-05-05 18:59:45.815000
