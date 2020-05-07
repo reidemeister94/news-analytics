@@ -7,12 +7,13 @@ from lda_utils import LdaUtils
 
 class LdaModule:
 
-    def __init__(self, num_docs, tokens):
+    def __init__(self, num_docs, tokens, num_topics):
         self.num_docs = num_docs
         self.tokens = tokens
         self.dictionary = None
         self.corpus = None
         self.topics = None
+        self.num_topics = num_topics
         self.utils = LdaUtils()
 
     def __get_logger(self):
@@ -69,9 +70,9 @@ class LdaModule:
 
         print("... Building LDA model ...")
 
-        self.model = models.LdaModel(self.corpus, num_topics=num_topics,
+        self.model = models.LdaModel(self.corpus, num_topics=self.num_topics,
                                      id2word=self.dictionary, passes=passes,
-                                     alpha=[alpha] * num_topics,
+                                     alpha=[alpha] * self.num_topics,
                                      eta=[eta] * len(self.dictionary.keys()))
 
         return self.model
