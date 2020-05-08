@@ -1,0 +1,1248 @@
+2020-05-05 20:29:38,163 - INFO - Starting scheduled news scraping...
+2020-05-05 20:29:38,163 - INFO - Start Date: 2019-12-01 00:00:00
+2020-05-05 20:29:39,812 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,814 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,815 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,816 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,817 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,819 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,820 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,821 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,822 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,823 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,825 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,826 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,827 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,828 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,829 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,831 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,832 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,833 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,834 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,835 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,836 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,838 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,839 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,840 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,841 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,842 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,844 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,845 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,846 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,847 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,848 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,850 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,851 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,852 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,853 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,854 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,856 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,857 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,858 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,859 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,860 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,862 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,863 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,864 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,865 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,866 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,868 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,869 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,870 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,871 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,872 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,873 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,875 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,876 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,877 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,878 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,879 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,881 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,882 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,883 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,884 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,885 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,886 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,888 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,889 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,890 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,891 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,892 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,894 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,895 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,896 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,897 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,898 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,900 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,901 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,902 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,903 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,904 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,906 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,907 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,908 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,909 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,910 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,912 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,913 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,914 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,915 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,916 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,917 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,919 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,920 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,921 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,922 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,923 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,925 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,926 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,927 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,928 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,930 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:39,931 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:40,032 - INFO - Current Date: 2020-01-20 10:59:58.987000
+2020-05-05 20:29:41,729 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:41,873 - INFO - Current Date: 2020-01-21 16:29:12.133000
+2020-05-05 20:29:43,690 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:43,806 - INFO - Current Date: 2020-01-22 00:12:53.010000
+2020-05-05 20:29:44,703 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:44,825 - INFO - Current Date: 2020-01-22 14:29:32.240000
+2020-05-05 20:29:45,883 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:45,890 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:45,953 - INFO - Current Date: 2020-01-23 05:34:26.370000
+2020-05-05 20:29:46,843 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:46,918 - INFO - Current Date: 2020-01-23 13:24:30.532000
+2020-05-05 20:29:47,853 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:47,929 - INFO - Current Date: 2020-01-23 18:30:06.459000
+2020-05-05 20:29:48,634 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:48,700 - INFO - Current Date: 2020-01-24 06:24:22.261000
+2020-05-05 20:29:49,472 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:49,475 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:49,518 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:49,538 - INFO - Current Date: 2020-01-24 18:58:08.167000
+2020-05-05 20:29:50,176 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:50,244 - INFO - Current Date: 2020-01-25 00:52:36.473000
+2020-05-05 20:29:50,891 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:50,957 - INFO - Current Date: 2020-01-25 12:15:34.522000
+2020-05-05 20:29:51,881 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:52,004 - INFO - Current Date: 2020-01-25 23:57:30.712000
+2020-05-05 20:29:52,707 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:52,829 - INFO - Current Date: 2020-01-26 11:52:54.287000
+2020-05-05 20:29:53,526 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:53,648 - INFO - Current Date: 2020-01-26 16:25:31.282000
+2020-05-05 20:29:54,191 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:54,320 - INFO - Current Date: 2020-01-26 23:54:03.267000
+2020-05-05 20:29:55,027 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:55,154 - INFO - Current Date: 2020-01-27 07:50:00.172000
+2020-05-05 20:29:55,785 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:55,904 - INFO - Current Date: 2020-01-27 10:45:28.264000
+2020-05-05 20:29:56,499 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:56,620 - INFO - Current Date: 2020-01-27 12:33:39.930000
+2020-05-05 20:29:57,233 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:57,355 - INFO - Current Date: 2020-01-27 15:18:46.524000
+2020-05-05 20:29:57,955 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:58,063 - INFO - Current Date: 2020-01-27 17:04:52.633000
+2020-05-05 20:29:58,920 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:59,036 - INFO - Current Date: 2020-01-27 23:23:31.463000
+2020-05-05 20:29:59,736 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:29:59,865 - INFO - Current Date: 2020-01-28 05:27:55.828000
+2020-05-05 20:30:00,528 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:30:00,655 - INFO - Current Date: 2020-01-28 07:24:03.119000
+2020-05-05 20:30:02,325 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:30:02,446 - INFO - Current Date: 2020-01-28 09:23:42.322000
+2020-05-05 20:30:03,108 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:30:03,270 - INFO - Current Date: 2020-01-28 10:43:01.846000
+2020-05-05 20:30:21,901 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:30:22,024 - INFO - Current Date: 2020-01-28 11:54:48.505000
+2020-05-05 20:30:33,821 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:30:33,945 - INFO - Current Date: 2020-01-28 13:28:46.554000
+2020-05-05 20:30:53,132 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:30:53,257 - INFO - Current Date: 2020-01-28 15:22:01.270000
+2020-05-05 20:31:08,785 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:31:08,857 - INFO - Current Date: 2020-01-28 17:01:33.003000
+2020-05-05 20:31:23,841 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:31:23,967 - INFO - Current Date: 2020-01-28 19:41:45.933000
+2020-05-05 20:31:35,492 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:31:35,624 - INFO - Current Date: 2020-01-28 21:46:24.280000
+2020-05-05 20:31:45,983 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:31:46,106 - INFO - Current Date: 2020-01-29 05:37:12.676000
+2020-05-05 20:31:52,634 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:31:52,722 - INFO - Current Date: 2020-01-29 08:08:28.661000
+2020-05-05 20:31:55,750 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:31:55,868 - INFO - Current Date: 2020-01-29 09:06:24.417000
+2020-05-05 20:32:03,036 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:03,038 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:03,168 - INFO - Current Date: 2020-01-29 10:51:04.052000
+2020-05-05 20:32:10,455 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:10,576 - INFO - Current Date: 2020-01-29 12:26:51.133000
+2020-05-05 20:32:16,483 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:16,602 - INFO - Current Date: 2020-01-29 14:36:17.861000
+2020-05-05 20:32:28,166 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:28,192 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:28,196 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:28,198 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:28,293 - INFO - Current Date: 2020-01-29 16:09:12.148000
+2020-05-05 20:32:39,151 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:39,194 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:39,282 - INFO - Current Date: 2020-01-29 17:43:20.717000
+2020-05-05 20:32:44,263 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:44,384 - INFO - Current Date: 2020-01-29 23:27:33.195000
+2020-05-05 20:32:46,812 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:46,933 - INFO - Current Date: 2020-01-30 06:35:27.614000
+2020-05-05 20:32:50,226 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:50,358 - INFO - Current Date: 2020-01-30 09:57:14.219000
+2020-05-05 20:32:54,295 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:54,372 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:54,425 - INFO - Current Date: 2020-01-30 11:52:14.459000
+2020-05-05 20:32:56,018 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:32:56,100 - INFO - Current Date: 2020-01-30 14:11:50.760000
+2020-05-05 20:33:00,861 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:00,929 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:00,986 - INFO - Current Date: 2020-01-30 15:51:44.583000
+2020-05-05 20:33:06,435 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:06,557 - INFO - Current Date: 2020-01-30 18:03:54.100000
+2020-05-05 20:33:09,407 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:09,538 - INFO - Current Date: 2020-01-30 20:43:26.571000
+2020-05-05 20:33:11,126 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:11,275 - INFO - Current Date: 2020-01-31 02:05:37.334000
+2020-05-05 20:33:14,647 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:14,791 - INFO - Current Date: 2020-01-31 07:47:14.654000
+2020-05-05 20:33:15,969 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:16,028 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:16,106 - INFO - Current Date: 2020-01-31 10:01:09.822000
+2020-05-05 20:33:19,811 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:19,845 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:19,850 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:19,854 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:19,940 - INFO - Current Date: 2020-01-31 11:45:07.153000
+2020-05-05 20:33:26,255 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:26,299 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:26,384 - INFO - Current Date: 2020-01-31 13:50:22.273000
+2020-05-05 20:33:32,141 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:32,154 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:32,194 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:32,196 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:32,242 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:32,282 - INFO - Current Date: 2020-01-31 15:34:23.389000
+2020-05-05 20:33:40,417 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:40,540 - INFO - Current Date: 2020-01-31 17:59:50.357000
+2020-05-05 20:33:53,870 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:53,890 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:53,926 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:53,930 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:53,951 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:53,956 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:33:54,001 - INFO - Current Date: 2020-01-31 22:58:04.671000
+2020-05-05 20:34:01,204 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:01,206 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:01,336 - INFO - Current Date: 2020-02-01 07:36:57.061000
+2020-05-05 20:34:10,900 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:11,040 - INFO - Current Date: 2020-02-01 11:43:55.183000
+2020-05-05 20:34:20,372 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:20,526 - INFO - Current Date: 2020-02-01 15:09:53.402000
+2020-05-05 20:34:27,135 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:27,284 - INFO - Current Date: 2020-02-01 20:05:34.939000
+2020-05-05 20:34:29,521 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:29,660 - INFO - Current Date: 2020-02-02 05:44:57.897000
+2020-05-05 20:34:33,437 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:33,583 - INFO - Current Date: 2020-02-02 09:57:37.185000
+2020-05-05 20:34:40,344 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:34:40,491 - INFO - Current Date: 2020-02-02 13:08:11.050000
+2020-05-05 20:35:08,850 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:09,090 - INFO - Current Date: 2020-02-02 18:16:43.504000
+2020-05-05 20:35:19,881 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:20,010 - INFO - Current Date: 2020-02-03 05:44:29.512000
+2020-05-05 20:35:25,294 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:25,439 - INFO - Current Date: 2020-02-03 08:34:02.541000
+2020-05-05 20:35:29,201 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:29,350 - INFO - Current Date: 2020-02-03 10:49:12.518000
+2020-05-05 20:35:32,563 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:32,693 - INFO - Current Date: 2020-02-03 12:03:44.672000
+2020-05-05 20:35:37,671 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:37,798 - INFO - Current Date: 2020-02-03 14:38:45.216000
+2020-05-05 20:35:48,522 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:48,603 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:48,633 - INFO - Current Date: 2020-02-03 16:51:49.493000
+2020-05-05 20:35:55,235 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:55,390 - INFO - Current Date: 2020-02-03 23:37:16.478000
+2020-05-05 20:35:58,758 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:35:58,910 - INFO - Current Date: 2020-02-04 06:04:24.414000
+2020-05-05 20:36:01,679 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:01,820 - INFO - Current Date: 2020-02-04 09:48:42.172000
+2020-05-05 20:36:05,680 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:05,821 - INFO - Current Date: 2020-02-04 12:14:11.471000
+2020-05-05 20:36:09,049 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:09,184 - INFO - Current Date: 2020-02-04 16:18:52.819000
+2020-05-05 20:36:11,989 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:12,121 - INFO - Current Date: 2020-02-04 23:21:02.027000
+2020-05-05 20:36:15,260 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:15,386 - INFO - Current Date: 2020-02-05 05:58:15.332000
+2020-05-05 20:36:22,231 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:22,365 - INFO - Current Date: 2020-02-05 09:16:44.784000
+2020-05-05 20:36:25,631 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:25,704 - INFO - Current Date: 2020-02-05 11:04:13.884000
+2020-05-05 20:36:28,458 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:28,528 - INFO - Current Date: 2020-02-05 13:16:03.979000
+2020-05-05 20:36:30,432 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:30,502 - INFO - Current Date: 2020-02-05 15:29:12.692000
+2020-05-05 20:36:36,110 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:36,239 - INFO - Current Date: 2020-02-05 20:05:17.390000
+2020-05-05 20:36:38,465 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:38,614 - INFO - Current Date: 2020-02-06 06:27:56.032000
+2020-05-05 20:36:41,023 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:41,154 - INFO - Current Date: 2020-02-06 09:50:53.905000
+2020-05-05 20:36:43,339 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:43,481 - INFO - Current Date: 2020-02-06 14:07:23.789000
+2020-05-05 20:36:49,595 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:49,732 - INFO - Current Date: 2020-02-06 18:13:52.272000
+2020-05-05 20:36:53,771 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:53,903 - INFO - Current Date: 2020-02-07 01:22:44.969000
+2020-05-05 20:36:56,399 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:56,540 - INFO - Current Date: 2020-02-07 08:26:02.192000
+2020-05-05 20:36:58,903 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:36:59,026 - INFO - Current Date: 2020-02-07 11:13:29.897000
+2020-05-05 20:37:03,596 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:03,736 - INFO - Current Date: 2020-02-07 13:54:28.940000
+2020-05-05 20:37:06,983 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:07,136 - INFO - Current Date: 2020-02-07 16:19:06.280000
+2020-05-05 20:37:10,048 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:10,124 - INFO - Current Date: 2020-02-08 03:04:04.941000
+2020-05-05 20:37:11,780 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:11,920 - INFO - Current Date: 2020-02-08 09:08:26.917000
+2020-05-05 20:37:15,420 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:15,569 - INFO - Current Date: 2020-02-08 15:57:39.687000
+2020-05-05 20:37:16,400 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:16,544 - INFO - Current Date: 2020-02-09 06:32:11.387000
+2020-05-05 20:37:17,982 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:18,141 - INFO - Current Date: 2020-02-09 14:30:38.968000
+2020-05-05 20:37:20,174 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:20,367 - INFO - Current Date: 2020-02-09 23:21:35.640000
+2020-05-05 20:37:21,335 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:21,474 - INFO - Current Date: 2020-02-10 06:43:22.172000
+2020-05-05 20:37:27,005 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:27,136 - INFO - Current Date: 2020-02-10 09:49:51.106000
+2020-05-05 20:37:48,964 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:49,088 - INFO - Current Date: 2020-02-10 13:17:55.119000
+2020-05-05 20:37:55,267 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:55,404 - INFO - Current Date: 2020-02-10 19:15:53.298000
+2020-05-05 20:37:59,069 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:37:59,221 - INFO - Current Date: 2020-02-11 06:05:15.307000
+2020-05-05 20:38:03,977 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:04,137 - INFO - Current Date: 2020-02-11 10:12:46.515000
+2020-05-05 20:38:05,948 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:06,072 - INFO - Current Date: 2020-02-11 15:21:16.122000
+2020-05-05 20:38:07,855 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:07,991 - INFO - Current Date: 2020-02-11 21:01:34.929000
+2020-05-05 20:38:09,278 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:09,400 - INFO - Current Date: 2020-02-12 05:58:34.154000
+2020-05-05 20:38:14,765 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:14,905 - INFO - Current Date: 2020-02-12 09:23:18.857000
+2020-05-05 20:38:24,391 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:24,511 - INFO - Current Date: 2020-02-12 12:25:19.509000
+2020-05-05 20:38:41,231 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:41,353 - INFO - Current Date: 2020-02-12 14:39:09.860000
+2020-05-05 20:38:52,692 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:52,827 - INFO - Current Date: 2020-02-12 23:34:44.205000
+2020-05-05 20:38:56,144 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:56,285 - INFO - Current Date: 2020-02-13 07:34:24.938000
+2020-05-05 20:38:59,747 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:38:59,874 - INFO - Current Date: 2020-02-13 09:37:12.200000
+2020-05-05 20:39:04,455 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:04,587 - INFO - Current Date: 2020-02-13 12:39:49.349000
+2020-05-05 20:39:06,471 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:06,602 - INFO - Current Date: 2020-02-13 16:31:27.710000
+2020-05-05 20:39:10,164 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:10,306 - INFO - Current Date: 2020-02-14 07:22:22.104000
+2020-05-05 20:39:13,030 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:13,168 - INFO - Current Date: 2020-02-14 12:54:37.917000
+2020-05-05 20:39:14,652 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:14,788 - INFO - Current Date: 2020-02-14 18:50:04.788000
+2020-05-05 20:39:16,016 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:16,146 - INFO - Current Date: 2020-02-15 09:40:04.783000
+2020-05-05 20:39:18,375 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:18,512 - INFO - Current Date: 2020-02-15 13:34:08.803000
+2020-05-05 20:39:20,485 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:20,641 - INFO - Current Date: 2020-02-16 03:32:07.933000
+2020-05-05 20:39:22,466 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:22,608 - INFO - Current Date: 2020-02-16 12:01:50.847000
+2020-05-05 20:39:23,966 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:24,104 - INFO - Current Date: 2020-02-17 02:01:13.247000
+2020-05-05 20:39:24,949 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:25,081 - INFO - Current Date: 2020-02-17 07:34:26.421000
+2020-05-05 20:39:25,615 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:25,737 - INFO - Current Date: 2020-02-17 12:47:44.806000
+2020-05-05 20:39:26,593 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:26,731 - INFO - Current Date: 2020-02-17 17:27:17.822000
+2020-05-05 20:39:27,448 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:27,580 - INFO - Current Date: 2020-02-18 03:49:08.634000
+2020-05-05 20:39:28,365 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:28,495 - INFO - Current Date: 2020-02-18 08:14:47.530000
+2020-05-05 20:39:29,024 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:29,147 - INFO - Current Date: 2020-02-18 12:02:54.011000
+2020-05-05 20:39:29,675 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:29,797 - INFO - Current Date: 2020-02-18 15:52:45.850000
+2020-05-05 20:39:30,392 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:30,516 - INFO - Current Date: 2020-02-19 04:00:02.194000
+2020-05-05 20:39:31,126 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:31,257 - INFO - Current Date: 2020-02-19 10:30:09.073000
+2020-05-05 20:39:31,972 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:32,118 - INFO - Current Date: 2020-02-19 16:50:14.673000
+2020-05-05 20:39:32,813 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:32,939 - INFO - Current Date: 2020-02-20 07:29:38.409000
+2020-05-05 20:39:33,467 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:33,515 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:33,520 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:33,522 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:33,590 - INFO - Current Date: 2020-02-20 11:10:41.183000
+2020-05-05 20:39:34,445 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:34,583 - INFO - Current Date: 2020-02-20 17:01:50.553000
+2020-05-05 20:39:53,334 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:39:53,482 - INFO - Current Date: 2020-02-21 07:24:58.121000
+2020-05-05 20:40:01,345 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:01,463 - INFO - Current Date: 2020-02-21 11:48:32.324000
+2020-05-05 20:40:11,224 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:11,349 - INFO - Current Date: 2020-02-21 17:11:47.324000
+2020-05-05 20:40:33,202 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:33,368 - INFO - Current Date: 2020-02-22 04:25:51.481000
+2020-05-05 20:40:35,638 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:35,780 - INFO - Current Date: 2020-02-22 12:21:46.080000
+2020-05-05 20:40:36,891 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:37,026 - INFO - Current Date: 2020-02-22 22:43:28.198000
+2020-05-05 20:40:37,927 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:38,061 - INFO - Current Date: 2020-02-23 07:47:04.480000
+2020-05-05 20:40:38,699 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:38,843 - INFO - Current Date: 2020-02-23 12:07:35.027000
+2020-05-05 20:40:39,456 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:39,591 - INFO - Current Date: 2020-02-23 15:45:31.385000
+2020-05-05 20:40:40,103 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:40,230 - INFO - Current Date: 2020-02-23 20:50:44.046000
+2020-05-05 20:40:41,049 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:41,187 - INFO - Current Date: 2020-02-24 04:19:37.973000
+2020-05-05 20:40:41,736 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:41,859 - INFO - Current Date: 2020-02-24 07:19:17.165000
+2020-05-05 20:40:42,227 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:42,345 - INFO - Current Date: 2020-02-24 09:21:02.154000
+2020-05-05 20:40:43,031 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:43,120 - INFO - Current Date: 2020-02-24 10:45:55.697000
+2020-05-05 20:40:43,597 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:43,720 - INFO - Current Date: 2020-02-24 12:21:27.298000
+2020-05-05 20:40:44,239 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:44,368 - INFO - Current Date: 2020-02-24 13:42:53.507000
+2020-05-05 20:40:44,800 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:44,917 - INFO - Current Date: 2020-02-24 15:09:27.730000
+2020-05-05 20:40:45,509 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:45,618 - INFO - Current Date: 2020-02-24 16:49:16.962000
+2020-05-05 20:40:47,268 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:47,364 - INFO - Current Date: 2020-02-24 18:59:21.889000
+2020-05-05 20:40:47,952 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:48,082 - INFO - Current Date: 2020-02-25 00:06:54.739000
+2020-05-05 20:40:49,647 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:49,778 - INFO - Current Date: 2020-02-25 06:22:16.679000
+2020-05-05 20:40:50,209 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:50,210 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:50,334 - INFO - Current Date: 2020-02-25 08:46:53.099000
+2020-05-05 20:40:50,932 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:51,052 - INFO - Current Date: 2020-02-25 10:43:56.184000
+2020-05-05 20:40:53,242 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:53,379 - INFO - Current Date: 2020-02-25 12:51:40.404000
+2020-05-05 20:40:54,745 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:54,883 - INFO - Current Date: 2020-02-25 14:37:35.395000
+2020-05-05 20:40:56,592 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:56,680 - INFO - Current Date: 2020-02-25 16:08:35.387000
+2020-05-05 20:40:57,754 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:57,852 - INFO - Current Date: 2020-02-25 17:27:48.416000
+2020-05-05 20:40:59,177 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:59,282 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:40:59,311 - INFO - Current Date: 2020-02-25 20:05:40.045000
+2020-05-05 20:41:00,497 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:00,635 - INFO - Current Date: 2020-02-25 23:53:39.794000
+2020-05-05 20:41:01,263 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:01,264 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:01,390 - INFO - Current Date: 2020-02-26 05:23:22.576000
+2020-05-05 20:41:02,080 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:02,205 - INFO - Current Date: 2020-02-26 07:08:32.861000
+2020-05-05 20:41:03,177 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:03,300 - INFO - Current Date: 2020-02-26 08:29:57.056000
+2020-05-05 20:41:03,877 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:03,995 - INFO - Current Date: 2020-02-26 09:33:34.291000
+2020-05-05 20:41:04,695 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:04,814 - INFO - Current Date: 2020-02-26 10:47:53.514000
+2020-05-05 20:41:05,703 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:05,832 - INFO - Current Date: 2020-02-26 11:46:58.921000
+2020-05-05 20:41:07,223 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:07,337 - INFO - Current Date: 2020-02-26 12:47:49.124000
+2020-05-05 20:41:12,745 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:12,871 - INFO - Current Date: 2020-02-26 13:37:54.354000
+2020-05-05 20:41:24,109 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:24,232 - INFO - Current Date: 2020-02-26 14:33:11.833000
+2020-05-05 20:41:40,060 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:40,188 - INFO - Current Date: 2020-02-26 15:45:32.637000
+2020-05-05 20:41:52,294 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:41:52,422 - INFO - Current Date: 2020-02-26 16:45:39.621000
+2020-05-05 20:42:05,946 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:06,085 - INFO - Current Date: 2020-02-26 17:54:33.264000
+2020-05-05 20:42:16,352 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:16,470 - INFO - Current Date: 2020-02-26 20:00:06.776000
+2020-05-05 20:42:19,652 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:19,783 - INFO - Current Date: 2020-02-26 22:22:16.004000
+2020-05-05 20:42:20,873 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:20,930 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:21,000 - INFO - Current Date: 2020-02-27 00:17:43.861000
+2020-05-05 20:42:21,884 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:22,006 - INFO - Current Date: 2020-02-27 05:27:05.888000
+2020-05-05 20:42:22,604 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:22,675 - INFO - Current Date: 2020-02-27 07:14:17.075000
+2020-05-05 20:42:23,351 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:23,471 - INFO - Current Date: 2020-02-27 08:27:02.551000
+2020-05-05 20:42:24,780 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:24,882 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:24,909 - INFO - Current Date: 2020-02-27 09:35:14.711000
+2020-05-05 20:42:25,527 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:25,648 - INFO - Current Date: 2020-02-27 10:28:50.291000
+2020-05-05 20:42:26,222 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:26,342 - INFO - Current Date: 2020-02-27 11:23:37.994000
+2020-05-05 20:42:26,956 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:27,075 - INFO - Current Date: 2020-02-27 12:22:58.683000
+2020-05-05 20:42:27,839 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:27,943 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:27,984 - INFO - Current Date: 2020-02-27 13:18:31.249000
+2020-05-05 20:42:28,577 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:28,709 - INFO - Current Date: 2020-02-27 14:10:04.398000
+2020-05-05 20:42:29,403 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:29,417 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:29,440 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:29,525 - INFO - Current Date: 2020-02-27 15:12:51.867000
+2020-05-05 20:42:30,084 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:30,178 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:30,207 - INFO - Current Date: 2020-02-27 16:09:05.052000
+2020-05-05 20:42:30,812 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:30,952 - INFO - Current Date: 2020-02-27 17:04:27.394000
+2020-05-05 20:42:31,600 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:31,723 - INFO - Current Date: 2020-02-27 18:17:52.159000
+2020-05-05 20:42:32,446 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:32,568 - INFO - Current Date: 2020-02-27 19:52:20.639000
+2020-05-05 20:42:33,317 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:33,440 - INFO - Current Date: 2020-02-27 22:28:32.210000
+2020-05-05 20:42:34,388 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:34,492 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:34,518 - INFO - Current Date: 2020-02-28 04:05:08.516000
+2020-05-05 20:42:35,632 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:35,633 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:35,755 - INFO - Current Date: 2020-02-28 06:19:57.664000
+2020-05-05 20:42:36,697 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:36,756 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:36,832 - INFO - Current Date: 2020-02-28 07:46:50.040000
+2020-05-05 20:42:37,402 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:37,538 - INFO - Current Date: 2020-02-28 08:49:10.109000
+2020-05-05 20:42:38,251 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:38,379 - INFO - Current Date: 2020-02-28 09:46:14.602000
+2020-05-05 20:42:38,826 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:38,909 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:38,946 - INFO - Current Date: 2020-02-28 10:26:26.489000
+2020-05-05 20:42:39,561 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:39,680 - INFO - Current Date: 2020-02-28 11:03:35.480000
+2020-05-05 20:42:40,274 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:40,394 - INFO - Current Date: 2020-02-28 11:44:55.004000
+2020-05-05 20:42:40,924 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:40,952 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:40,958 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:41,047 - INFO - Current Date: 2020-02-28 12:24:14.884000
+2020-05-05 20:42:41,780 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:41,921 - INFO - Current Date: 2020-02-28 13:23:13.047000
+2020-05-05 20:42:42,556 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:42,674 - INFO - Current Date: 2020-02-28 14:28:47.804000
+2020-05-05 20:42:43,350 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:43,473 - INFO - Current Date: 2020-02-28 15:34:25.355000
+2020-05-05 20:42:44,189 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:44,243 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:44,321 - INFO - Current Date: 2020-02-28 16:37:04.924000
+2020-05-05 20:42:44,991 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,019 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,021 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,093 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,118 - INFO - Current Date: 2020-02-28 17:24:59.510000
+2020-05-05 20:42:45,801 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,802 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,815 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,861 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:45,927 - INFO - Current Date: 2020-02-28 18:42:50.258000
+2020-05-05 20:42:46,617 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:46,740 - INFO - Current Date: 2020-02-28 20:13:31.668000
+2020-05-05 20:42:47,508 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:47,656 - INFO - Current Date: 2020-02-29 00:15:45.471000
+2020-05-05 20:42:48,189 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:48,313 - INFO - Current Date: 2020-02-29 06:55:12.175000
+2020-05-05 20:42:48,920 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:49,012 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:49,054 - INFO - Current Date: 2020-02-29 09:10:08.914000
+2020-05-05 20:42:49,727 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:49,731 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:49,742 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:49,861 - INFO - Current Date: 2020-02-29 10:50:18.545000
+2020-05-05 20:42:58,127 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:58,140 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:58,154 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:42:58,282 - INFO - Current Date: 2020-02-29 12:01:27.025000
+2020-05-05 20:43:10,148 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:10,225 - INFO - Current Date: 2020-02-29 13:55:38.474000
+2020-05-05 20:43:18,851 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:18,866 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:18,868 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:19,003 - INFO - Current Date: 2020-02-29 16:12:52.511000
+2020-05-05 20:43:20,459 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:20,590 - INFO - Current Date: 2020-02-29 19:41:16.824000
+2020-05-05 20:43:21,599 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:21,604 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:21,713 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:21,716 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:21,718 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:21,720 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:21,746 - INFO - Current Date: 2020-02-29 23:57:29.353000
+2020-05-05 20:43:22,587 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:22,588 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:22,592 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:22,594 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:22,596 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:22,723 - INFO - Current Date: 2020-03-01 06:31:57.764000
+2020-05-05 20:43:23,517 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:23,648 - INFO - Current Date: 2020-03-01 09:16:23.924000
+2020-05-05 20:43:24,819 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:24,947 - INFO - Current Date: 2020-03-01 11:26:31.587000
+2020-05-05 20:43:25,901 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:25,987 - INFO - Current Date: 2020-03-01 13:38:42.264000
+2020-05-05 20:43:26,643 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:26,803 - INFO - Current Date: 2020-03-01 15:55:11.777000
+2020-05-05 20:43:27,402 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:27,533 - INFO - Current Date: 2020-03-01 19:28:34.857000
+2020-05-05 20:43:28,566 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:28,725 - INFO - Current Date: 2020-03-01 23:33:53.062000
+2020-05-05 20:43:29,179 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:29,308 - INFO - Current Date: 2020-03-02 04:58:49.634000
+2020-05-05 20:43:29,737 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:29,859 - INFO - Current Date: 2020-03-02 07:22:41.846000
+2020-05-05 20:43:30,313 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:30,454 - INFO - Current Date: 2020-03-02 08:51:39.550000
+2020-05-05 20:43:32,029 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:32,187 - INFO - Current Date: 2020-03-02 10:06:25.183000
+2020-05-05 20:43:33,057 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:33,136 - INFO - Current Date: 2020-03-02 10:56:21.729000
+2020-05-05 20:43:33,914 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:34,042 - INFO - Current Date: 2020-03-02 12:07:24.042000
+2020-05-05 20:43:34,666 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:34,791 - INFO - Current Date: 2020-03-02 13:47:37.680000
+2020-05-05 20:43:35,679 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:35,811 - INFO - Current Date: 2020-03-02 14:56:27.547000
+2020-05-05 20:43:36,398 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:36,518 - INFO - Current Date: 2020-03-02 15:56:47.015000
+2020-05-05 20:43:37,205 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:37,304 - INFO - Current Date: 2020-03-02 17:07:23.174000
+2020-05-05 20:43:38,016 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:38,145 - INFO - Current Date: 2020-03-02 18:43:56.905000
+2020-05-05 20:43:38,749 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:38,873 - INFO - Current Date: 2020-03-02 20:52:49.083000
+2020-05-05 20:43:39,689 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:39,838 - INFO - Current Date: 2020-03-03 03:20:16.836000
+2020-05-05 20:43:40,499 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:40,654 - INFO - Current Date: 2020-03-03 06:29:36.367000
+2020-05-05 20:43:41,141 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:41,272 - INFO - Current Date: 2020-03-03 07:55:27.056000
+2020-05-05 20:43:41,851 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:41,973 - INFO - Current Date: 2020-03-03 09:33:26.761000
+2020-05-05 20:43:42,530 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:42,651 - INFO - Current Date: 2020-03-03 10:21:49.944000
+2020-05-05 20:43:43,113 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:43,236 - INFO - Current Date: 2020-03-03 11:08:30.253000
+2020-05-05 20:43:43,887 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:44,010 - INFO - Current Date: 2020-03-03 12:07:57.516000
+2020-05-05 20:43:44,542 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:44,662 - INFO - Current Date: 2020-03-03 13:05:50.147000
+2020-05-05 20:43:52,478 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:43:52,614 - INFO - Current Date: 2020-03-03 13:48:02.147000
+2020-05-05 20:44:00,929 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:01,073 - INFO - Current Date: 2020-03-03 14:29:21.021000
+2020-05-05 20:44:14,029 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:14,160 - INFO - Current Date: 2020-03-03 15:21:48.650000
+2020-05-05 20:44:24,804 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:24,939 - INFO - Current Date: 2020-03-03 16:13:17.618000
+2020-05-05 20:44:28,751 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:28,872 - INFO - Current Date: 2020-03-03 17:23:57.130000
+2020-05-05 20:44:31,315 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:31,451 - INFO - Current Date: 2020-03-03 19:03:55.652000
+2020-05-05 20:44:34,730 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:34,857 - INFO - Current Date: 2020-03-03 21:42:55.324000
+2020-05-05 20:44:36,019 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:36,147 - INFO - Current Date: 2020-03-04 00:59:50.998000
+2020-05-05 20:44:39,245 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:39,384 - INFO - Current Date: 2020-03-04 04:55:26.017000
+2020-05-05 20:44:43,613 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:43,737 - INFO - Current Date: 2020-03-04 06:51:08.808000
+2020-05-05 20:44:44,946 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:45,077 - INFO - Current Date: 2020-03-04 08:55:14.384000
+2020-05-05 20:44:48,049 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:48,176 - INFO - Current Date: 2020-03-04 10:04:15.436000
+2020-05-05 20:44:51,370 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:44:51,518 - INFO - Current Date: 2020-03-04 10:57:23.493000
+2020-05-05 20:45:00,591 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:00,748 - INFO - Current Date: 2020-03-04 11:54:45.547000
+2020-05-05 20:45:06,171 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:06,347 - INFO - Current Date: 2020-03-04 13:07:25.270000
+2020-05-05 20:45:07,694 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:07,812 - INFO - Current Date: 2020-03-04 14:01:38.859000
+2020-05-05 20:45:10,167 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:10,306 - INFO - Current Date: 2020-03-04 15:23:42.114000
+2020-05-05 20:45:15,384 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:15,530 - INFO - Current Date: 2020-03-04 16:33:48.462000
+2020-05-05 20:45:17,067 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:17,191 - INFO - Current Date: 2020-03-04 17:51:18.572000
+2020-05-05 20:45:20,277 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:20,413 - INFO - Current Date: 2020-03-04 19:19:07.399000
+2020-05-05 20:45:22,857 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:22,925 - INFO - Current Date: 2020-03-04 20:58:14.499000
+2020-05-05 20:45:26,390 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:26,522 - INFO - Current Date: 2020-03-05 02:11:20.117000
+2020-05-05 20:45:28,119 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:28,264 - INFO - Current Date: 2020-03-05 05:42:44.162000
+2020-05-05 20:45:31,576 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:31,706 - INFO - Current Date: 2020-03-05 07:06:45.645000
+2020-05-05 20:45:32,569 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:32,700 - INFO - Current Date: 2020-03-05 08:58:51.572000
+2020-05-05 20:45:34,587 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:34,712 - INFO - Current Date: 2020-03-05 09:49:25.935000
+2020-05-05 20:45:36,125 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:36,266 - INFO - Current Date: 2020-03-05 10:51:08.463000
+2020-05-05 20:45:36,878 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:37,002 - INFO - Current Date: 2020-03-05 11:46:53.148000
+2020-05-05 20:45:38,234 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:38,361 - INFO - Current Date: 2020-03-05 12:44:08.186000
+2020-05-05 20:45:39,045 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:39,176 - INFO - Current Date: 2020-03-05 13:45:01.206000
+2020-05-05 20:45:40,212 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:40,337 - INFO - Current Date: 2020-03-05 14:27:59.175000
+2020-05-05 20:45:41,369 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:41,492 - INFO - Current Date: 2020-03-05 15:12:33.984000
+2020-05-05 20:45:42,994 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:43,120 - INFO - Current Date: 2020-03-05 16:25:58.367000
+2020-05-05 20:45:44,171 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:44,314 - INFO - Current Date: 2020-03-05 17:18:10.660000
+2020-05-05 20:45:47,164 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:47,301 - INFO - Current Date: 2020-03-05 19:03:57.566000
+2020-05-05 20:45:48,258 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:48,406 - INFO - Current Date: 2020-03-05 21:20:16.012000
+2020-05-05 20:45:51,671 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:51,798 - INFO - Current Date: 2020-03-07 22:37:50.718000
+2020-05-05 20:45:58,959 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:58,961 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:58,962 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:45:59,077 - INFO - Current Date: 2020-03-07 22:50:21.353000
+2020-05-05 20:46:26,990 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:46:27,125 - INFO - Current Date: 2020-03-08 05:28:33.905000
+2020-05-05 20:46:55,697 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:46:55,832 - INFO - Current Date: 2020-03-08 07:33:40.791000
+2020-05-05 20:47:09,792 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:09,950 - INFO - Current Date: 2020-03-08 08:47:39.191000
+2020-05-05 20:47:17,365 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:17,487 - INFO - Current Date: 2020-03-08 09:51:46.918000
+2020-05-05 20:47:22,176 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:22,309 - INFO - Current Date: 2020-03-08 11:15:15.726000
+2020-05-05 20:47:31,635 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:31,760 - INFO - Current Date: 2020-03-08 12:36:36.988000
+2020-05-05 20:47:34,913 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:35,037 - INFO - Current Date: 2020-03-08 13:59:05.190000
+2020-05-05 20:47:39,881 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:40,002 - INFO - Current Date: 2020-03-08 15:27:55.537000
+2020-05-05 20:47:42,430 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:42,550 - INFO - Current Date: 2020-03-08 16:54:07.637000
+2020-05-05 20:47:44,806 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:44,934 - INFO - Current Date: 2020-03-08 18:48:03.628000
+2020-05-05 20:47:46,286 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:46,423 - INFO - Current Date: 2020-03-08 22:25:15.263000
+2020-05-05 20:47:47,698 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:47,849 - INFO - Current Date: 2020-03-09 05:17:10.301000
+2020-05-05 20:47:50,559 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:50,688 - INFO - Current Date: 2020-03-09 06:29:24.740000
+2020-05-05 20:47:51,737 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:51,865 - INFO - Current Date: 2020-03-09 07:42:33.878000
+2020-05-05 20:47:52,411 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:52,533 - INFO - Current Date: 2020-03-09 08:49:51.813000
+2020-05-05 20:47:53,700 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:53,825 - INFO - Current Date: 2020-03-09 09:45:09.031000
+2020-05-05 20:47:54,320 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:54,440 - INFO - Current Date: 2020-03-09 10:41:27.171000
+2020-05-05 20:47:54,948 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:54,949 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:55,077 - INFO - Current Date: 2020-03-09 11:24:29.262000
+2020-05-05 20:47:55,771 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:55,877 - INFO - Current Date: 2020-03-09 11:54:34.398000
+2020-05-05 20:47:56,733 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:56,860 - INFO - Current Date: 2020-03-09 12:42:57.627000
+2020-05-05 20:47:58,306 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:58,433 - INFO - Current Date: 2020-03-09 13:43:37.652000
+2020-05-05 20:47:58,989 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:59,117 - INFO - Current Date: 2020-03-09 14:42:35.709000
+2020-05-05 20:47:59,960 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:59,962 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:59,963 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:47:59,964 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:00,059 - INFO - Current Date: 2020-03-09 15:32:18.304000
+2020-05-05 20:48:10,139 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:10,285 - INFO - Current Date: 2020-03-09 16:07:34.895000
+2020-05-05 20:48:12,017 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:12,019 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:12,145 - INFO - Current Date: 2020-03-09 16:39:54.205000
+2020-05-05 20:48:13,945 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:14,065 - INFO - Current Date: 2020-03-09 17:37:58.373000
+2020-05-05 20:48:17,886 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:18,023 - INFO - Current Date: 2020-03-09 18:59:24.063000
+2020-05-05 20:48:20,619 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:20,757 - INFO - Current Date: 2020-03-09 20:57:52.365000
+2020-05-05 20:48:22,913 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:23,048 - INFO - Current Date: 2020-03-09 22:36:44.753000
+2020-05-05 20:48:24,222 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:24,351 - INFO - Current Date: 2020-03-10 04:26:41.688000
+2020-05-05 20:48:25,899 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:26,032 - INFO - Current Date: 2020-03-10 05:58:52.262000
+2020-05-05 20:48:28,291 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:28,415 - INFO - Current Date: 2020-03-10 07:20:30.938000
+2020-05-05 20:48:31,031 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:31,160 - INFO - Current Date: 2020-03-10 08:27:50.349000
+2020-05-05 20:48:48,125 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:48:48,303 - INFO - Current Date: 2020-03-10 09:28:04.002000
+2020-05-05 20:49:02,149 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:49:02,275 - INFO - Current Date: 2020-03-10 10:25:24.324000
+2020-05-05 20:49:15,791 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:49:15,915 - INFO - Current Date: 2020-03-10 10:56:24.176000
+2020-05-05 20:49:35,533 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:49:35,650 - INFO - Current Date: 2020-03-10 11:37:09.192000
+2020-05-05 20:49:40,738 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:49:40,860 - INFO - Current Date: 2020-03-10 12:07:12.151000
+2020-05-05 20:49:43,028 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:49:43,149 - INFO - Current Date: 2020-03-10 12:38:27.653000
+2020-05-05 20:49:48,697 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:49:48,771 - INFO - Current Date: 2020-03-10 13:16:42.437000
+2020-05-05 20:49:51,294 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:49:51,424 - INFO - Current Date: 2020-03-10 13:55:34.055000
+2020-05-05 20:50:00,326 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:00,454 - INFO - Current Date: 2020-03-10 14:39:22.913000
+2020-05-05 20:50:02,407 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:02,531 - INFO - Current Date: 2020-03-10 15:24:02.929000
+2020-05-05 20:50:03,868 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:03,995 - INFO - Current Date: 2020-03-10 16:08:23.563000
+2020-05-05 20:50:06,140 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:06,271 - INFO - Current Date: 2020-03-10 16:57:45.863000
+2020-05-05 20:50:08,331 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:08,462 - INFO - Current Date: 2020-03-10 17:41:19.296000
+2020-05-05 20:50:09,343 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:09,470 - INFO - Current Date: 2020-03-10 18:51:00.142000
+2020-05-05 20:50:10,648 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:10,783 - INFO - Current Date: 2020-03-10 20:39:33.141000
+2020-05-05 20:50:12,439 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:12,506 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:12,586 - INFO - Current Date: 2020-03-10 23:26:38.381000
+2020-05-05 20:50:13,142 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:13,263 - INFO - Current Date: 2020-03-11 04:42:33.799000
+2020-05-05 20:50:13,957 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:14,036 - INFO - Current Date: 2020-03-11 06:17:54.232000
+2020-05-05 20:50:14,763 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:14,918 - INFO - Current Date: 2020-03-11 07:09:26.101000
+2020-05-05 20:50:15,510 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:15,634 - INFO - Current Date: 2020-03-11 07:53:07.419000
+2020-05-05 20:50:16,126 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:16,259 - INFO - Current Date: 2020-03-11 08:32:22.446000
+2020-05-05 20:50:16,832 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:16,959 - INFO - Current Date: 2020-03-11 09:04:41.143000
+2020-05-05 20:50:17,454 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:17,594 - INFO - Current Date: 2020-03-11 09:39:42.918000
+2020-05-05 20:50:18,129 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:18,297 - INFO - Current Date: 2020-03-11 10:15:05.648000
+2020-05-05 20:50:18,994 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:19,135 - INFO - Current Date: 2020-03-11 10:56:37.653000
+2020-05-05 20:50:19,777 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:19,935 - INFO - Current Date: 2020-03-11 11:27:21.216000
+2020-05-05 20:50:20,461 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:20,541 - INFO - Current Date: 2020-03-11 11:58:44.817000
+2020-05-05 20:50:21,646 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:21,647 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:21,770 - INFO - Current Date: 2020-03-11 12:39:19.328000
+2020-05-05 20:50:22,371 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:22,525 - INFO - Current Date: 2020-03-11 13:10:42.239000
+2020-05-05 20:50:23,165 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:23,301 - INFO - Current Date: 2020-03-11 13:47:40.825000
+2020-05-05 20:50:23,717 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:23,839 - INFO - Current Date: 2020-03-11 14:33:01.003000
+2020-05-05 20:50:24,475 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:24,603 - INFO - Current Date: 2020-03-11 15:17:32
+2020-05-05 20:50:25,096 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:25,235 - INFO - Current Date: 2020-03-11 16:02:30.958000
+2020-05-05 20:50:25,695 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:25,697 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:25,698 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:25,817 - INFO - Current Date: 2020-03-11 16:39:43.922000
+2020-05-05 20:50:26,236 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:26,237 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:26,313 - INFO - Current Date: 2020-03-11 17:11:27.515000
+2020-05-05 20:50:28,283 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:28,415 - INFO - Current Date: 2020-03-11 17:52:52.509000
+2020-05-05 20:50:41,144 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:50:41,271 - INFO - Current Date: 2020-03-11 19:17:26.579000
+2020-05-05 20:51:04,107 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:04,243 - INFO - Current Date: 2020-03-11 21:06:54.467000
+2020-05-05 20:51:23,957 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:24,040 - INFO - Current Date: 2020-03-11 23:34:05.273000
+2020-05-05 20:51:24,798 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:24,939 - INFO - Current Date: 2020-03-12 02:07:16.525000
+2020-05-05 20:51:25,587 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:25,711 - INFO - Current Date: 2020-03-12 04:57:20.314000
+2020-05-05 20:51:26,402 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:26,531 - INFO - Current Date: 2020-03-12 05:52:44.849000
+2020-05-05 20:51:27,172 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:27,313 - INFO - Current Date: 2020-03-12 06:49:45.540000
+2020-05-05 20:51:27,731 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:27,850 - INFO - Current Date: 2020-03-12 07:45:25.501000
+2020-05-05 20:51:28,600 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:28,728 - INFO - Current Date: 2020-03-12 08:47:28.846000
+2020-05-05 20:51:29,308 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:29,432 - INFO - Current Date: 2020-03-12 09:31:53.137000
+2020-05-05 20:51:29,942 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:30,064 - INFO - Current Date: 2020-03-12 10:17:04.525000
+2020-05-05 20:51:30,716 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:30,858 - INFO - Current Date: 2020-03-12 10:58:59.492000
+2020-05-05 20:51:31,466 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:31,467 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:31,593 - INFO - Current Date: 2020-03-12 11:31:23.958000
+2020-05-05 20:51:32,123 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:32,124 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:32,249 - INFO - Current Date: 2020-03-12 12:13:02.791000
+2020-05-05 20:51:32,662 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:32,783 - INFO - Current Date: 2020-03-12 12:57:39.160000
+2020-05-05 20:51:33,231 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:33,359 - INFO - Current Date: 2020-03-12 13:25:38.886000
+2020-05-05 20:51:34,136 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:34,284 - INFO - Current Date: 2020-03-12 14:00:59.028000
+2020-05-05 20:51:34,915 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:35,044 - INFO - Current Date: 2020-03-12 14:41:36.630000
+2020-05-05 20:51:35,648 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:35,780 - INFO - Current Date: 2020-03-12 15:24:20.853000
+2020-05-05 20:51:36,286 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:36,411 - INFO - Current Date: 2020-03-12 15:58:55.752000
+2020-05-05 20:51:37,028 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:37,160 - INFO - Current Date: 2020-03-12 16:36:49.579000
+2020-05-05 20:51:37,678 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:37,800 - INFO - Current Date: 2020-03-12 17:25:14.129000
+2020-05-05 20:51:38,274 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:38,411 - INFO - Current Date: 2020-03-12 18:24:17.514000
+2020-05-05 20:51:38,926 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:39,051 - INFO - Current Date: 2020-03-12 19:40:17.840000
+2020-05-05 20:51:39,897 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:40,037 - INFO - Current Date: 2020-03-12 21:09:43.046000
+2020-05-05 20:51:40,634 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:40,793 - INFO - Current Date: 2020-03-12 23:07:00.835000
+2020-05-05 20:51:41,242 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:41,243 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:41,374 - INFO - Current Date: 2020-03-13 03:08:13.776000
+2020-05-05 20:51:42,065 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:42,205 - INFO - Current Date: 2020-03-13 05:34:35.427000
+2020-05-05 20:51:42,911 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:42,912 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:43,040 - INFO - Current Date: 2020-03-13 06:13:19.391000
+2020-05-05 20:51:43,638 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:43,772 - INFO - Current Date: 2020-03-13 07:02:31.773000
+2020-05-05 20:51:44,273 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:44,401 - INFO - Current Date: 2020-03-13 07:50:39.188000
+2020-05-05 20:51:44,931 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:45,083 - INFO - Current Date: 2020-03-13 08:39:49.425000
+2020-05-05 20:51:45,533 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:45,655 - INFO - Current Date: 2020-03-13 09:27:57.611000
+2020-05-05 20:51:46,217 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:46,349 - INFO - Current Date: 2020-03-13 10:07:47.529000
+2020-05-05 20:51:46,850 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:46,976 - INFO - Current Date: 2020-03-13 10:51:57.763000
+2020-05-05 20:51:47,520 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:47,640 - INFO - Current Date: 2020-03-13 11:21:02.373000
+2020-05-05 20:51:48,689 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:48,769 - INFO - Current Date: 2020-03-13 11:58:35.513000
+2020-05-05 20:51:57,628 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:51:57,754 - INFO - Current Date: 2020-03-13 12:36:20.951000
+2020-05-05 20:52:07,782 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:07,855 - INFO - Current Date: 2020-03-13 13:10:38.793000
+2020-05-05 20:52:20,817 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:20,947 - INFO - Current Date: 2020-03-13 13:39:38.024000
+2020-05-05 20:52:26,294 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:26,415 - INFO - Current Date: 2020-03-13 14:13:39.330000
+2020-05-05 20:52:28,435 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:28,565 - INFO - Current Date: 2020-03-13 14:46:51.052000
+2020-05-05 20:52:30,128 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:30,261 - INFO - Current Date: 2020-03-13 15:24:59.371000
+2020-05-05 20:52:31,089 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:31,230 - INFO - Current Date: 2020-03-13 15:57:36.458000
+2020-05-05 20:52:31,956 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:32,098 - INFO - Current Date: 2020-03-13 16:36:05.959000
+2020-05-05 20:52:32,585 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:32,713 - INFO - Current Date: 2020-03-13 17:02:41.041000
+2020-05-05 20:52:33,295 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:33,420 - INFO - Current Date: 2020-03-13 17:52:59.451000
+2020-05-05 20:52:34,028 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:34,158 - INFO - Current Date: 2020-03-13 18:47:24.034000
+2020-05-05 20:52:35,007 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:35,148 - INFO - Current Date: 2020-03-13 19:47:46.391000
+2020-05-05 20:52:35,901 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:36,015 - INFO - Current Date: 2020-03-13 21:10:14.326000
+2020-05-05 20:52:36,767 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:36,903 - INFO - Current Date: 2020-03-13 23:00:27.262000
+2020-05-05 20:52:37,373 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:37,497 - INFO - Current Date: 2020-03-14 04:07:21.012000
+2020-05-05 20:52:38,144 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:38,281 - INFO - Current Date: 2020-03-14 07:00:06.381000
+2020-05-05 20:52:38,976 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:39,105 - INFO - Current Date: 2020-03-14 08:16:09.279000
+2020-05-05 20:52:39,822 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:39,955 - INFO - Current Date: 2020-03-14 09:22:36.607000
+2020-05-05 20:52:40,636 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:40,780 - INFO - Current Date: 2020-03-14 10:25:21.824000
+2020-05-05 20:52:44,569 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:44,570 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:44,571 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:44,696 - INFO - Current Date: 2020-03-14 11:09:32.243000
+2020-05-05 20:52:45,649 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:45,787 - INFO - Current Date: 2020-03-14 12:23:31.126000
+2020-05-05 20:52:46,367 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:46,491 - INFO - Current Date: 2020-03-14 13:38:07.420000
+2020-05-05 20:52:47,136 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:47,277 - INFO - Current Date: 2020-03-14 14:55:56.106000
+2020-05-05 20:52:47,956 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:48,096 - INFO - Current Date: 2020-03-14 16:18:22.592000
+2020-05-05 20:52:48,839 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:48,974 - INFO - Current Date: 2020-03-14 17:44:20.579000
+2020-05-05 20:52:49,789 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:49,935 - INFO - Current Date: 2020-03-14 19:19:37.100000
+2020-05-05 20:52:50,628 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:50,769 - INFO - Current Date: 2020-03-14 22:10:11.424000
+2020-05-05 20:52:52,377 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:52,506 - INFO - Current Date: 2020-03-15 04:17:22.122000
+2020-05-05 20:52:53,278 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:53,436 - INFO - Current Date: 2020-03-15 06:15:53.566000
+2020-05-05 20:52:53,943 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:53,945 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:54,068 - INFO - Current Date: 2020-03-15 07:41:31.656000
+2020-05-05 20:52:54,712 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:54,713 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:54,847 - INFO - Current Date: 2020-03-15 08:28:06.401000
+2020-05-05 20:52:55,412 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:55,537 - INFO - Current Date: 2020-03-15 09:07:35.429000
+2020-05-05 20:52:56,123 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:56,278 - INFO - Current Date: 2020-03-15 10:13:34.809000
+2020-05-05 20:52:56,862 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:56,863 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:56,865 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:57,011 - INFO - Current Date: 2020-03-15 11:18:54.053000
+2020-05-05 20:52:57,635 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:57,785 - INFO - Current Date: 2020-03-15 11:57:37.921000
+2020-05-05 20:52:58,521 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:58,658 - INFO - Current Date: 2020-03-15 12:57:47.073000
+2020-05-05 20:52:59,225 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:52:59,349 - INFO - Current Date: 2020-03-15 13:45:39.681000
+2020-05-05 20:52:59,890 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:00,022 - INFO - Current Date: 2020-03-15 14:32:11.985000
+2020-05-05 20:53:00,554 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:00,555 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:00,676 - INFO - Current Date: 2020-03-15 15:14:20.084000
+2020-05-05 20:53:01,404 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:01,536 - INFO - Current Date: 2020-03-15 15:59:40.088000
+2020-05-05 20:53:02,127 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:02,261 - INFO - Current Date: 2020-03-15 16:57:48.737000
+2020-05-05 20:53:02,896 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:03,034 - INFO - Current Date: 2020-03-15 18:08:06.292000
+2020-05-05 20:53:03,628 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:03,771 - INFO - Current Date: 2020-03-15 19:23:32.672000
+2020-05-05 20:53:04,437 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:04,571 - INFO - Current Date: 2020-03-15 21:32:29.779000
+2020-05-05 20:53:05,292 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:05,429 - INFO - Current Date: 2020-03-15 23:52:39.238000
+2020-05-05 20:53:06,022 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:06,153 - INFO - Current Date: 2020-03-16 04:42:21.428000
+2020-05-05 20:53:06,699 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:06,823 - INFO - Current Date: 2020-03-16 05:56:51.814000
+2020-05-05 20:53:07,482 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:07,606 - INFO - Current Date: 2020-03-16 07:09:23.755000
+2020-05-05 20:53:08,106 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:08,228 - INFO - Current Date: 2020-03-16 08:07:08.469000
+2020-05-05 20:53:09,557 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:09,688 - INFO - Current Date: 2020-03-16 08:56:33.605000
+2020-05-05 20:53:10,705 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:10,827 - INFO - Current Date: 2020-03-16 09:37:18.085000
+2020-05-05 20:53:11,469 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:11,590 - INFO - Current Date: 2020-03-16 10:34:22.108000
+2020-05-05 20:53:12,131 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:12,151 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:12,266 - INFO - Current Date: 2020-03-16 11:17:09.675000
+2020-05-05 20:53:13,256 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:13,257 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:13,258 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:13,391 - INFO - Current Date: 2020-03-16 11:44:16.162000
+2020-05-05 20:53:13,902 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:14,024 - INFO - Current Date: 2020-03-16 12:34:38.684000
+2020-05-05 20:53:14,530 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:14,651 - INFO - Current Date: 2020-03-16 13:17:49.552000
+2020-05-05 20:53:15,276 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:15,406 - INFO - Current Date: 2020-03-16 13:59:48.164000
+2020-05-05 20:53:15,959 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:16,082 - INFO - Current Date: 2020-03-16 14:44:36.569000
+2020-05-05 20:53:16,614 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:16,746 - INFO - Current Date: 2020-03-16 15:21:43.754000
+2020-05-05 20:53:17,434 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:17,597 - INFO - Current Date: 2020-03-16 15:56:57.159000
+2020-05-05 20:53:18,191 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:18,328 - INFO - Current Date: 2020-03-16 16:37:22.265000
+2020-05-05 20:53:19,471 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:19,598 - INFO - Current Date: 2020-03-16 17:39:08.055000
+2020-05-05 20:53:29,795 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:29,939 - INFO - Current Date: 2020-03-16 18:22:16.917000
+2020-05-05 20:53:42,144 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:42,146 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:42,335 - INFO - Current Date: 2020-03-16 19:28:52.171000
+2020-05-05 20:53:58,259 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:53:58,391 - INFO - Current Date: 2020-03-16 20:45:23.451000
+2020-05-05 20:54:14,415 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:14,573 - INFO - Current Date: 2020-03-16 22:22:35.450000
+2020-05-05 20:54:15,668 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:15,812 - INFO - Current Date: 2020-03-17 01:06:53.993000
+2020-05-05 20:54:16,684 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:16,811 - INFO - Current Date: 2020-03-17 04:53:26.490000
+2020-05-05 20:54:18,002 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:18,103 - INFO - Current Date: 2020-03-17 06:05:06.270000
+2020-05-05 20:54:18,798 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:18,875 - INFO - Current Date: 2020-03-17 06:58:38.137000
+2020-05-05 20:54:19,564 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:19,689 - INFO - Current Date: 2020-03-17 08:03:20.711000
+2020-05-05 20:54:20,395 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:20,526 - INFO - Current Date: 2020-03-17 08:46:23.968000
+2020-05-05 20:54:21,401 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:21,533 - INFO - Current Date: 2020-03-17 09:40:00.216000
+2020-05-05 20:54:22,103 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:22,235 - INFO - Current Date: 2020-03-17 10:26:57.086000
+2020-05-05 20:54:22,889 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:23,020 - INFO - Current Date: 2020-03-17 10:57:52.651000
+2020-05-05 20:54:23,679 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:23,809 - INFO - Current Date: 2020-03-17 11:47:22.270000
+2020-05-05 20:54:24,445 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:24,446 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:24,574 - INFO - Current Date: 2020-03-17 12:40:47.553000
+2020-05-05 20:54:25,173 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:25,175 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:25,326 - INFO - Current Date: 2020-03-17 13:19:30.467000
+2020-05-05 20:54:26,076 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:26,200 - INFO - Current Date: 2020-03-17 13:48:08.829000
+2020-05-05 20:54:26,806 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:26,932 - INFO - Current Date: 2020-03-17 14:18:20.831000
+2020-05-05 20:54:27,496 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:27,628 - INFO - Current Date: 2020-03-17 14:59:45.324000
+2020-05-05 20:54:28,942 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:29,090 - INFO - Current Date: 2020-03-17 15:38:40.361000
+2020-05-05 20:54:29,731 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:29,857 - INFO - Current Date: 2020-03-17 16:18:34.529000
+2020-05-05 20:54:30,448 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:30,449 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:30,574 - INFO - Current Date: 2020-03-17 17:09:55.239000
+2020-05-05 20:54:31,267 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:31,409 - INFO - Current Date: 2020-03-17 17:52:23.919000
+2020-05-05 20:54:32,118 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:32,259 - INFO - Current Date: 2020-03-17 19:14:41.924000
+2020-05-05 20:54:33,235 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:33,379 - INFO - Current Date: 2020-03-17 20:38:24.087000
+2020-05-05 20:54:34,162 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:34,301 - INFO - Current Date: 2020-03-18 00:08:37.020000
+2020-05-05 20:54:34,856 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:34,975 - INFO - Current Date: 2020-03-18 04:47:11.553000
+2020-05-05 20:54:35,711 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:35,728 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:35,734 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:35,854 - INFO - Current Date: 2020-03-18 06:08:55.041000
+2020-05-05 20:54:36,443 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:36,600 - INFO - Current Date: 2020-03-18 07:22:20.552000
+2020-05-05 20:54:37,215 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:37,348 - INFO - Current Date: 2020-03-18 08:14:36.237000
+2020-05-05 20:54:37,906 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:38,033 - INFO - Current Date: 2020-03-18 08:55:27.844000
+2020-05-05 20:54:38,635 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:38,771 - INFO - Current Date: 2020-03-18 09:38:39.033000
+2020-05-05 20:54:39,313 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:39,436 - INFO - Current Date: 2020-03-18 10:23:03.576000
+2020-05-05 20:54:41,781 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:41,902 - INFO - Current Date: 2020-03-18 11:11:17.678000
+2020-05-05 20:54:56,199 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:54:56,336 - INFO - Current Date: 2020-03-18 11:58:42.615000
+2020-05-05 20:55:06,150 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:06,274 - INFO - Current Date: 2020-03-18 13:15:14.062000
+2020-05-05 20:55:21,574 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:21,701 - INFO - Current Date: 2020-03-18 14:05:11.383000
+2020-05-05 20:55:32,601 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:32,730 - INFO - Current Date: 2020-03-18 14:28:26.478000
+2020-05-05 20:55:38,782 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:38,909 - INFO - Current Date: 2020-03-18 14:56:32.583000
+2020-05-05 20:55:42,019 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:42,146 - INFO - Current Date: 2020-03-18 15:27:34.684000
+2020-05-05 20:55:45,949 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:46,075 - INFO - Current Date: 2020-03-18 16:06:31.703000
+2020-05-05 20:55:47,712 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:47,843 - INFO - Current Date: 2020-03-18 16:44:01.950000
+2020-05-05 20:55:49,679 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:49,816 - INFO - Current Date: 2020-03-18 17:23:33.924000
+2020-05-05 20:55:50,958 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:50,963 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:51,086 - INFO - Current Date: 2020-03-18 18:04:23.713000
+2020-05-05 20:55:52,370 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:52,497 - INFO - Current Date: 2020-03-18 19:12:28.110000
+2020-05-05 20:55:53,448 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:53,628 - INFO - Current Date: 2020-03-18 21:16:04.803000
+2020-05-05 20:55:54,769 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:54,943 - INFO - Current Date: 2020-03-19 00:09:52.529000
+2020-05-05 20:55:55,812 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:55,947 - INFO - Current Date: 2020-03-19 03:49:21.214000
+2020-05-05 20:55:56,627 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:56,751 - INFO - Current Date: 2020-03-19 05:49:24.683000
+2020-05-05 20:55:57,564 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:57,702 - INFO - Current Date: 2020-03-19 06:30:21.523000
+2020-05-05 20:55:58,441 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:58,510 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:55:58,572 - INFO - Current Date: 2020-03-19 07:28:13.615000
+2020-05-05 20:56:04,163 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:04,334 - INFO - Current Date: 2020-03-19 08:14:59.167000
+2020-05-05 20:56:07,333 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:07,461 - INFO - Current Date: 2020-03-19 09:20:04.992000
+2020-05-05 20:56:08,968 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:08,969 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:09,129 - INFO - Current Date: 2020-03-19 10:08:19.494000
+2020-05-05 20:56:10,617 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:10,741 - INFO - Current Date: 2020-03-19 11:17:06.439000
+2020-05-05 20:56:11,869 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:11,999 - INFO - Current Date: 2020-03-19 12:38:08.453000
+2020-05-05 20:56:12,865 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:12,866 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:12,990 - INFO - Current Date: 2020-03-19 13:31:06.095000
+2020-05-05 20:56:14,166 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:14,329 - INFO - Current Date: 2020-03-19 14:10:18.328000
+2020-05-05 20:56:14,896 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:15,020 - INFO - Current Date: 2020-03-19 14:44:39.370000
+2020-05-05 20:56:16,275 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:16,421 - INFO - Current Date: 2020-03-19 15:32:26.696000
+2020-05-05 20:56:16,983 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:17,110 - INFO - Current Date: 2020-03-19 16:11:26.280000
+2020-05-05 20:56:17,640 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:17,763 - INFO - Current Date: 2020-03-19 16:43:10.401000
+2020-05-05 20:56:18,502 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:18,503 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:18,643 - INFO - Current Date: 2020-03-19 17:31:30.684000
+2020-05-05 20:56:19,299 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:19,432 - INFO - Current Date: 2020-03-19 18:19:40.004000
+2020-05-05 20:56:20,805 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:20,946 - INFO - Current Date: 2020-03-19 20:18:58.583000
+2020-05-05 20:56:42,418 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:42,564 - INFO - Current Date: 2020-03-19 23:17:24.323000
+2020-05-05 20:56:50,126 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:50,265 - INFO - Current Date: 2020-03-20 04:59:34.003000
+2020-05-05 20:56:52,946 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:53,074 - INFO - Current Date: 2020-03-20 06:10:46.847000
+2020-05-05 20:56:54,274 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:54,419 - INFO - Current Date: 2020-03-20 07:02:11.764000
+2020-05-05 20:56:56,072 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:56,135 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 112
+2020-05-05 20:56:56,211 - INFO - Current Date: 2020-03-20 08:05:53.926000

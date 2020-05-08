@@ -7,6 +7,18 @@ scraper:
   - sBBqsGXiYgF0Db5OV5tAw0qEsNkUdZjT9lAgq0YtkxoDyiGAcVcfuEZOaoHNRgd_n2pHZrSf1gT2PUujH1YaQA
   - sBBqsGXiYgF0Db5OV5tAw0qEsNkUdZjT9lAgq0YtkxqeWhxI2MWq4hxoWw_PQDAMn2pHZrSf1gT2PUujH1YaQA
   - sBBqsGXiYgF0Db5OV5tAw0qEsNkUdZjT9lAgq0Ytkxrcf3h1pG1qGQmmLqj3ICRtn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw-Jb2dMH9MSyvbTy8S7glfSZsD2Xztv-s9OeE6OPqJ_-n2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWcZMnN4bs4Df4RXM5MdO6IBn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWfIS2D_Ok7qp48XzMx5qypdn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWf-l55FqqgcRrCcXbAnc1HXn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWfn0E7tV7Zs1-2z9LIlrWCcn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWfBmZfbnQnIZ9Db2oOHRsrhn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWcfALlNit8EUXV4sOhH98HWn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWdHjzDzgS2IrSmtJ3KkmwL9n2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWceAsFvO7LyF6xSfplknrvBn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWfrUkmpnY6LF4rMVqaCsc_Qn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAw98Pu7pQ6o1uDGmdvkhOLWeJGV4qpYsh0osjAFNB44fLn2pHZrSf1gT2PUujH1YaQA
+  - sBBqsGXiYgF0Db5OV5tAwzFUXbd7H1JfChjkkDxLkfwVd-3ad7hq73CTVTIadygin2pHZrSf1gT2PUujH1YaQA
   sort_by:
     discover_date: discoverDate
     read_time: metadata.readTime.seconds
@@ -14,5 +26,10 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-03-13 16:58:33.150000
-  start_date_en: 2020-03-14 15:51:32.145000
+  start_date: 2020-05-05 18:59:45.815000
+  start_date_de: 2020-03-20 08:05:53.926000
+  start_date_en: 2020-05-04 20:38:36.261000
+  start_date_es: 2020-05-05 08:51:28.795000
+  start_date_fr: 2020-05-05 10:40:17.776000
+  start_date_nl: 2020-05-05 07:19:28.085000
+  start_date_tr: 2019-12-01 00:00:00

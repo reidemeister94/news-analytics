@@ -13,9 +13,11 @@ import pytz
 import bson
 
 class NewsScraper:
-    def __init__(self):
+    def __init__(self, lang):
         with open('../configuration/configuration.yaml','r') as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
+        self.lang = lang
+        self.lang_code = lang.lower()
         self.NEWS_API_LIST = self.CONFIG['scraper']['newsriver_api']
         self.LOGGER = self.__get_logger()
         self.sort_by = self.CONFIG['scraper']['sort_by']
@@ -31,7 +33,10 @@ class NewsScraper:
         logger = logging.getLogger('NewsScraper')
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = '../log/news_scraper.log'
+        if self.lang == 'IT':
+            log_path = '../log/news_scraper.log'
+        else:
+            log_path = '../log/news_scraper_' + self.lang_code + '.log'
         if not os.path.isdir('../log/'):
             os.mkdir('../log/')
         fh = logging.FileHandler(log_path)
@@ -74,21 +79,26 @@ class NewsScraper:
                                                                                         exc_type, fname, exc_tb.tb_lineno))
             return None
     
-    def save_news_to_db(self, lang):
+    def save_news_to_db(self):
         # print(self.NEWS_API)
         #get correct db collection
-        if lang == 'IT':
+        print(self.lang)
+        print(self.lang_code)
+        if self.lang == 'IT':
             collection = self.CLIENT['news']['article']
             current_date = self.CONFIG['scraper']['start_date']
         else:
-            collection = self.CLIENT['news']['article_en']
-            current_date = self.CONFIG['scraper']['start_date_en']
+            collection = self.CLIENT['news']['article_' + self.lang_code]
+            current_date = self.CONFIG['scraper']['start_date_' + self.lang_code]
         stop = False
         self.stop_date =  datetime.now()
         self.LOGGER.info('Starting scheduled news scraping...')
         self.LOGGER.info('Start Date: {}'.format(current_date))
         while not stop:
-            query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+            if self.lang == 'TR': 
+                query = "language:{} AND text:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+            else:
+                query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
             print(query)
             json_news = self.get_news_by_query(query, 'discover_date', 'asc', 100)
             if json_news is None:
@@ -111,10 +121,10 @@ class NewsScraper:
                             exc_type, fname, exc_tb.tb_lineno))
                 last_article = json_news[-1]
                 stop, current_date = self.stop_condition(last_article, current_date)
-                if lang == 'IT':
+                if self.lang == 'IT':
                     self.CONFIG['scraper']['start_date'] = current_date
                 else:
-                    self.CONFIG['scraper']['start_date_en'] = current_date
+                    self.CONFIG['scraper']['start_date_' + self.lang_code] = current_date
                 with open('../configuration/configuration.yaml', 'w') as f:
                     yaml.dump(self.CONFIG, f)
                 self.LOGGER.info('Current Date: {}'.format(current_date))
@@ -122,7 +132,6 @@ class NewsScraper:
             #         json.dump(json_news,w)
         self.LOGGER.info('Scheduled News Scraping Done until {}'.format(current_date))
         
-
 
     def stop_condition(self, article, current_date):
         current_date = dateparser.parse(article['discoverDate']).replace(tzinfo=None)
