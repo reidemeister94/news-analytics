@@ -48,8 +48,10 @@ topics = lda_module.get_topics(model, corpus, len(tokens))
 print(topics)
 '''
 
+docs_topics_dict = lda.get_docs_topics_dict()
+
 # == Saving to file ==
-topics_doc_dict = {}
+'''topics_doc_dict = {}
 for i in range(num_docs):
     #print('---- Documento ',i,' ----')
     current_doc_topics = topics[i]
@@ -62,7 +64,7 @@ for i in range(num_docs):
         current_doc_topics[j] = topic
 
     topics_doc_dict[str(i)] = {'topic': current_doc_topics, 'words': model.show_topics(
-        formatted=True, num_topics=lda.num_topics, num_words=20)[topics[i][0][0]]}
+        formatted=True, num_topics=lda.num_topics, num_words=20)[topics[i][0][0]]}'''
 
 with open('doc_topic.json', 'w') as fp:
-    json.dump(topics_doc_dict, fp)
+    json.dump(docs_topics_dict, fp)
