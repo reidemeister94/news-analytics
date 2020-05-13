@@ -10,7 +10,7 @@ from bert_serving.client import BertClient
 from pprint import pprint
 import math
 
-class NewsSimilarity:
+class NewsAnalyzer:
     def __init__(self):
         with open('../configuration/configuration.yaml','r') as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
@@ -20,10 +20,10 @@ class NewsSimilarity:
     
     def __get_logger(self):
         # create logger
-        logger = logging.getLogger('NewsSimilarity')
+        logger = logging.getLogger('NewsAnalyzer')
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = '../log/news_similarity.log'
+        log_path = '../log/news_analyzer.log'
         if not os.path.isdir('../log/'):
             os.mkdir('../log/')
         fh = logging.FileHandler(log_path)
