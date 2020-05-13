@@ -1,4 +1,19 @@
+collections_lang:
+- it
+- en
+- fr
+- de
+- nl
+- es
 mongourl: mongodb://localhost:27017
+post_process:
+  last_processed_id: Mw2sTeo_upO1iGqDw4xaFkOXHFuX4aid7hPL1WmZNnZA2dtLZpQ3jEIBGkU7BvdR5CCKzqSZNHx0tSrdrv2PlA
+  last_processed_id_de: null
+  last_processed_id_en: null
+  last_processed_id_es: null
+  last_processed_id_fr: null
+  last_processed_id_nl: null
+  last_processed_id_tr: null
 scraper:
   newsriver_api:
   - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
@@ -26,7 +41,7 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-05-13 11:13:03.281000
+  start_date: 2020-05-13 09:01:56.349000
   start_date_de: 2020-05-13 13:15:41.016000
   start_date_en: 2020-05-12 16:08:49.572000
   start_date_es: 2020-05-12 18:17:57.220000
