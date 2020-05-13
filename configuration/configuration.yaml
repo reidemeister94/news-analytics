@@ -26,10 +26,10 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-05-05 18:59:45.815000
-  start_date_de: 2020-03-20 08:05:53.926000
-  start_date_en: 2020-05-04 20:38:36.261000
-  start_date_es: 2020-05-05 08:51:28.795000
-  start_date_fr: 2020-05-05 10:40:17.776000
-  start_date_nl: 2020-05-05 07:19:28.085000
+  start_date: 2020-05-13 11:13:03.281000
+  start_date_de: 2020-05-12 21:55:16.785000
+  start_date_en: 2020-05-12 16:08:49.572000
+  start_date_es: 2020-05-12 23:18:37.378000
+  start_date_fr: 2020-05-13 10:20:53.229000
+  start_date_nl: 2020-05-13 06:35:40.562000
   start_date_tr: 2019-12-01 00:00:00
