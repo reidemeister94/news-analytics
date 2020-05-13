@@ -5,7 +5,7 @@ from pprint import pprint
 import json
 import os
 import sys
-from datetime import datetime
+import datetime
 import random
 import dateparser
 from pymongo import MongoClient
@@ -91,14 +91,14 @@ class NewsScraper:
             collection = self.CLIENT['news']['article_' + self.lang_code]
             current_date = self.CONFIG['scraper']['start_date_' + self.lang_code]
         stop = False
-        self.stop_date =  datetime.now()
+        self.stop_date =  datetime.datetime.now()
         self.LOGGER.info('Starting scheduled news scraping...')
         self.LOGGER.info('Start Date: {}'.format(current_date))
         while not stop:
             if self.lang == 'TR': 
-                query = "language:{} AND text:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+                query = "language:{} AND text:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S.%f') )
             else:
-                query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S') )
+                query = "language:{} AND title:coronavirus AND discoverDate:[{} TO *] ".format(self.lang, datetime.datetime.strftime(current_date, '%Y-%m-%dT%H:%M:%S.%f') )
             print(query)
             json_news = self.get_news_by_query(query, 'discover_date', 'asc', 100)
             if json_news is None:
@@ -111,6 +111,10 @@ class NewsScraper:
                 self.NEWS_API = self.CONFIG['scraper']['newsriver_api'][idx_api]
             else:
                 for news in json_news:
+                    # print(type(news['discoverDate']))
+                    # print(news['discoverDate'])
+                    discover_date = dateparser.parse(news['discoverDate']).replace(tzinfo=None)
+                    news['discoverDate'] = discover_date
                     try:
                         collection.insert_one(news)
                     except Exception as e:
@@ -120,11 +124,12 @@ class NewsScraper:
                         self.LOGGER.error('Error on DB Insert: {}, {}, {}'.format(
                             exc_type, fname, exc_tb.tb_lineno))
                 last_article = json_news[-1]
-                stop, current_date = self.stop_condition(last_article, current_date)
+                stop = self.stop_condition(last_article)
+                current_date = last_article['discoverDate'] + datetime.timedelta(milliseconds=10)
                 if self.lang == 'IT':
-                    self.CONFIG['scraper']['start_date'] = current_date
+                    self.CONFIG['scraper']['start_date'] = last_article['discoverDate']
                 else:
-                    self.CONFIG['scraper']['start_date_' + self.lang_code] = current_date
+                    self.CONFIG['scraper']['start_date_' + self.lang_code] = last_article['discoverDate']
                 with open('../configuration/configuration.yaml', 'w') as f:
                     yaml.dump(self.CONFIG, f)
                 self.LOGGER.info('Current Date: {}'.format(current_date))
@@ -133,11 +138,12 @@ class NewsScraper:
         self.LOGGER.info('Scheduled News Scraping Done until {}'.format(current_date))
         
 
-    def stop_condition(self, article, current_date):
-        current_date = dateparser.parse(article['discoverDate']).replace(tzinfo=None)
-        if dateparser.parse(article['discoverDate']).replace(tzinfo=None) >= self.stop_date:
-            return True, current_date
-        return False, current_date
+    def stop_condition(self, article):
+        #current_date = dateparser.parse(article['discoverDate']).replace(tzinfo=None)
+        if article['discoverDate'] >= self.stop_date:
+        #if dateparser.parse(article['discoverDate']).replace(tzinfo=None) >= self.stop_date:
+            return True
+        return False
 
 if __name__ == '__main__':
     news_scraper = NewsScraper()
