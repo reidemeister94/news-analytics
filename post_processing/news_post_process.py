@@ -5,6 +5,7 @@ import logging
 import requests
 from pprint import pprint
 import json
+import time
 import os
 from scraping.news_scraper import NewsScraper
 from pymongo import MongoClient
@@ -40,27 +41,30 @@ class NewsPostProcess:
 	def main(self):
 		# this is the main workflow: here the extraction and processing 
 		# phases are looped until no other news has to be analyzed
-		i = 0
+		i = 0 # TESTING
 		for lang in self.CONFIG['collections_lang']:
-			if lang == 'it': # Just for testing. Remove it then.
+			if lang == 'it': # TESTING
 				if lang != 'it':
-					collection = self.MONGO_CLIENT['news']['article_' + lang] 
+					name_coll = 'article_' + lang
+					last_processed_param = 'last_processed_' + lang
 				else:
-					collection = self.MONGO_CLIENT['news']['article']
-			
-			#print(self.CONFIG['post_process']['last_processed_id_en'] is None)
-			if i == 0:
-				for doc in collection.find({"id":self.CONFIG['post_process']['last_processed_id']}):
-					discover_date = doc['discoverDate']
-					discover_date = dateparser.parse(discover_date)#.strftime('%d/%m/%y, %H:%M')
-					res = collection.update_one({'id':doc['id']}, {"$set": { "discoverDate": discover_date }})
-					print(res)
-					i += 1
-				# print(doc)
-				# print('='*75)
-				# i += 1
-				# if i == 10:
-				# 	break
+					name_coll = 'article'
+					last_processed_param = 'last_processed'
+				collection = self.MONGO_CLIENT['news'][name_coll]
+				if i == 0: # TESTING
+					for doc in collection.find({'discoverDate' : {'$gt': self.CONFIG['post_process'][last_processed_param]}}):
+						# discover_date = doc['discoverDate']
+						# discover_date = dateparser.parse(discover_date)#.strftime('%d/%m/%y, %H:%M')
+						# res = collection.update_one({'id':doc['id']}, {"$set": { "discoverDate": discover_date }})
+						print(doc)
+						print('='*75)
+						time.sleep(5)
+						i += 1
+					# print(doc)
+					# print('='*75)
+					# i += 1
+					# if i == 10:
+					# 	break
 		
 
 	def __stop(self, p, collection):
