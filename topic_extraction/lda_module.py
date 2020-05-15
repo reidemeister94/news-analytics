@@ -89,6 +89,9 @@ class LdaModule:
         return
 
     def get_topics_flat(self):
+        '''
+        Format self.topics object into a list
+        '''
         return [topic for sublist in self.topics for topic in sublist]
 
     def get_document_topic(self, doc_tokens):
