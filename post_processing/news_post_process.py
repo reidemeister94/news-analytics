@@ -1,5 +1,6 @@
 import sys
 sys.path.append('../')
+sys.path.append('../core_modules/')
 import yaml
 import logging
 import requests
@@ -8,6 +9,8 @@ import json
 import time
 import os
 from scraping.news_scraper import NewsScraper
+from news_analyzer.news_analyzer import NewsAnalyzer
+from named_entity_recognition.named_entity_recognition import NamedEntityRecognition
 from pymongo import MongoClient
 import dateparser
 
@@ -42,6 +45,7 @@ class NewsPostProcess:
 		# this is the main workflow: here the extraction and processing 
 		# phases are looped until no other news has to be analyzed
 		i = 0 # TESTING
+		news_analyzer = NewsAnalyzer()
 		for lang in self.CONFIG['collections_lang']:
 			if lang == 'it': # TESTING
 				if lang != 'it':
@@ -52,7 +56,10 @@ class NewsPostProcess:
 					last_processed_param = 'last_processed'
 				collection = self.MONGO_CLIENT['news'][name_coll]
 				if i == 0: # TESTING
-					for doc in collection.find({'discoverDate' : {'$gt': self.CONFIG['post_process'][last_processed_param]}}):
+					not_processed_docs = collection.find({'processedEncoding' : False})
+					for doc in not_processed_docs:
+
+					#for doc in collection.find({'discoverDate' : {'$gt': self.CONFIG['post_process'][last_processed_param]}}):
 						# discover_date = doc['discoverDate']
 						# discover_date = dateparser.parse(discover_date)#.strftime('%d/%m/%y, %H:%M')
 						# res = collection.update_one({'id':doc['id']}, {"$set": { "discoverDate": discover_date }})

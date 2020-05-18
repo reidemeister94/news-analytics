@@ -6,14 +6,6 @@ collections_lang:
 - nl
 - es
 mongourl: mongodb://localhost:27017
-post_process:
-  last_processed: 2020-05-07T14:33:32.594
-  last_processed_de: 2019-12-01T00:00:00.000
-  last_processed_en: 2019-12-01T00:00:00.000
-  last_processed_es: 2019-12-01T00:00:00.000
-  last_processed_fr: 2019-12-01T00:00:00.000
-  last_processed_nl: 2019-12-01T00:00:00.000
-  last_processed_tr: 2019-12-01T00:00:00.000
 scraper:
   newsriver_api:
   - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
