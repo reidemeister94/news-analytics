@@ -2,20 +2,22 @@ import pandas as pd
 
 from gensim import corpora, models
 
-from lda_utils import LdaUtils
-
+from lda_utils import LDAUtils
+from nlp_utils import NLPUtils
 
 class LdaModule:
 
-    def __init__(self, num_docs, tokens, num_topics):
+    def __init__(self, num_docs, data, num_topics, lang):
         self.num_docs = num_docs
-        self.tokens = tokens
+        self.data = data
         self.num_topics = num_topics
+        self.lang = lang
+        self.tokens = None
         self.dictionary = None
         self.corpus = None
         self.topics = None
         self.model = None
-        self.utils = LdaUtils()
+        self.LDAUtils = LDAUtils()
 
     def __get_logger(self):
         # create logger
@@ -34,6 +36,12 @@ class LdaModule:
         logger.addHandler(fh)
         return logger
 
+    def parse_text(self):
+        self.tokens = NLPUtils(self.data).parse_text(self.lang)
+        #return NLPUtils(data).parse_text('en')
+        return
+
+
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
         assert len(self.tokens) != 0, "Missing input tokens."
 
@@ -41,9 +49,9 @@ class LdaModule:
 
         if(use_collocations):
             print("... Finding collocations ...")
-            self.tokens = self.utils.get_word_collocations(self.tokens)
+            self.tokens = self.LDAUtils.get_word_collocations(self.tokens)
         else:
-            self.tokens = [self.utils.string_to_list(t) for t in self.tokens]
+            self.tokens = [self.LDAUtils.string_to_list(t) for t in self.tokens]
 
         # Build dictionary
         dictionary = corpora.Dictionary(self.tokens)
@@ -112,7 +120,7 @@ class LdaModule:
         assert len(self.topics != 0), "LDA model not present."
         num_topics = len(self.topics)
 
-        t2d_matrix = pd.concat([self.utils.topics_document_to_dataframe(topics_document, num_topics)
+        t2d_matrix = pd.concat([self.LDAUtils.topics_document_to_dataframe(topics_document, num_topics)
                                 for topics_document in self.topics]).reset_index(drop=True).fillna(0)
         return t2d_matrix
 
@@ -134,6 +142,7 @@ class LdaModule:
         return docs_topics_dict
 
     def runLDA(self):
+        self.parse_text()
         self.build_dictionary()
         self.build_corpus()
         self.build_lda_model()

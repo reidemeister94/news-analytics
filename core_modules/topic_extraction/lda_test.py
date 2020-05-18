@@ -3,9 +3,6 @@ import json
 import numpy as np
 
 from lda_module import LdaModule
-from lda_utils import LdaUtils
-
-from nlp_utils import NLPUtils
 
 #data = pd.read_csv("./data_test.csv")
 
@@ -18,11 +15,11 @@ num_docs = len(data['articles'])
 num_topics = 20
 
 # Some preparation before running LDA
-text_utils = NLPUtils(data)
-tokens = text_utils.parse_text('en')
+#text_utils = NLPUtils(data)
+#tokens = text_utils.parse_text('en')
 
-lda = LdaModule(num_docs, tokens, num_topics)
-
+lang = 'en'
+lda = LdaModule(num_docs, data, num_topics, lang)
 lda.runLDA()
 
 #dictionary = lda.build_dictionary()
