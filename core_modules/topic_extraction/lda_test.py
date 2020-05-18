@@ -1,5 +1,6 @@
 import json
 #import pandas as pd
+import numpy as np
 
 from lda_module import LdaModule
 from lda_utils import LdaUtils
@@ -9,39 +10,36 @@ from nlp_utils import NLPUtils
 #data = pd.read_csv("./data_test.csv")
 
 # Assuming a json file coming from mongoDB
-file = './old/data.json'
+file = 'data.json'
 with open(file, 'r') as texts:
     data = json.load(texts)
 
 num_docs = len(data['articles'])
+num_topics = 20
 
 # Some preparation before running LDA
 text_utils = NLPUtils(data)
 tokens = text_utils.parse_text('en')
 
-lda = LdaModule(num_docs, tokens)
+lda = LdaModule(num_docs, tokens, num_topics)
 
-dictionary = lda.build_dictionary()
+lda.runLDA()
 
-corpus = lda.build_corpus()
+#dictionary = lda.build_dictionary()
 
-model = lda.build_lda_model()
+#corpus = lda.build_corpus()
 
-topics = lda.get_topics()
+#model = lda.build_lda_model()
 
-flat_topics = [topic for sublist in topics for topic in sublist]
+#topics = lda.get_topics()
 
-print("I've assigned ", len(flat_topics), "topics.")
-# print(topics)
+#flat_topics = [topic for sublist in topics for topic in sublist]
 
-'''
-dictionary, tokens = lda_module.build_dictionary(tokens, use_collocations = False)
+#print("I've assigned ", len(flat_topics), "topics.")
+# print(flat_topics)
 
-corpus = lda_module.build_corpus(dictionary, tokens)
+docs_topics_dict = lda.get_docs_topics_dict()
 
-model = lda_module.build_lda_model(dictionary, corpus)
-
-topics = lda_module.get_topics(model, corpus, len(tokens))
-
-print(topics)
-'''
+# == Saving to file ==
+with open('doc_topic.json', 'w') as fp:
+    json.dump(docs_topics_dict, fp)
