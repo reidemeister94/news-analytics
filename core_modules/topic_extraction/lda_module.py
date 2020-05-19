@@ -2,18 +2,22 @@ import pandas as pd
 
 from gensim import corpora, models
 
-from lda_utils import LdaUtils
-
+from lda_utils import LDAUtils
+from nlp_utils import NLPUtils
 
 class LdaModule:
 
-    def __init__(self, num_docs, tokens):
+    def __init__(self, num_docs, data, num_topics, lang):
         self.num_docs = num_docs
-        self.tokens = tokens
+        self.data = data
+        self.num_topics = num_topics
+        self.lang = lang
+        self.tokens = None
         self.dictionary = None
         self.corpus = None
         self.topics = None
-        self.utils = LdaUtils()
+        self.model = None
+        self.LDAUtils = LDAUtils()
 
     def __get_logger(self):
         # create logger
@@ -32,6 +36,12 @@ class LdaModule:
         logger.addHandler(fh)
         return logger
 
+    def parse_text(self):
+        self.tokens = NLPUtils(self.data).parse_text(self.lang)
+        #return NLPUtils(data).parse_text('en')
+        return
+
+
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
         assert len(self.tokens) != 0, "Missing input tokens."
 
@@ -39,9 +49,9 @@ class LdaModule:
 
         if(use_collocations):
             print("... Finding collocations ...")
-            self.tokens = self.utils.get_word_collocations(self.tokens)
+            self.tokens = self.LDAUtils.get_word_collocations(self.tokens)
         else:
-            self.tokens = [self.utils.string_to_list(t) for t in self.tokens]
+            self.tokens = [self.LDAUtils.string_to_list(t) for t in self.tokens]
 
         # Build dictionary
         dictionary = corpora.Dictionary(self.tokens)
@@ -52,7 +62,8 @@ class LdaModule:
 
         self.dictionary = dictionary
 
-        return dictionary
+        #return self.dictionary
+        return
 
     def build_corpus(self):
 
@@ -62,29 +73,39 @@ class LdaModule:
         self.corpus = [self.dictionary.doc2bow(
             list_of_tokens) for list_of_tokens in self.tokens]
 
-        return self.corpus
+        #return self.corpus
+        return
 
     def build_lda_model(self, num_topics=20, passes=4, alpha=0.01, eta=0.01):
         assert len(self.dictionary) != 0, "Empty dictionary."
 
         print("... Building LDA model ...")
 
-        self.model = models.LdaModel(self.corpus, num_topics=num_topics,
+        self.model = models.LdaModel(self.corpus, num_topics=self.num_topics,
                                      id2word=self.dictionary, passes=passes,
-                                     alpha=[alpha] * num_topics,
+                                     alpha=[alpha] * self.num_topics,
                                      eta=[eta] * len(self.dictionary.keys()))
 
-        return self.model
+        #return self.model
+        return
 
     def get_topics(self):
         print("... Retrieving topics ...")
         self.topics = [self.model[self.corpus[i]]
                        for i in range(self.num_docs)]
-        return self.topics
+        #return self.topics
+        return
+
+    def get_topics_flat(self):
+        '''
+        Format self.topics object into a list
+        '''
+        return [topic for sublist in self.topics for topic in sublist]
 
     def get_document_topic(self, doc_tokens):
         '''
-        Return the topic(s) for a given document
+        Return the topic(s) for a given document.
+        Future: now it's unused, maybe to remove since this info is made persistent on mongo
         '''
         assert len(self.topics != 0), "LDA model not present."
         document_info = pd.DataFrame([(el[0], round(el[1], 2), topics[el[0]][1])
@@ -93,14 +114,39 @@ class LdaModule:
         return document_info
 
     def get_top2doc_matrix(self):
-
+        '''
+        Future: now it's unused, maybe to remove...
+        '''
         assert len(self.topics != 0), "LDA model not present."
         num_topics = len(self.topics)
 
-        t2d_matrix = pd.concat([self.utils.topics_document_to_dataframe(topics_document, num_topics)
+        t2d_matrix = pd.concat([self.LDAUtils.topics_document_to_dataframe(topics_document, num_topics)
                                 for topics_document in self.topics]).reset_index(drop=True).fillna(0)
         return t2d_matrix
 
+    def get_docs_topics_dict(self):
+        docs_topics_dict = {}
+        for i in range(self.num_docs):
+            #print('---- Documento ',i,' ----')
+            current_doc_topics = self.topics[i]
+            for j in range(len(current_doc_topics)):
+                topic = current_doc_topics[j]
+                if len(topic) == 1:
+                    topic = topic[0]
+                # print(topic)
+                topic = (topic[0], str(topic[1]))
+                current_doc_topics[j] = topic
+
+            docs_topics_dict[str(i)] = {'topic': current_doc_topics, 'words': self.model.show_topics(
+                formatted=True, num_topics=self.model.num_topics, num_words=20)[self.topics[i][0][0]]}
+        return docs_topics_dict
+
+    def runLDA(self):
+        self.parse_text()
+        self.build_dictionary()
+        self.build_corpus()
+        self.build_lda_model()
+        self.get_topics()
 
 if __name__ == '__main__':
     lda = LdaModule()

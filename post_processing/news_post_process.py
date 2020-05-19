@@ -29,7 +29,11 @@ class NewsPostProcess:
 		# all the articles that aren't processed yet
 		pass
 
-	def topic_extraction(self):
+	def topic_extraction(self, num_topics):
+		# from db: data, lang, num_docs
+		# lda = LdaModule(num_docs, data, num_topics, lang)
+		# lda.runLDA()
+		# docs_topics_dict = lda.get_docs_topics_dict()
 		pass
 
 	def cited_news_extraction(self):

@@ -2,8 +2,7 @@ from gensim.models import Phrases
 
 import ast
 
-
-class LdaUtils:
+class LDAUtils:
 
     def __init__(self):
         pass
@@ -36,4 +35,4 @@ class LdaUtils:
 
 
 if __name__ == '__main__':
-    lda_utils = LdaUtils()
+    lda_utils = LDAUtils()
