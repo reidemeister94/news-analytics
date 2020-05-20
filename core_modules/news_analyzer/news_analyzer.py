@@ -12,7 +12,7 @@ import math
 
 class NewsAnalyzer:
     def __init__(self):
-        with open('../configuration/configuration.yaml','r') as f:
+        with open('../../configuration/configuration.yaml','r') as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.CLIENT = MongoClient(self.CONFIG['mongourl'])
         self.BC = BertClient(port=5555, port_out=5556, check_version=False)
@@ -61,16 +61,24 @@ class NewsAnalyzer:
         similarity = self.scoring(first_doc,second_doc)
         # now add this similarity to db (need to think about what db collection to use)
     
-    def encode_news(self):
+    def encode_news(self,news):
         ###
         # TODO:
         #extract not processed news and compute the encoding
         #of their main paragraph
         ###
-        document = None
-        text_rank = self.text_rank(document)
-        main_phrase = ' '.join(text_rank[0][1], text_rank[1][1], text_rank[2][1])
-        self.BC.encode(main_phrase)
+        text_rank = self.text_rank(news)
+        main_phrase = ' '.join((text_rank[0][1], text_rank[1][1], text_rank[2][1]))
+        res = self.BC.encode([main_phrase])
+        return res
         ###
         # TODO:
         #update the db, adding the encoded paragraph
+
+
+if __name__ == "__main__":
+    news_analyzer = NewsAnalyzer()
+    doc = """With changes taking effect on Wednesday, all 50 states have begun to reopen in at least some way, more than two months after the coronavirus thrust the country into lockdown. But there remain vast discrepancies in how states are deciding to open up, with some forging far ahead of others.
+             Connecticut will be among the last states to take a plunge back to business on Wednesday, when its stay-at-home order lifts and stores, museums and offices are allowed to reopen. But not far away in New Jersey, the reopening has been more limited, with only curbside pickup at retail stores and allowances for certain industries."""
+    enc = news_analyzer.encode_news(doc)
+    pprint(enc)

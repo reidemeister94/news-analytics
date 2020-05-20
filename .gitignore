@@ -10,3 +10,5 @@ __pycache__/
 .vscode/
 
 .ipynb_checkpoints
+
+core_modules/news_analyzer/bert_models/
