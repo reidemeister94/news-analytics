@@ -17,7 +17,6 @@ class NewsAnalyzer:
         self.CLIENT = MongoClient(self.CONFIG['mongourl'])
         self.BC = BertClient(port=5555, port_out=5556, check_version=False)
         self.LOGGER = self.__get_logger()
-        print('ciao')
     
     def __get_logger(self):
         # create logger

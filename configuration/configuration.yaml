@@ -7,6 +7,25 @@ collections_lang:
 - es
 mongourl: mongodb://localhost:27017
 scraper:
+  turkish_news_urls:
+    - http://hurriyetdailynews.com
+    - https://hurriyet.com.tr
+    - https://www.ensonhaber.com
+    - https://www.haber7.com
+    - https://www.hurriyet.com.tr
+    - https://www.milliyet.com.tr
+    - https://www.yenisafak.com
+    - https://www.sozcu.com.tr/
+    - https://www.haberturk.com/
+    - https://www.haberler.com/
+    - https://www.star.com.tr/
+    - https://www.memurlar.net/
+    - https://www.aa.com.tr/
+    - https://www.cumhuriyet.com.tr/
+    - https://www.cnnturk.com/
+    - https://www.gazetevatan.com/
+    - https://www.haber3.com/
+    - https://www.sondakika.com/
   newsriver_api:
   - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
   - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXzq3w96QlMqw3KrGN772WETn2pHZrSf1gT2PUujH1YaQA
