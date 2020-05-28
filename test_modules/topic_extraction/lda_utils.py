@@ -2,7 +2,6 @@ from gensim.models import Phrases
 
 import ast
 
-
 class LdaUtils:
 
     def __init__(self):

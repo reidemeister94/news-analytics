@@ -1,4 +1,5 @@
 import pandas as pd
+import spacy
 
 from langdetect import detect
 from itertools import chain
@@ -15,6 +16,7 @@ class NLPUtils:
 
     def __init__(self, data):
         self.data = data
+        self.nlp = spacy.load("en_core_web_md")
 
     def parse_text(self, lang):
         '''
@@ -46,10 +48,12 @@ class NLPUtils:
         - data: Pandas dataframe
         - lang: string representing the language to keep (like 'en')
         '''
+        ''' COMMENTED ONLY FOR TESTING
         if lang is not None:
             return data.loc[data.lang == lang]
         else:
-            return data
+            return data'''
+        return data
 
     def sentence_tokenize(self, data):
         '''
