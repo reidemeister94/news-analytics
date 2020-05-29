@@ -1,6 +1,7 @@
 from gensim.models import Phrases
 
 import ast
+import pickle
 
 class LdaUtils:
 
@@ -32,6 +33,22 @@ class LdaUtils:
         return value
         '''
         return ast.literal_eval(tokens)
+
+    def save_lda_model(self, model, location):
+        # Test location
+        #location = "./lda_model/lda_checkpoint"
+        chekpointfile = open(location, "wb")
+        pickle.dump(model, chekpointfile)
+        chekpointfile.close()
+        return
+    
+    def load_lda_model(self, location):
+        # Test location
+        #location = "./lda_model/lda_checkpoint"
+        checkpointfile = open(file_name,"rb")
+        loaded_lda = pickle.load(checkpointfile)
+        checkpointfile.close()
+        return loaded_lda
 
 
 if __name__ == '__main__':

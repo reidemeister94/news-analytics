@@ -1,45 +1,41 @@
 import json
-#import pandas as pd
 import numpy as np
+import datetime
 
 from lda_module import LdaModule
 from lda_utils import LdaUtils
 
 from nlp_utils import NLPUtils
 
-#data = pd.read_csv("./data_test.csv")
-
 # Assuming a json file coming from mongoDB
 file = 'data.json'
 with open(file, 'r') as texts:
     data = json.load(texts)
 
-num_docs = len(data['articles'])
-num_topics = 20
+doc_collection = []
 
 # Some preparation before running LDA
-text_utils = NLPUtils(data)
-tokens = text_utils.parse_text('en')
+text_utils = NLPUtils('en')
+print("Parsing articles...")
+for doc in data['articles']:
+    tokens = text_utils.parse_text(doc['text'])
+    doc_collection.append(tokens)
 
-lda = LdaModule(num_docs, tokens, num_topics)
+print("Completed parsing articles")
+num_docs = len(doc_collection)
+num_topics = 20
+
+lda = LdaModule(num_docs = num_docs, doc_collection = doc_collection, num_topics = num_topics, trained = False)
 
 lda.runLDA()
-
-#dictionary = lda.build_dictionary()
-
-#corpus = lda.build_corpus()
-
-#model = lda.build_lda_model()
-
-#topics = lda.get_topics()
-
-#flat_topics = [topic for sublist in topics for topic in sublist]
-
-#print("I've assigned ", len(flat_topics), "topics.")
-# print(flat_topics)
 
 docs_topics_dict = lda.get_docs_topics_dict()
 
 # == Saving to file ==
 with open('doc_topic.json', 'w') as fp:
     json.dump(docs_topics_dict, fp)
+
+# == Saving model checkpoint ==
+now = datetime.datetime.now()
+timestamp = now.strftime("%m-%d-%Y_%H-%M-%S")
+lda.save_LDA_model("./lda_checkpoint/lda_{}".format(timestamp))

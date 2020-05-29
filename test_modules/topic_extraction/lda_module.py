@@ -7,10 +7,12 @@ from lda_utils import LdaUtils
 
 class LdaModule:
 
-    def __init__(self, num_docs, tokens, num_topics):
+    def __init__(self, num_docs, doc_collection, num_topics, trained = False):
         self.num_docs = num_docs
-        self.tokens = tokens
+        self.doc_collection = doc_collection
         self.num_topics = num_topics
+        # If the model has already been trained we restore it
+        self.trained = trained
         self.dictionary = None
         self.corpus = None
         self.topics = None
@@ -35,18 +37,18 @@ class LdaModule:
         return logger
 
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
-        assert len(self.tokens) != 0, "Missing input tokens."
+        assert len(self.doc_collection) != 0, "Missing input tokens."
 
         print("... Building dictionary ...")
 
         if(use_collocations):
             print("... Finding collocations ...")
-            self.tokens = self.utils.get_word_collocations(self.tokens)
+            self.doc_collection = self.utils.get_word_collocations(self.doc_collection)
         else:
-            self.tokens = [self.utils.string_to_list(t) for t in self.tokens]
+            self.doc_collection = [self.utils.string_to_list(t) for t in self.doc_collection]
 
         # Build dictionary
-        dictionary = corpora.Dictionary(self.tokens)
+        dictionary = corpora.Dictionary(self.doc_collection)
 
         # Keep tokens that appear at least in 3 documents
         if(doc_threshold > 0):
@@ -63,7 +65,7 @@ class LdaModule:
 
         # Build corpus as list of bags of words from the documents
         self.corpus = [self.dictionary.doc2bow(
-            list_of_tokens) for list_of_tokens in self.tokens]
+            list_of_tokens) for list_of_tokens in self.doc_collection]
 
         #return self.corpus
         return
@@ -138,6 +140,15 @@ class LdaModule:
         self.build_corpus()
         self.build_lda_model()
         self.get_topics()
+        return
+
+    def save_LDA_model(self, location):
+        self.utils.save_lda_model(self.model, location)
+        return
+    
+    def load_lda_model(self, location):
+        self.model = self.utils.load_lda_model(location)
+        return
 
 if __name__ == '__main__':
     lda = LdaModule()
