@@ -1,23 +1,28 @@
 import pandas as pd
+import datetime
 
 from gensim import corpora, models
 
 from lda_utils import LdaUtils
-
+from nlp_utils import NLPUtils
 
 class LdaModule:
 
-    def __init__(self, num_docs, doc_collection, num_topics, trained = False):
+    def __init__(self, lang, num_docs, doc_collection, num_topics, trained = False):
         self.num_docs = num_docs
         self.doc_collection = doc_collection
         self.num_topics = num_topics
-        # If the model has already been trained we restore it
-        self.trained = trained
         self.dictionary = None
         self.corpus = None
         self.topics = None
-        self.model = None
+        self.location = "./lda_checkpoint/lda_"     # load it form config file?
         self.utils = LdaUtils()
+        self.nlp_utils = NLPUtils(lang)
+        # If the model has already been trained we restore it
+        if trained :
+            self.model = self.load_lda_model(self.location)
+        else :
+            self.model = None
 
     def __get_logger(self):
         # create logger
@@ -35,6 +40,9 @@ class LdaModule:
         fh.setFormatter(formatter)
         logger.addHandler(fh)
         return logger
+
+    def parse_text(self, raw_data, custom_stop_words = None):
+        return self.nlp_utils.parse_text(raw_data, custom_stop_words)
 
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
         assert len(self.doc_collection) != 0, "Missing input tokens."
@@ -56,9 +64,6 @@ class LdaModule:
 
         self.dictionary = dictionary
 
-        #return self.dictionary
-        return
-
     def build_corpus(self):
 
         print("... Building corpus ...")
@@ -66,9 +71,6 @@ class LdaModule:
         # Build corpus as list of bags of words from the documents
         self.corpus = [self.dictionary.doc2bow(
             list_of_tokens) for list_of_tokens in self.doc_collection]
-
-        #return self.corpus
-        return
 
     def build_lda_model(self, num_topics=20, passes=4, alpha=0.01, eta=0.01):
         assert len(self.dictionary) != 0, "Empty dictionary."
@@ -80,15 +82,10 @@ class LdaModule:
                                      alpha=[alpha] * self.num_topics,
                                      eta=[eta] * len(self.dictionary.keys()))
 
-        #return self.model
-        return
-
     def get_topics(self):
         print("... Retrieving topics ...")
         self.topics = [self.model[self.corpus[i]]
                        for i in range(self.num_docs)]
-        #return self.topics
-        return
 
     def get_topics_flat(self):
         '''
@@ -140,15 +137,23 @@ class LdaModule:
         self.build_corpus()
         self.build_lda_model()
         self.get_topics()
-        return
 
-    def save_LDA_model(self, location):
-        self.utils.save_lda_model(self.model, location)
-        return
-    
-    def load_lda_model(self, location):
-        self.model = self.utils.load_lda_model(location)
-        return
+    def save_LDA_model(self):
+        now = datetime.datetime.now()
+        timestamp = now.strftime("%m-%d-%Y_%H-%M-%S")
+        path = self.location + timestamp
+        self.utils.save_lda_model(self.model, path)
+
+    def load_lda_model(self):
+        self.model = self.utils.load_lda_model(self.location)
+
+    def update_lda_model(self, doc):
+        if self.model is None:
+            self.model = self.utils.load_lda_model(self.location)
+        parsed_doc = self.nlp_utils.parse_text(doc)
+        self.model.update[self.dictionary.doc2bow(parsed_doc)]
+        self.save_LDA_model()
+
 
 if __name__ == '__main__':
     lda = LdaModule()
