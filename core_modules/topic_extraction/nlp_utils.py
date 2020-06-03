@@ -6,7 +6,7 @@ from itertools import chain
 
 class NLPUtils:
 
-    def __init__(self, lang):
+    def __init__(self, lang = 'en'):
         self.lang = lang
         self.doc = None
         if (self.lang == 'es'):
