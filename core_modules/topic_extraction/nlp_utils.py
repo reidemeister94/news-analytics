@@ -1,130 +1,91 @@
 import pandas as pd
 
-from langdetect import detect
+import spacy
+
 from itertools import chain
-
-from nltk.tokenize import word_tokenize
-from nltk.tokenize import sent_tokenize
-from nltk.corpus import wordnet
-from nltk.corpus import stopwords
-from nltk import pos_tag
-from nltk.stem.wordnet import WordNetLemmatizer
-
 
 class NLPUtils:
 
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, lang):
+        self.lang = lang
+        self.doc = None
+        if (self.lang == 'es'):
+            self.nlp = spacy.load("es_core_news_md")
+        elif (self.lang == 'de'):
+            self.nlp = spacy.load("de_core_news_md")
+        elif (self.lang == 'fr'):
+            self.nlp = spacy.load("fr_core_news_md")
+        elif (self.lang == 'it'):
+            self.nlp = spacy.load("it_core_news_sm")
+        elif (self.lang == 'nl'):
+            self.nlp = spacy.load("nl_core_news_sm")
+        else:
+            # English is default
+            self.nlp = spacy.load("en_core_web_md")
+        self.fix_stop_words()
 
-    def parse_text(self, lang):
+    def parse_text(self, raw_data, custom_stop_words = None):
         '''
         General function to parse a set of texts
+        '''
+        if (custom_stop_words != None):
+            self.add_custom_stop_words(custom_stop_words)
+        
+        # Check parsing before this point (should be good with pymongo)
+        
+        # Build spaCy's doc object
+        self.doc = self.nlp(raw_data)
+        # Retrieve sentences
+        sentences = self.sentence_tokenize(self.doc)
+        #print(len(sentences))
+        # Lemmatize + remove stop words
+        lemmas = self.lemmatize_tokens(sentences)
+        #print(len(lemmas))
+        # Flatten results into a single list
+        parsed_text = self.flatten_list(lemmas)
 
-        To-Do: add the option to 'toggle' only some of them
-        '''
-        self.data = self.convert_to_df(self.data)
-        self.data = self.filter_language(self.data, lang)
-        self.data = self.sentence_tokenize(self.data)
-        self.data = self.get_word_tokens(self.data)
-        self.data = self.pos_tagging(self.data)
-        self.data = self.lemmatize_tokens(self.data)
-        if(lang == 'en'):
-            self.data = self.remove_stopwords(self.data, 'english')
+        return parsed_text
 
-        return self.data['tokens'].tolist()
-
-    def convert_to_df(self, data):
+    def fix_stop_words(self):
         '''
-        Convert the JSON data into a Pandas dataframe.
-        Makes it easier to work with models from nltk and gensim.
+        Despite being present in spaCy's models, sometimes stop words aren't picked up.
+        This workaround forces them to be removed.
         '''
-        return pd.DataFrame.from_dict(data)
-
-    def filter_language(self, data, lang=None):
+        for word in self.nlp.Defaults.stop_words:
+            w = self.nlp.vocab[word]
+            w.is_stop = True
+        return
+    
+    def add_custom_stop_words(self, custom_stop_words):
         '''
-        Keep texts only from a given language
-        - data: Pandas dataframe
-        - lang: string representing the language to keep (like 'en')
+        If any, custom words are added by flagging them in the language model (nlp)
         '''
-        if lang is not None:
-            return data.loc[data.lang == lang]
-        else:
-            return data
+        for cw in custom_stop_words:
+            w = self.nlp.vocab[cw]
+            w.is_stop = True
+        return
 
     def sentence_tokenize(self, data):
         '''
-        For each document in data, create a list of strings
-        with each one being a sentence from that document.
-        The result is appended to data in the 'sentences' column
+        Creates a list of strings with each one being a sentence from that document.
         '''
-        data['sentences'] = data.articles.map(sent_tokenize)
-        return data
-
-    def get_word_tokens(self, data):
-        '''
-        For each document, tokenize the sentences in it.
-        The result is appended to data in the 'tokens_sentences' column
-        '''
-        data['tokens_sentences'] = data['sentences'].map(
-            lambda sentences: [word_tokenize(sentence) for sentence in sentences])
-        return data
-
-    def pos_tagging(self, data):
-        '''
-        Performs POS tagging on a list of tokens representing a sentence
-        '''
-        data['POS_tokens'] = data['tokens_sentences'].map(
-            lambda tokens_sentences: [pos_tag(tokens) for tokens in tokens_sentences])
-        return data
-
-    def _get_wordnet_pos(self, treebank_tag):
-        '''
-        Utility function to map from the Treebank corpus tag set (used to
-        train the nltk POS tagger) to the WordNet tag set. 
-        '''
-        if treebank_tag.startswith('J'):
-            return wordnet.ADJ
-        elif treebank_tag.startswith('V'):
-            return wordnet.VERB
-        elif treebank_tag.startswith('N'):
-            return wordnet.NOUN
-        elif treebank_tag.startswith('R'):
-            return wordnet.ADV
-        else:
-            return ''
+        return [sent for sent in data.sents]
 
     def lemmatize_tokens(self, data):
         '''
-        Lemmatizing each word with its POS tag, in each sentence
+        Lemmatizing each word + remove stop words in each sentence
         '''
-        lemmatizer = WordNetLemmatizer()
+        lemmas = []
+        for sent in data:
+            lemmas.append([token.lemma_ for token in sent if (not self.nlp.vocab[token.lower_].is_stop and 
+                                                              not token.is_punct and len(token.text)>1)])
+        return lemmas
 
-        data['tokens_sentences_lemmatized'] = data['POS_tokens'].map(
-            lambda list_tokens_POS: [
-                [
-                    lemmatizer.lemmatize(el[0], self._get_wordnet_pos(el[1]))
-                    if self._get_wordnet_pos(el[1]) != '' else el[0] for el in tokens_POS
-                ]
-                for tokens_POS in list_tokens_POS
-            ]
-        )
-        return data
-
-    def remove_stopwords(self, data, lang, extra_stopwords=None):
+    def flatten_list(self, data):
         '''
-        Remove very common words
+        Flattens the lemmatized sentences into a single list, ready for gensim's LDA implementation
         '''
-        to_remove = stopwords.words(lang)
-
-        if extra_stopwords is not None:
-            if len(extra_stopwords) > 0:
-                to_remove = to_remove + extra_stopwords
-
-        data['tokens'] = data['tokens_sentences_lemmatized'].map(lambda sentences: list(chain.from_iterable(sentences)))
-        data['tokens'] = data['tokens'].map(lambda tokens: [token.lower() for token in tokens if token.isalpha()
-                                                            and token.lower() not in to_remove and len(token) > 1])
-
-        return data
+        return list(chain.from_iterable(data))
 
 
 if __name__ == '__main__':

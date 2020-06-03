@@ -1,23 +1,28 @@
 import pandas as pd
+import datetime
 
 from gensim import corpora, models
 
-from lda_utils import LDAUtils
+from lda_utils import LdaUtils
 from nlp_utils import NLPUtils
 
 class LdaModule:
 
-    def __init__(self, num_docs, data, num_topics, lang):
+    def __init__(self, lang, num_docs, doc_collection, num_topics, trained = False):
         self.num_docs = num_docs
-        self.data = data
+        self.doc_collection = doc_collection
         self.num_topics = num_topics
-        self.lang = lang
-        self.tokens = None
         self.dictionary = None
         self.corpus = None
         self.topics = None
-        self.model = None
-        self.LDAUtils = LDAUtils()
+        self.location = "./lda_checkpoint/lda_"     # load it form config file?
+        self.utils = LdaUtils()
+        self.nlp_utils = NLPUtils(lang)
+        # If the model has already been trained we restore it
+        if trained :
+            self.model = self.load_lda_model(self.location)
+        else :
+            self.model = None
 
     def __get_logger(self):
         # create logger
@@ -36,25 +41,22 @@ class LdaModule:
         logger.addHandler(fh)
         return logger
 
-    def parse_text(self):
-        self.tokens = NLPUtils(self.data).parse_text(self.lang)
-        #return NLPUtils(data).parse_text('en')
-        return
-
+    def parse_text(self, raw_data, custom_stop_words = None):
+        return self.nlp_utils.parse_text(raw_data, custom_stop_words)
 
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
-        assert len(self.tokens) != 0, "Missing input tokens."
+        assert len(self.doc_collection) != 0, "Missing input tokens."
 
         print("... Building dictionary ...")
 
         if(use_collocations):
             print("... Finding collocations ...")
-            self.tokens = self.LDAUtils.get_word_collocations(self.tokens)
+            self.doc_collection = self.utils.get_word_collocations(self.doc_collection)
         else:
-            self.tokens = [self.LDAUtils.string_to_list(t) for t in self.tokens]
+            self.doc_collection = [self.utils.string_to_list(t) for t in self.doc_collection]
 
         # Build dictionary
-        dictionary = corpora.Dictionary(self.tokens)
+        dictionary = corpora.Dictionary(self.doc_collection)
 
         # Keep tokens that appear at least in 3 documents
         if(doc_threshold > 0):
@@ -62,19 +64,13 @@ class LdaModule:
 
         self.dictionary = dictionary
 
-        #return self.dictionary
-        return
-
     def build_corpus(self):
 
         print("... Building corpus ...")
 
         # Build corpus as list of bags of words from the documents
         self.corpus = [self.dictionary.doc2bow(
-            list_of_tokens) for list_of_tokens in self.tokens]
-
-        #return self.corpus
-        return
+            list_of_tokens) for list_of_tokens in self.doc_collection]
 
     def build_lda_model(self, num_topics=20, passes=4, alpha=0.01, eta=0.01):
         assert len(self.dictionary) != 0, "Empty dictionary."
@@ -86,15 +82,10 @@ class LdaModule:
                                      alpha=[alpha] * self.num_topics,
                                      eta=[eta] * len(self.dictionary.keys()))
 
-        #return self.model
-        return
-
     def get_topics(self):
         print("... Retrieving topics ...")
         self.topics = [self.model[self.corpus[i]]
                        for i in range(self.num_docs)]
-        #return self.topics
-        return
 
     def get_topics_flat(self):
         '''
@@ -120,7 +111,7 @@ class LdaModule:
         assert len(self.topics != 0), "LDA model not present."
         num_topics = len(self.topics)
 
-        t2d_matrix = pd.concat([self.LDAUtils.topics_document_to_dataframe(topics_document, num_topics)
+        t2d_matrix = pd.concat([self.utils.topics_document_to_dataframe(topics_document, num_topics)
                                 for topics_document in self.topics]).reset_index(drop=True).fillna(0)
         return t2d_matrix
 
@@ -142,11 +133,27 @@ class LdaModule:
         return docs_topics_dict
 
     def runLDA(self):
-        self.parse_text()
         self.build_dictionary()
         self.build_corpus()
         self.build_lda_model()
         self.get_topics()
+
+    def save_LDA_model(self):
+        now = datetime.datetime.now()
+        timestamp = now.strftime("%m-%d-%Y_%H-%M-%S")
+        path = self.location + timestamp
+        self.utils.save_lda_model(self.model, path)
+
+    def load_lda_model(self):
+        self.model = self.utils.load_lda_model(self.location)
+
+    def update_lda_model(self, doc):
+        if self.model is None:
+            self.model = self.utils.load_lda_model(self.location)
+        parsed_doc = self.nlp_utils.parse_text(doc)
+        self.model.update[self.dictionary.doc2bow(parsed_doc)]
+        self.save_LDA_model()
+
 
 if __name__ == '__main__':
     lda = LdaModule()
