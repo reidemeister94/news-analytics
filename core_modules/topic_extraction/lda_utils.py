@@ -2,6 +2,7 @@ from gensim.models import Phrases
 
 import ast
 import pickle
+import pandas as pd
 
 class LdaUtils:
 
@@ -27,7 +28,7 @@ class LdaUtils:
             res.loc[0, topic_weight[0]] = topic_weight[1]
         return res
 
-    def _string_to_list(self, tokens):
+    def string_to_list(self, tokens):
         '''
         Old function used to fix the format of the get_word_collocations()
         return value
@@ -45,7 +46,7 @@ class LdaUtils:
     def load_lda_model(self, location):
         # Test location
         #location = "./lda_model/lda_checkpoint"
-        checkpointfile = open(file_name,"rb")
+        checkpointfile = open(location,"rb")
         loaded_lda = pickle.load(checkpointfile)
         checkpointfile.close()
         return loaded_lda

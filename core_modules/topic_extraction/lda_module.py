@@ -1,5 +1,7 @@
 import pandas as pd
 import datetime
+import os
+import logging
 
 from gensim import corpora, models
 
@@ -8,7 +10,7 @@ from nlp_utils import NLPUtils
 
 class LdaModule:
 
-    def __init__(self, lang, num_docs, doc_collection, num_topics, trained = False):
+    def __init__(self, lang = 'en', num_docs = 0, doc_collection = [], num_topics = 0, trained = False):
         self.num_docs = num_docs
         self.doc_collection = doc_collection
         self.num_topics = num_topics
@@ -20,7 +22,7 @@ class LdaModule:
         self.nlp_utils = NLPUtils(lang)
         # If the model has already been trained we restore it
         if trained :
-            self.model = self.load_lda_model(self.location)
+            self.load_lda_model()
         else :
             self.model = None
 
@@ -99,7 +101,7 @@ class LdaModule:
         Future: now it's unused, maybe to remove since this info is made persistent on mongo
         '''
         assert len(self.topics != 0), "LDA model not present."
-        document_info = pd.DataFrame([(el[0], round(el[1], 2), topics[el[0]][1])
+        document_info = pd.DataFrame([(el[0], round(el[1], 2), self.topics[el[0]][1])
                                       for el in self.model[self.dictionary.doc2bow(doc_tokens)]],
                                      columns=['topic #', 'weight', 'words in topic'])
         return document_info
