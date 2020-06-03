@@ -3,6 +3,7 @@ from gensim.models import Phrases
 import ast
 import pickle
 import pandas as pd
+import json
 
 class LdaUtils:
 
@@ -35,21 +36,38 @@ class LdaUtils:
         '''
         return ast.literal_eval(tokens)
 
-    def save_lda_model(self, model, location):
+    def save_lda_model(self, ldaModule, location):
         # Test location
         #location = "./lda_model/lda_checkpoint"
-        chekpointfile = open(location, "wb")
-        pickle.dump(model, chekpointfile)
-        chekpointfile.close()
-        return
+        # chekpointfile = open(location, "wb")
+        # pickle.dump(ldaModule.model, chekpointfile)
+        # chekpointfile.close()
+        # # save dictionary
+        # with open(location + '_dictionary.json', 'w') as writer:
+        #     json.dumps(dict(ldaModule.dictionary), writer)
+        # # save corpus
+        # with open(location + '_corpus.json', 'w') as writer:
+        #     json.dumps(dict(ldaModule.corpus), writer)
+        # return
+        with open(location + '.pickle', 'wb') as output:
+            pickle.dump(ldaModule, output, pickle.HIGHEST_PROTOCOL)
     
     def load_lda_model(self, location):
         # Test location
         #location = "./lda_model/lda_checkpoint"
-        checkpointfile = open(location,"rb")
-        loaded_lda = pickle.load(checkpointfile)
-        checkpointfile.close()
-        return loaded_lda
+        # checkpointfile = open(location,"rb")
+        # loaded_lda = pickle.load(checkpointfile)
+        # checkpointfile.close()
+        # # load dictionary
+        # with open(location + '_dictionary.json', 'r') as jsonfile:
+        #     dictionary =  json.load(jsonfile)
+        # # load corpus
+        # with open(location + '_corpus.json', 'r') as jsonfile:
+        #     corpus = json.load(jsonfile)
+        # return loaded_lda, dictionary, corpus
+        with open(location + '.pickle', 'rb') as input_file:
+            ldaModule = pickle.load(input_file)
+        return ldaModule
 
 
 if __name__ == '__main__':

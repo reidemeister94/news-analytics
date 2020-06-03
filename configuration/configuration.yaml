@@ -59,3 +59,5 @@ scraper:
   - https://www.gazetevatan.com/
   - https://www.haber3.com/
   - https://www.sondakika.com/
+topic_extraction:
+  lda_models_path: lda_checkpoint/
