@@ -7,25 +7,6 @@ collections_lang:
 - es
 mongourl: mongodb://localhost:27017
 scraper:
-  turkish_news_urls:
-    - http://hurriyetdailynews.com
-    - https://hurriyet.com.tr
-    - https://www.ensonhaber.com
-    - https://www.haber7.com
-    - https://www.hurriyet.com.tr
-    - https://www.milliyet.com.tr
-    - https://www.yenisafak.com
-    - https://www.sozcu.com.tr/
-    - https://www.haberturk.com/
-    - https://www.haberler.com/
-    - https://www.star.com.tr/
-    - https://www.memurlar.net/
-    - https://www.aa.com.tr/
-    - https://www.cumhuriyet.com.tr/
-    - https://www.cnnturk.com/
-    - https://www.gazetevatan.com/
-    - https://www.haber3.com/
-    - https://www.sondakika.com/
   newsriver_api:
   - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
   - sBBqsGXiYgF0Db5OV5tAwyDwTBcmusmyclF2DJQMGXzq3w96QlMqw3KrGN772WETn2pHZrSf1gT2PUujH1YaQA
@@ -52,10 +33,29 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-05-21 11:58:47.929000
-  start_date_de: 2020-05-20 13:01:04.001000
-  start_date_en: 2020-05-21 12:59:11.140000
-  start_date_es: 2020-05-21 07:55:55.417000
-  start_date_fr: 2020-05-21 10:01:33.830000
-  start_date_nl: 2020-05-18 10:46:28.704000
+  start_date: 2020-06-03 10:00:46.192000
+  start_date_de: 2020-06-03 10:59:25.361000
+  start_date_en: 2020-06-03 08:59:48.233000
+  start_date_es: 2020-06-03 04:59:58.945000
+  start_date_fr: 2020-06-02 17:58:09.031000
+  start_date_nl: 2020-05-30 13:17:24.264000
   start_date_tr: 2019-12-01 00:00:00
+  turkish_news_urls:
+  - http://hurriyetdailynews.com
+  - https://hurriyet.com.tr
+  - https://www.ensonhaber.com
+  - https://www.haber7.com
+  - https://www.hurriyet.com.tr
+  - https://www.milliyet.com.tr
+  - https://www.yenisafak.com
+  - https://www.sozcu.com.tr/
+  - https://www.haberturk.com/
+  - https://www.haberler.com/
+  - https://www.star.com.tr/
+  - https://www.memurlar.net/
+  - https://www.aa.com.tr/
+  - https://www.cumhuriyet.com.tr/
+  - https://www.cnnturk.com/
+  - https://www.gazetevatan.com/
+  - https://www.haber3.com/
+  - https://www.sondakika.com/
