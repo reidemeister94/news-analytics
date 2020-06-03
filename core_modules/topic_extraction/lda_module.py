@@ -11,6 +11,7 @@ from nlp_utils import NLPUtils
 class LdaModule:
 
     def __init__(self, lang = 'en', num_docs = 0, doc_collection = [], num_topics = 0, trained = False):
+        self.lang = lang
         self.num_docs = num_docs
         self.doc_collection = doc_collection
         self.num_topics = num_topics
@@ -19,7 +20,6 @@ class LdaModule:
         self.topics = None
         self.location = "./lda_checkpoint/lda_"     # load it form config file?
         self.utils = LdaUtils()
-        self.nlp_utils = NLPUtils(lang)
         # If the model has already been trained we restore it
         if trained :
             self.load_lda_model()
@@ -44,7 +44,8 @@ class LdaModule:
         return logger
 
     def parse_text(self, raw_data, custom_stop_words = None):
-        return self.nlp_utils.parse_text(raw_data, custom_stop_words)
+        text_utils = NLPUtils(self.lang)
+        return text_utils.parse_text(raw_data, custom_stop_words)
 
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
         assert len(self.doc_collection) != 0, "Missing input tokens."
@@ -150,9 +151,10 @@ class LdaModule:
         self.model = self.utils.load_lda_model(self.location)
 
     def update_lda_model(self, doc):
+        text_utils = NLPUtils(self.lang)
         if self.model is None:
             self.model = self.utils.load_lda_model(self.location)
-        parsed_doc = self.nlp_utils.parse_text(doc)
+        parsed_doc = text_utils.parse_text(doc)
         self.model.update[self.dictionary.doc2bow(parsed_doc)]
         self.save_LDA_model()
 
