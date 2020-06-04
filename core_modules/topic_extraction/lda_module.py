@@ -145,8 +145,8 @@ class LdaModule:
 		self.get_topics()
 
 	def save_LDA_model(self):
-		now = datetime.datetime.now()
-		# timestamp = now.strftime("%m-%d-%Y_%H-%M-%S")
+		#now = datetime.datetime.now()
+		#timestamp = now.strftime("%m-%d-%Y_%H-%M-%S")
 		path = self.location + 'lda_model_' + self.lang
 		if not os.path.isdir(self.location):
 			os.mkdir(self.location)

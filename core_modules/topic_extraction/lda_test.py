@@ -6,13 +6,15 @@ from lda_utils import LdaUtils
 from nlp_utils import NLPUtils
 
 # Assuming a json file coming from mongoDB
-file = 'data.json'
-with open(file, 'r') as texts:
+with open('data.json', 'r') as texts:
     data = json.load(texts)
+
+with open('custom_stop_words.json', 'r') as sw:
+    custom_stop_words = json.load(sw)
 
 doc_collection = []
 
-text_utils = NLPUtils('en')
+text_utils = NLPUtils('en', custom_stop_words = custom_stop_words['s_words'])
 
 # Define LDA model
 
