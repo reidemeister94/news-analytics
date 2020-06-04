@@ -78,19 +78,10 @@ class NLPUtils:
         '''
         Lemmatizing each word + remove stop words in each sentence
         '''
-        # lemmas = []
-        # for sent in data:
-        #     lemmas.append([token.lemma_ for token in sent if (not self.nlp.vocab[token.lower_].is_stop and 
-        #                                                       not token.is_punct and len(token.text) > 1)])
-        # return lemmas
         lemmas = []
         for sent in data:
-            for token in sent:
-                print(token.text)
-                if (not self.nlp.vocab[token.lower_].is_stop and not token.is_punct and len(token.text) > 1):
-                    lemmas.append(token.lemma_)
-                    print('token appended')
-                print('='*75)
+            lemmas.append([token.lemma_ for token in sent if (not self.nlp.vocab[token.lower_].is_stop and 
+                                                              not token.is_punct and len(token.text) > 1)])
         return lemmas
 
     def flatten_list(self, data):

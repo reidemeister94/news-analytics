@@ -48,8 +48,11 @@ class NewsPostProcess:
         document_topic_info = {}
         for el in self.lda_module.model[lda_module.dictionary.doc2bow(parsed_text)]:
             document_topic_info[el[0]] = [round(el[1], 2), topics[el[0]][1]]
+        doc['topic_extraction'] = document_topic_info
 
         # bert enconding phase
+
+		#return doc
 
     def topic_extraction(self, num_topics):
         # from db: data, lang, num_docs
@@ -95,6 +98,7 @@ class NewsPostProcess:
                         # print('='*75)
                         # time.sleep(5)
                         updated_doc = self.process_doc(doc)
+
                         time.sleep(10)
                     i += 1  # DEBUG
 
