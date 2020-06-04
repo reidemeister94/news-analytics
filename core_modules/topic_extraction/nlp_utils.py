@@ -1,12 +1,13 @@
 import pandas as pd
 
 import spacy
+import json
 
 from itertools import chain
 
 class NLPUtils:
 
-    def __init__(self, lang = 'en', custom_stop_words = None):
+    def __init__(self, lang = 'en'):
         self.lang = lang
         self.doc = None
         if (self.lang == 'es'):
@@ -23,8 +24,7 @@ class NLPUtils:
             # English is default
             self.nlp = spacy.load("en_core_web_md")
         self.fix_stop_words()
-        if (custom_stop_words != None):
-            self.add_custom_stop_words(custom_stop_words)
+        self.load_custom_stop_words()
 
     def parse_text(self, raw_data):
         '''
@@ -51,17 +51,21 @@ class NLPUtils:
         This workaround forces them to be removed.
         '''
         for word in self.nlp.Defaults.stop_words:
-            w = self.nlp.vocab[word]
-            w.is_stop = True
+            self.nlp.vocab[word].is_stop = True
         return
+
+    def load_custom_stop_words(self):
+        with open('custom_stop_words.json', 'r') as sw:
+            custom_stop_words = json.load(sw)['s_words']
+        # custom_stop_words = custom_stop_words['s_words']
+        self.add_custom_stop_words(custom_stop_words)
     
     def add_custom_stop_words(self, custom_stop_words):
         '''
         If any, custom words are added by flagging them in the language model (nlp)
         '''
         for cw in custom_stop_words:
-            w = self.nlp.vocab[cw]
-            w.is_stop = True
+            self.nlp.vocab[cw].is_stop = True
         return
 
     def sentence_tokenize(self, data):
@@ -74,10 +78,19 @@ class NLPUtils:
         '''
         Lemmatizing each word + remove stop words in each sentence
         '''
+        # lemmas = []
+        # for sent in data:
+        #     lemmas.append([token.lemma_ for token in sent if (not self.nlp.vocab[token.lower_].is_stop and 
+        #                                                       not token.is_punct and len(token.text) > 1)])
+        # return lemmas
         lemmas = []
         for sent in data:
-            lemmas.append([token.lemma_ for token in sent if (not self.nlp.vocab[token.lower_].is_stop and 
-                                                              not token.is_punct and len(token.text)>1)])
+            for token in sent:
+                print(token.text)
+                if (not self.nlp.vocab[token.lower_].is_stop and not token.is_punct and len(token.text) > 1):
+                    lemmas.append(token.lemma_)
+                    print('token appended')
+                print('='*75)
         return lemmas
 
     def flatten_list(self, data):
