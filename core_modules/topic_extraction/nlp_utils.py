@@ -6,7 +6,7 @@ from itertools import chain
 
 class NLPUtils:
 
-    def __init__(self, lang = 'en'):
+    def __init__(self, lang = 'en', custom_stop_words = None):
         self.lang = lang
         self.doc = None
         if (self.lang == 'es'):
@@ -23,14 +23,13 @@ class NLPUtils:
             # English is default
             self.nlp = spacy.load("en_core_web_md")
         self.fix_stop_words()
-
-    def parse_text(self, raw_data, custom_stop_words = None):
-        '''
-        General function to parse a set of texts
-        '''
         if (custom_stop_words != None):
             self.add_custom_stop_words(custom_stop_words)
-        
+
+    def parse_text(self, raw_data):
+        '''
+        General function to parse a set of texts
+        '''       
         # Check parsing before this point (should be good with pymongo)
         
         # Build spaCy's doc object
