@@ -65,18 +65,10 @@ class NewsAnalyzer:
         # now add this similarity to db (need to think about what db collection to use)
 
     def encode_news(self, news):
-        ###
-        # TODO:
-        # extract not processed news and compute the encoding
-        # of their main paragraph
-        ###
         text_rank = self.text_rank(news)
         main_phrase = " ".join((text_rank[0][1], text_rank[1][1], text_rank[2][1]))
         res = self.BC.encode([main_phrase])
         return list(res)
-        ###
-        # TODO:
-        # update the db, adding the encoded paragraph
 
 
 if __name__ == "__main__":

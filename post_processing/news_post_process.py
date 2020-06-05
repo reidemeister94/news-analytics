@@ -1,3 +1,6 @@
+import sys
+
+sys.path.append("../")
 import dateparser
 from pymongo import MongoClient
 from core_modules.topic_extraction.nlp_utils import NLPUtils
@@ -14,9 +17,6 @@ from pprint import pprint
 import requests
 import logging
 import yaml
-import sys
-
-sys.path.append("../")
 
 
 class NewsPostProcess:
@@ -128,7 +128,6 @@ class NewsPostProcess:
             else:
                 updated_doc = self.process_doc(doc, update_model=False)
             self.batch_size += 1
-            
 
     def __stop(self, p, collection):
         is_old_post = collection.find_one({"id_post": p["id_post"]})
