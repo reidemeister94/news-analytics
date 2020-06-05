@@ -60,7 +60,9 @@ scraper:
   - https://www.haber3.com/
   - https://www.sondakika.com/
 topic_extraction:
-  lda_models_path: lda_checkpoint/
+  lda_models_path: core_modules/topic_extraction/lda_checkpoint/
   num_topics: 20
   num_words: 20
   batch_size: 1000
+news_analyzer: 
+  bert_model_path: /Users/silvio/Documents/news-analytics/core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8

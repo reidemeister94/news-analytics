@@ -1,13 +1,8 @@
-import sys
-
-sys.path.append("../")
 import dateparser
 from pymongo import MongoClient
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
-from core_modules.named_entity_recognition.named_entity_recognition import (
-    NamedEntityRecognition,
-)
+from core_modules.named_entity_recognition.named_entity_recognition import NamedEntityRecognition
 from core_modules.news_analyzer.news_analyzer import NewsAnalyzer
 from scraping.news_scraper import NewsScraper
 import os
@@ -16,15 +11,16 @@ import json
 from pprint import pprint
 import requests
 import logging
+import subprocess
 import yaml
 
 
 class NewsPostProcess:
     def __init__(self):
-        with open("../configuration/configuration.yaml") as f:
+        with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.LOGGER = self.__get_logger()
-        mongourl = "mongodb://localhost:27017/"
+        mongourl = self.CONFIG['mongourl']
         self.MONGO_CLIENT = MongoClient(mongourl)
         self.news_json = None
         self.news_analyzer = None
@@ -37,7 +33,11 @@ class NewsPostProcess:
     def db_news_extraction(self):
         # news extraction from db: there will be extracted
         # all the articles that aren't processed yet
-        self.news_analyzer = NewsAnalyzer(self.CONFIG)
+        # with open('test.txt', 'w') as f:
+        #     process = subprocess.Popen(['bert-serving-start',
+        #     '-model_dir', self.CONFIG['news_analyzer']['bert_model_path'],
+        #     '-num_worker=1'], stdout=f, universal_newlines=True)
+        # self.news_analyzer = NewsAnalyzer(self.CONFIG)
         self.named_entity_recognition = NamedEntityRecognition()
         for lang in self.CONFIG["collections_lang"]:
             self.lda_module = LdaModule(lang=lang, trained=True)
@@ -62,12 +62,20 @@ class NewsPostProcess:
     def process_doc(self, doc, update_model=False):
         # named entity recognition phase
         doc = self.named_entity_recognition(doc)
+        print('ner completed')
 
         # topic extraction phase
         doc = self.topic_extraction(doc, update_model)
+        print('topic extraction completed')
 
         # bert enconding phase
+        # doc = self.news_analysis(doc)
+        # print('bert encoding completed')
 
+        return doc
+
+    def news_analysis(self, doc):
+        doc["bert_encoding"] = news_analyzer.encode_news(doc)
         return doc
 
     def topic_extraction(self, doc, update_model):
@@ -101,9 +109,6 @@ class NewsPostProcess:
         doc["named_entity_recognition"] = ner_data
         return doc
 
-    def news_analysis(self):
-        pass
-
     def db_news_update(self, collection, doc):
         query = {"id": doc["id"]}
         newvalues = {
@@ -119,9 +124,14 @@ class NewsPostProcess:
     def main(self):
         # this is the main workflow: here the extraction and processing
         # phases are looped until no other news has to be analyzed
+        self.LOGGER.info("Initializing core modules and extract news from db...")
         collection, not_processed_docs = self.db_news_extraction()
+        self.LOGGER.info("Core modules initialized and news from db extracted...")
         # print(len(list(not_processed_docs)))
+        i = 0 
         for doc in not_processed_docs:
+            if i % 10 == 0:
+                pprint(doc)
             if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
                 updated_doc = self.process_doc(doc, update_model=True)
                 self.batch_size = 0
@@ -129,6 +139,8 @@ class NewsPostProcess:
             else:
                 updated_doc = self.process_doc(doc, update_model=False)
             self.batch_size += 1
+            i += 1
+        subprocess.Popen(['bert-serving-terminate','-port=5555'])
 
     def __stop(self, p, collection):
         is_old_post = collection.find_one({"id_post": p["id_post"]})

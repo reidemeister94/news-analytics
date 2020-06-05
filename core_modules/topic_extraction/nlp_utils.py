@@ -55,7 +55,7 @@ class NLPUtils:
         return
 
     def load_custom_stop_words(self):
-        with open("custom_stop_words.json", "r") as sw:
+        with open("core_modules/topic_extraction/custom_stop_words.json", "r") as sw:
             custom_stop_words = json.load(sw)["s_words"]
         # custom_stop_words = custom_stop_words['s_words']
         self.add_custom_stop_words(custom_stop_words)

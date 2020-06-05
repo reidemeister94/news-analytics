@@ -14,7 +14,7 @@ class LdaModule:
     def __init__(
         self, lang="en", num_docs=0, doc_collection=[], num_topics=0, trained=False
     ):
-        with open("../../configuration/configuration.yaml") as f:
+        with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.lang = lang
         self.num_docs = num_docs
@@ -178,6 +178,7 @@ class LdaModule:
         self.utils.save_lda_model(self, path)
 
     def load_lda_model(self):
+        print('LOCAZIONE: {}'.format(os.getcwd()))
         module = self.utils.load_lda_model(self.location + "lda_model_" + self.lang)
         self.dictionary = module.dictionary
         self.corpus = module.corpus
