@@ -5,7 +5,7 @@ import json
 
 from itertools import chain
 
-
+# Utility functions to parse text
 class NLPUtils:
     def __init__(self, lang="en"):
         self.lang = lang
