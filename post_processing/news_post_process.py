@@ -87,6 +87,7 @@ class NewsPostProcess:
 
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)
+            
         return doc
 
     def named_entity_recognition(self, doc):
