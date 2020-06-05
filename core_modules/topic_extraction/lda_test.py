@@ -14,7 +14,7 @@ with open("custom_stop_words.json", "r") as sw:
 
 doc_collection = []
 
-text_utils = NLPUtils("en", custom_stop_words=custom_stop_words["s_words"])
+text_utils = NLPUtils("en")
 
 # Define LDA model
 
