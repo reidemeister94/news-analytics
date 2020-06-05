@@ -48,9 +48,9 @@ class LdaModule:
         logger.addHandler(fh)
         return logger
 
-    def parse_text(self, raw_data, custom_stop_words=None):
+    def parse_text(self, raw_data):
         text_utils = NLPUtils(self.lang)
-        return text_utils.parse_text(raw_data, custom_stop_words)
+        return text_utils.parse_text(raw_data)
 
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
         assert len(self.doc_collection) != 0, "Missing input tokens."
@@ -188,7 +188,7 @@ class LdaModule:
     def update_lda_model(self, parsed_docs):
         # text_utils = NLPUtils(self.lang)
         if self.model is None:
-            self.model = self.load_lda_model()
+            self.load_lda_model()
         # parsed_doc = text_utils.parse_text(doc)
         new_corpus = [self.dictionary.doc2bow(doc) for doc in parsed_docs]
         self.model.update(new_corpus)
