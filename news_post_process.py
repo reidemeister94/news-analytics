@@ -19,6 +19,7 @@ import yaml
 
 class NewsPostProcess:
     def __init__(self):
+        # init
         with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.LOGGER = self.__get_logger()

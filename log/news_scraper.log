@@ -1,2 +1,37 @@
 2020-05-14 17:02:08,025 - INFO - Starting scheduled news scraping...
 2020-05-14 17:02:08,026 - INFO - Start Date: 2020-05-13 09:01:56.349000
+2020-06-08 16:00:03,198 - INFO - Starting scheduled news scraping...
+2020-06-08 16:00:03,201 - INFO - Start Date: 2020-06-08 13:56:54.190000
+2020-06-08 16:00:25,927 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,934 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,940 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,955 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,963 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,970 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,977 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,984 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,991 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:25,998 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,004 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,012 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,021 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,028 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,034 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,039 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,044 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,051 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,057 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,064 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,071 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,077 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,081 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,086 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,091 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,097 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,101 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,107 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,114 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,123 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,130 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,137 - ERROR - Error on DB Insert: <class 'pymongo.errors.DuplicateKeyError'>, news_scraper.py, 132
+2020-06-08 16:00:26,491 - INFO - Current Date: 2020-06-08 15:57:27.117000

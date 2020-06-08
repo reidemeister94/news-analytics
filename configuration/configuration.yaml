@@ -6,6 +6,8 @@ collections_lang:
 - nl
 - es
 mongourl: mongodb://localhost:27017
+news_analyzer:
+  bert_model_path: /Users/silvio/Documents/news-analytics/core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8
 scraper:
   newsriver_api:
   - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
@@ -33,7 +35,7 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-06-08 13:56:54.190000
+  start_date: 2020-06-08 15:57:27.107000
   start_date_de: 2020-06-08 10:58:25.404000
   start_date_en: 2020-06-08 15:00:31.472000
   start_date_es: 2020-06-08 09:56:34.285000
@@ -60,9 +62,7 @@ scraper:
   - https://www.haber3.com/
   - https://www.sondakika.com/
 topic_extraction:
+  batch_size: 1000
   lda_models_path: core_modules/topic_extraction/lda_checkpoint/
   num_topics: 20
   num_words: 20
-  batch_size: 1000
-news_analyzer: 
-  bert_model_path: /Users/silvio/Documents/news-analytics/core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8
