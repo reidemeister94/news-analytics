@@ -34,7 +34,7 @@ from core_modules.topic_extraction.lda_module import LdaModule
 
 mongourl = "mongodb://localhost:27017/"
 MONGO_CLIENT = MongoClient(mongourl)
-LANG_CODE = "fr"
+LANG_CODE = "nl"
 
 
 # In[ ]:
