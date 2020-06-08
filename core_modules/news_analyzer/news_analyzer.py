@@ -66,12 +66,17 @@ class NewsAnalyzer:
 
     def encode_news(self, news):
         text_rank = self.text_rank(news)
-        main_phrase = " ".join((text_rank[0][1], text_rank[1][1], text_rank[2][1]))
-        res = self.BC.encode([main_phrase])
-        final_res = []
-        for elem in res[0]:
-            final_res.append(float(elem))
-        return final_res
+        if len(text_rank) > 0:
+            main_phrase = ""
+            for i in range(min(3,len(text_rank))):
+                main_phrase += " " + text_rank[i][1]
+            res = self.BC.encode([main_phrase])
+            final_res = []
+            for elem in res[0]:
+                final_res.append(float(elem))
+            return final_res
+        else:
+            return []
 
 
 if __name__ == "__main__":

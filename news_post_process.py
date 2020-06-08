@@ -1,4 +1,3 @@
-import dateparser
 import bson
 from pymongo import MongoClient
 from core_modules.topic_extraction.nlp_utils import NLPUtils
@@ -70,6 +69,9 @@ class NewsPostProcess:
         doc["bert_encoding"] = self.news_analyzer.encode_news(doc["text"])
         return doc
 
+    def format_topic_list(self, topics):
+        return [(word,float(weight)) for word,weight in topics]
+
     def topic_extraction(self, doc, update_model):
         parsed_text = self.nlp_utils.parse_text(doc["text"])
         self.batch_docs.append(parsed_text)
@@ -82,7 +84,7 @@ class NewsPostProcess:
         for el in self.lda_module.model[
             self.lda_module.dictionary.doc2bow(parsed_text)
         ]:
-            document_topic_info[str(el[0])] = [round(el[1], 2), topics[el[0]][1]]
+            document_topic_info[str(el[0])] = [float(round(el[1], 2)), self.format_topic_list(topics[el[0]][1])]
         doc["topic_extraction"] = document_topic_info
 
         if update_model:
