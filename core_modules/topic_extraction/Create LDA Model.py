@@ -24,7 +24,7 @@ import psutil
 from pathlib import Path
 
 sys.path.append(str(Path(os.getcwd())) + "/")
-print(sys.path)
+#print(sys.path)
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
 
@@ -34,14 +34,14 @@ from core_modules.topic_extraction.lda_module import LdaModule
 
 mongourl = "mongodb://localhost:27017/"
 MONGO_CLIENT = MongoClient(mongourl)
-LANG_CODE = "it"
+LANG_CODE = "es"
 
 
 # In[ ]:
 
 
-# collection = MONGO_CLIENT["news"]["article" + "_" + LANG_CODE]
-collection = MONGO_CLIENT["news"]["article"]
+collection = MONGO_CLIENT["news"]["article" + "_" + LANG_CODE]
+# collection = MONGO_CLIENT["news"]["article"]
 not_processed_docs = collection.find()
 # for doc in not_processed_docs:
 #    print(doc)
@@ -52,13 +52,13 @@ not_processed_docs = collection.find()
 
 
 training_set = []
-i = 0
+# i = 0
 for document in not_processed_docs:
-    if i % 10000 == 0:
-        print(i)
-        print(psutil.virtual_memory())
+    # if i % 10000 == 0:
+    #     print(i)
+    #     print(psutil.virtual_memory())
     training_set.append(document["text"])
-    i += 1
+    # i += 1
 
 
 # In[ ]:
