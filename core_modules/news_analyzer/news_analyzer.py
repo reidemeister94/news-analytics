@@ -16,7 +16,7 @@ class NewsAnalyzer:
         if CONFIG is not None:
             self.CONFIG = CONFIG
         else:
-            with open("../../configuration/configuration.yaml") as f:
+            with open("configuration/configuration.yaml") as f:
                 self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.CLIENT = MongoClient(self.CONFIG["mongourl"])
         self.BC = BertClient(port=5555, port_out=5556, check_version=False)
@@ -68,7 +68,10 @@ class NewsAnalyzer:
         text_rank = self.text_rank(news)
         main_phrase = " ".join((text_rank[0][1], text_rank[1][1], text_rank[2][1]))
         res = self.BC.encode([main_phrase])
-        return list(res)
+        final_res = []
+        for elem in res[0]:
+            final_res.append(float(elem))
+        return final_res
 
 
 if __name__ == "__main__":
@@ -77,8 +80,3 @@ if __name__ == "__main__":
 			 Connecticut will be among the last states to take a plunge back to business on Wednesday, when its stay-at-home order lifts and stores, museums and offices are allowed to reopen. But not far away in New Jersey, the reopening has been more limited, with only curbside pickup at retail stores and allowances for certain industries."""
     enc = news_analyzer.encode_news(doc)
     print(type(enc))
-    print(enc)
-    enc = list(enc)
-    print("=" * 100)
-    print(type(enc))
-    print(enc)

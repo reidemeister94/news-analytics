@@ -5,8 +5,8 @@ import logging
 
 from gensim import corpora, models
 
-from lda_utils import LdaUtils
-from nlp_utils import NLPUtils
+from core_modules.topic_extraction.lda_utils import LdaUtils
+from core_modules.topic_extraction.nlp_utils import NLPUtils
 import yaml
 
 
@@ -37,9 +37,9 @@ class LdaModule:
         logger = logging.getLogger("LdaModule")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "../log/LdaModule.log"
-        if not os.path.isdir("../log/"):
-            os.mkdir("../log/")
+        log_path = "core_modules/log/LdaModule.log"
+        if not os.path.isdir("core_modules/log"):
+            os.mkdir("core_modules/log")
         fh = logging.FileHandler(log_path)
         fh.setLevel(logging.DEBUG)
         # create formatter
@@ -178,7 +178,7 @@ class LdaModule:
         self.utils.save_lda_model(self, path)
 
     def load_lda_model(self):
-        print('LOCAZIONE: {}'.format(os.getcwd()))
+        print("LOCAZIONE: {}".format(os.getcwd()))
         module = self.utils.load_lda_model(self.location + "lda_model_" + self.lang)
         self.dictionary = module.dictionary
         self.corpus = module.corpus
