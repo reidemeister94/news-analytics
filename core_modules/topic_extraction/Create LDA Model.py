@@ -4,7 +4,7 @@
 # In[ ]:
 
 
-#%load_ext nb_black
+# %load_ext nb_black
 
 
 # In[ ]:
@@ -24,7 +24,7 @@ import psutil
 from pathlib import Path
 
 sys.path.append(str(Path(os.getcwd())) + "/")
-#print(sys.path)
+# print(sys.path)
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
 
@@ -34,7 +34,7 @@ from core_modules.topic_extraction.lda_module import LdaModule
 
 mongourl = "mongodb://localhost:27017/"
 MONGO_CLIENT = MongoClient(mongourl)
-LANG_CODE = "es"
+LANG_CODE = "fr"
 
 
 # In[ ]:
