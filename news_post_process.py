@@ -1,8 +1,11 @@
 import dateparser
+import bson
 from pymongo import MongoClient
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
-from core_modules.named_entity_recognition.named_entity_recognition import NamedEntityRecognition
+from core_modules.named_entity_recognition.named_entity_recognition import (
+    NamedEntityRecognition,
+)
 from core_modules.news_analyzer.news_analyzer import NewsAnalyzer
 from scraping.news_scraper import NewsScraper
 import os
@@ -20,7 +23,7 @@ class NewsPostProcess:
         with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.LOGGER = self.__get_logger()
-        mongourl = self.CONFIG['mongourl']
+        mongourl = self.CONFIG["mongourl"]
         self.MONGO_CLIENT = MongoClient(mongourl)
         self.news_json = None
         self.news_analyzer = None
@@ -30,52 +33,41 @@ class NewsPostProcess:
         self.batch_size = 0
         self.batch_docs = []
 
-    def db_news_extraction(self):
-        # news extraction from db: there will be extracted
-        # all the articles that aren't processed yet
-        # with open('test.txt', 'w') as f:
-        #     process = subprocess.Popen(['bert-serving-start',
-        #     '-model_dir', self.CONFIG['news_analyzer']['bert_model_path'],
-        #     '-num_worker=1'], stdout=f, universal_newlines=True)
-        # self.news_analyzer = NewsAnalyzer(self.CONFIG)
-        self.named_entity_recognition = NamedEntityRecognition()
-        for lang in self.CONFIG["collections_lang"]:
-            self.lda_module = LdaModule(lang=lang, trained=True)
-            self.nlp_utils = NLPUtils(lang=lang)
-            if lang != "it":
-                name_coll = "article_" + lang
-                last_processed_param = "last_processed_" + lang
-            else:
-                name_coll = "article"
-                last_processed_param = "last_processed"
-            collection = self.MONGO_CLIENT["news"][name_coll]
-            not_processed_docs = collection.find(
-                {
-                    "$or": [
-                        {"processedEncoding": False},
-                        {"processedEncoding": {"$exists": False}},
-                    ]
-                }
-            )
+    def db_news_extraction(self, lang):
+        if lang != "it":
+            name_coll = "article_" + lang
+            last_processed_param = "last_processed_" + lang
+        else:
+            name_coll = "article"
+            last_processed_param = "last_processed"
+        collection = self.MONGO_CLIENT["news"][name_coll]
+        not_processed_docs = collection.find(
+            {
+                "$or": [
+                    {"processedEncoding": False},
+                    {"processedEncoding": {"$exists": False}},
+                ]
+            }
+        )
         return collection, not_processed_docs
 
     def process_doc(self, doc, update_model=False):
         # named entity recognition phase
-        doc = self.named_entity_recognition(doc)
-        print('ner completed')
+        doc = self.ner_analysis(doc)
+        print("ner completed")
 
         # topic extraction phase
         doc = self.topic_extraction(doc, update_model)
-        print('topic extraction completed')
+        print("topic extraction completed")
 
         # bert enconding phase
-        # doc = self.news_analysis(doc)
-        # print('bert encoding completed')
+        doc = self.news_analysis(doc)
+        print("bert encoding completed")
 
         return doc
 
     def news_analysis(self, doc):
-        doc["bert_encoding"] = news_analyzer.encode_news(doc)
+        doc["bert_encoding"] = self.news_analyzer.encode_news(doc["text"])
         return doc
 
     def topic_extraction(self, doc, update_model):
@@ -90,15 +82,14 @@ class NewsPostProcess:
         for el in self.lda_module.model[
             self.lda_module.dictionary.doc2bow(parsed_text)
         ]:
-            document_topic_info[el[0]] = [round(el[1], 2), topics[el[0]][1]]
+            document_topic_info[str(el[0])] = [round(el[1], 2), topics[el[0]][1]]
         doc["topic_extraction"] = document_topic_info
 
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)
-            
         return doc
 
-    def named_entity_recognition(self, doc):
+    def ner_analysis(self, doc):
         (
             elem_pos_type,
             labels,
@@ -110,37 +101,58 @@ class NewsPostProcess:
         return doc
 
     def db_news_update(self, collection, doc):
-        query = {"id": doc["id"]}
+        query = {"_id": doc["_id"]}
         newvalues = {
             "$set": {
-                "topic_extraction": doc["topic_extraction"],
-                "named_entity_recognition": doc["named_entity_recognition"],
-                "bert_encoding": doc["bert_encoding"],
+                "topicExtraction": doc["topic_extraction"],
+                "namedEntityRecognition": doc["named_entity_recognition"],
+                "bertEncoding": doc["bert_encoding"],
+                "processedEncoding": True,
             }
         }
         collection.update_one(query, newvalues)
-        time.sleep(10)
+
+    def init_core_modules(self, lang):
+        for i in range(3):
+            print("SPEGNITI")
+            subprocess.run(["bert-serving-terminate", "-port", "5555"])
+        subprocess.Popen(
+            [
+                "bert-serving-start",
+                "-model_dir",
+                self.CONFIG["news_analyzer"]["bert_model_path"],
+                "-num_worker=1",
+            ]
+        )
+        self.news_analyzer = NewsAnalyzer(self.CONFIG)
+        self.lda_module = LdaModule(lang=lang, trained=True)
+        self.nlp_utils = NLPUtils(lang=lang)
+        self.named_entity_recognition = NamedEntityRecognition(self.nlp_utils.nlp)
 
     def main(self):
         # this is the main workflow: here the extraction and processing
         # phases are looped until no other news has to be analyzed
-        self.LOGGER.info("Initializing core modules and extract news from db...")
-        collection, not_processed_docs = self.db_news_extraction()
-        self.LOGGER.info("Core modules initialized and news from db extracted...")
-        # print(len(list(not_processed_docs)))
-        i = 0 
-        for doc in not_processed_docs:
-            if i % 10 == 0:
-                pprint(doc)
-            if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
-                updated_doc = self.process_doc(doc, update_model=True)
-                self.batch_size = 0
-                self.batch_docs.clear()
-            else:
-                updated_doc = self.process_doc(doc, update_model=False)
-            self.batch_size += 1
-            i += 1
-        subprocess.Popen(['bert-serving-terminate','-port=5555'])
+        for lang in self.CONFIG["collections_lang"]:
+            self.LOGGER.info("Initializing core modules and extract news from db...")
+            self.init_core_modules(lang)
+            collection, not_processed_docs = self.db_news_extraction(lang)
+            self.LOGGER.info("Core modules initialized and news from db extracted...")
+            # print(len(list(not_processed_docs)))
+            i = 0
+            for doc in not_processed_docs:
+                if i % 100 == 0:
+                    pprint(doc)
+                if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
+                    updated_doc = self.process_doc(doc, update_model=True)
+                    self.batch_size = 0
+                    self.batch_docs.clear()
+                else:
+                    updated_doc = self.process_doc(doc, update_model=False)
+                self.batch_size += 1
+                self.db_news_update(collection, updated_doc)
+                print("DOC UPDATED TO DB!")
+                i += 1
+            subprocess.run(["bert-serving-terminate", "-port=5555"])
 
     def __stop(self, p, collection):
         is_old_post = collection.find_one({"id_post": p["id_post"]})
