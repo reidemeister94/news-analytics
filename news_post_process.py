@@ -19,7 +19,6 @@ import yaml
 
 class NewsPostProcess:
     def __init__(self):
-        # comment
         with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.LOGGER = self.__get_logger()
@@ -36,10 +35,8 @@ class NewsPostProcess:
     def db_news_extraction(self, lang):
         if lang != "it":
             name_coll = "article_" + lang
-            last_processed_param = "last_processed_" + lang
         else:
             name_coll = "article"
-            last_processed_param = "last_processed"
         collection = self.MONGO_CLIENT["news"][name_coll]
         not_processed_docs = collection.find(
             {
@@ -101,9 +98,7 @@ class NewsPostProcess:
             labels,
             items,
             most_common_items,
-        ) = self.named_entity_recognition.named_entity_recognition_process(
-            doc["text"]
-        )
+        ) = self.named_entity_recognition.named_entity_recognition_process(doc["text"])
         ner_data = [elem_pos_type, labels, items, most_common_items]
         doc["named_entity_recognition"] = ner_data
         return doc
@@ -121,7 +116,7 @@ class NewsPostProcess:
         collection.update_one(query, newvalues)
 
     def init_core_modules(self, lang):
-        for i in range(3):
+        for _ in range(3):
             print("SPEGNITI")
             subprocess.run(["bert-serving-terminate", "-port", "5555"])
         subprocess.Popen(
@@ -135,31 +130,22 @@ class NewsPostProcess:
         self.news_analyzer = NewsAnalyzer(self.CONFIG)
         self.lda_module = LdaModule(lang=lang, trained=True)
         self.nlp_utils = NLPUtils(lang=lang)
-        self.named_entity_recognition = NamedEntityRecognition(
-            self.nlp_utils.nlp
-        )
+        self.named_entity_recognition = NamedEntityRecognition(self.nlp_utils.nlp)
 
     def main(self):
         # this is the main workflow: here the extraction and processing
         # phases are looped until no other news has to be analyzed
         for lang in self.CONFIG["collections_lang"]:
-            self.LOGGER.info(
-                "Initializing core modules and extract news from db..."
-            )
+            self.LOGGER.info("Initializing core modules and extract news from db...")
             self.init_core_modules(lang)
             collection, not_processed_docs = self.db_news_extraction(lang)
-            self.LOGGER.info(
-                "Core modules initialized and news from db extracted..."
-            )
+            self.LOGGER.info("Core modules initialized and news from db extracted...")
             # print(len(list(not_processed_docs)))
             i = 0
             for doc in not_processed_docs:
                 if i % 100 == 0:
                     pprint(doc)
-                if (
-                    self.batch_size
-                    == self.CONFIG["topic_extraction"]["batch_size"]
-                ):
+                if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
                     updated_doc = self.process_doc(doc, update_model=True)
                     self.batch_size = 0
                     self.batch_docs.clear()
@@ -172,13 +158,14 @@ class NewsPostProcess:
             subprocess.run(["bert-serving-terminate", "-port=5555"])
 
     def __stop(self, p, collection):
-        is_old_post = collection.find_one({"id_post": p["id_post"]})
-        if is_old_post is None and p["timestamp"] >= self.min_date_post:
-            return False
+        # is_old_post = collection.find_one({"id_post": p["id_post"]})
+        # if is_old_post is None and p["timestamp"] >= self.min_date_post:
+        #    return False
         # if p['timestamp'] >= self.min_date_post:
         #     return False
-        else:
-            return True
+        # else:
+        #    return True
+        pass
 
     def __get_logger(self):
         # create logger
@@ -191,9 +178,7 @@ class NewsPostProcess:
         fh = logging.FileHandler(log_path)
         fh.setLevel(logging.DEBUG)
         # create formatter
-        formatter = logging.Formatter(
-            "%(asctime)s - %(levelname)s - %(message)s"
-        )
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
         fh.setFormatter(formatter)
         logger.addHandler(fh)
         return logger
