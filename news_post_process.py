@@ -50,10 +50,6 @@ class NewsPostProcess:
         return collection, not_processed_docs
 
     def process_doc(self, doc, update_model=False):
-        # named entity recognition phase
-        doc = self.ner_analysis(doc)
-        print("ner completed")
-
         # topic extraction phase
         doc = self.topic_extraction(doc, update_model)
         print("topic extraction completed")
@@ -61,6 +57,10 @@ class NewsPostProcess:
         # bert enconding phase
         doc = self.news_analysis(doc)
         print("bert encoding completed")
+
+        # named entity recognition phase
+        doc = self.ner_analysis(doc)
+        print("ner completed")
 
         return doc
 
@@ -88,19 +88,16 @@ class NewsPostProcess:
                 self.format_topic_list(topics[el[0]][1]),
             ]
         doc["topic_extraction"] = document_topic_info
+        doc["parsed_text"] = parsed_text
 
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)
         return doc
 
     def ner_analysis(self, doc):
-        (
-            elem_pos_type,
-            labels,
-            items,
-            most_common_items,
-        ) = self.named_entity_recognition.named_entity_recognition_process(doc["text"])
-        ner_data = [elem_pos_type, labels, items, most_common_items]
+        ner_data = self.named_entity_recognition.named_entity_recognition_process(
+            doc["parsed_text"]
+        )
         doc["named_entity_recognition"] = ner_data
         return doc
 
@@ -108,6 +105,7 @@ class NewsPostProcess:
         query = {"_id": doc["_id"]}
         newvalues = {
             "$set": {
+                "parsedText": doc["parsed_text"],
                 "topicExtraction": doc["topic_extraction"],
                 "namedEntityRecognition": doc["named_entity_recognition"],
                 "bertEncoding": doc["bert_encoding"],
