@@ -90,7 +90,7 @@ class NewsPostProcess:
         return doc, None
 
     def news_analysis(self, doc):
-        doc["bert_encoding"] = self.news_analyzer.encode_news(doc["text"])
+        doc["bert_encoding"] = self.news_analyzer.encode_news(doc["parsed_text"])
         return doc
 
     def format_topic_list(self, topics):
@@ -149,6 +149,7 @@ class NewsPostProcess:
                 "-model_dir",
                 self.CONFIG["news_analyzer"]["bert_model_path"],
                 "-num_worker=1",
+                "-max_seq_len=1000",
             ]
         )
         self.news_analyzer = NewsAnalyzer(self.CONFIG)
@@ -167,8 +168,8 @@ class NewsPostProcess:
             # print(len(list(not_processed_docs)))
             i = 0
             for doc in not_processed_docs:
-                if i % 100 == 0:
-                    pprint(doc)
+                # if i % 100 == 0:
+                #     pprint(doc)
                 if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
                     updated_doc, error = self.process_doc(doc, update_model=True)
                     self.batch_size = 0
@@ -178,7 +179,7 @@ class NewsPostProcess:
                 if error is None:
                     self.batch_size += 1
                     self.db_news_update(collection, updated_doc)
-                    print("DOC UPDATED TO DB!")
+                    # print("DOC UPDATED TO DB!")
                     i += 1
             subprocess.run(["bert-serving-terminate", "-port=5555"])
 
