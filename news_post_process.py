@@ -15,6 +15,7 @@ import requests
 import logging
 import subprocess
 import yaml
+import sys
 
 
 class NewsPostProcess:
@@ -51,18 +52,42 @@ class NewsPostProcess:
 
     def process_doc(self, doc, update_model=False):
         # topic extraction phase
-        doc = self.topic_extraction(doc, update_model)
-        print("topic extraction completed")
+        try:
+            doc = self.topic_extraction(doc, update_model)
+            print("topic extraction completed")
+        except Exception:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+            )
+            return None, "error"
 
         # bert enconding phase
-        doc = self.news_analysis(doc)
-        print("bert encoding completed")
+        try:
+            doc = self.news_analysis(doc)
+            print("bert encoding completed")
+        except Exception:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+            )
+            return None, "error"
 
         # named entity recognition phase
-        doc = self.ner_analysis(doc)
-        print("ner completed")
+        try:
+            doc = self.ner_analysis(doc)
+            print("ner completed")
+        except Exception:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+            )
+            return None, "error"
 
-        return doc
+        return doc, None
 
     def news_analysis(self, doc):
         doc["bert_encoding"] = self.news_analyzer.encode_news(doc["text"])
@@ -88,7 +113,7 @@ class NewsPostProcess:
                 self.format_topic_list(topics[el[0]][1]),
             ]
         doc["topic_extraction"] = document_topic_info
-        doc["parsed_text"] = parsed_text
+        doc["parsed_text"] = " ".join(word for word in parsed_text)
 
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)
@@ -145,15 +170,16 @@ class NewsPostProcess:
                 if i % 100 == 0:
                     pprint(doc)
                 if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
-                    updated_doc = self.process_doc(doc, update_model=True)
+                    updated_doc, error = self.process_doc(doc, update_model=True)
                     self.batch_size = 0
                     self.batch_docs.clear()
                 else:
-                    updated_doc = self.process_doc(doc, update_model=False)
-                self.batch_size += 1
-                self.db_news_update(collection, updated_doc)
-                print("DOC UPDATED TO DB!")
-                i += 1
+                    updated_doc, error = self.process_doc(doc, update_model=False)
+                if error is None:
+                    self.batch_size += 1
+                    self.db_news_update(collection, updated_doc)
+                    print("DOC UPDATED TO DB!")
+                    i += 1
             subprocess.run(["bert-serving-terminate", "-port=5555"])
 
     def __stop(self, p, collection):

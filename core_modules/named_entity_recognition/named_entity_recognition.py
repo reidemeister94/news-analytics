@@ -15,7 +15,7 @@ class NamedEntityRecognition:
     def named_entity_recognition_process(self, parsed_doc_text):
         # collection.insert_one(self.news_json[0])
         def add_freq(k, v):
-            v.append(freq_dict[k])
+            v["freq"] = freq_dict[k]
             return v
 
         doc = self.nlp(parsed_doc_text)
@@ -23,8 +23,8 @@ class NamedEntityRecognition:
         ner_data = {}
         for ent in doc.ents:
             freq_dict[ent.text.lower()] += 1
-            ner_data[ent.text.lower()] = [ent.label_]
-        ner_data = {k: add_freq(v) for k, v in ner_data.items()}
+            ner_data[ent.text.lower()] = {"label": ent.label_, "freq": None}
+        ner_data = {k: add_freq(k, v) for k, v in ner_data.items()}
         return ner_data
 
 
