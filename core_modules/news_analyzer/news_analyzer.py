@@ -49,26 +49,25 @@ class NewsAnalyzer:
         scores = nx.pagerank(nx_graph)
         return sorted(((scores[i], s) for i, s in enumerate(sentences)), reverse=True)
 
-    def scoring(self, first_doc, second_doc):
-        # cosine similarity between two encodings
-        cosine = np.dot(first_doc, second_doc) / (
-            np.linalg.norm(first_doc) * np.linalg.norm(second_doc)
-        )
-        return 1 / (1 + math.exp(-100 * (cosine - 0.95)))
+    # def scoring(self, first_doc, second_doc):
+    #     # cosine similarity between two encodings
+    #     cosine = np.dot(first_doc, second_doc) / (
+    #         np.linalg.norm(first_doc) * np.linalg.norm(second_doc)
+    #     )
+    #     return 1 / (1 + math.exp(-100 * (cosine - 0.95)))
 
-    def similarity_pair(self, pair):
-        # first, extract two not analyzed sentences from db (their encodings)
-        # then, return their similarity
-        first_doc = None
-        second_doc = None
-        similarity = self.scoring(first_doc, second_doc)
-        # now add this similarity to db (need to think about what db collection to use)
+    # def similarity_pair(self, pair):
+    #     # first, extract two not analyzed sentences from db (their encodings)
+    #     # then, return their similarity
+    #     first_doc = None
+    #     second_doc = None
+    #     similarity = self.scoring(first_doc, second_doc)
 
     def encode_news(self, news):
         text_rank = self.text_rank(news)
         if len(text_rank) > 0:
             main_phrase = ""
-            for i in range(min(3,len(text_rank))):
+            for i in range(min(3, len(text_rank))):
                 main_phrase += " " + text_rank[i][1]
             res = self.BC.encode([main_phrase])
             final_res = []
@@ -81,7 +80,6 @@ class NewsAnalyzer:
 
 if __name__ == "__main__":
     news_analyzer = NewsAnalyzer()
-    doc = """With changes taking effect on Wednesday, all 50 states have begun to reopen in at least some way, more than two months after the coronavirus thrust the country into lockdown. But there remain vast discrepancies in how states are deciding to open up, with some forging far ahead of others.
-			 Connecticut will be among the last states to take a plunge back to business on Wednesday, when its stay-at-home order lifts and stores, museums and offices are allowed to reopen. But not far away in New Jersey, the reopening has been more limited, with only curbside pickup at retail stores and allowances for certain industries."""
+    doc = "text"
     enc = news_analyzer.encode_news(doc)
     print(type(enc))

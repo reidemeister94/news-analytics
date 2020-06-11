@@ -191,7 +191,7 @@ class LdaModule:
         if self.model is None:
             self.load_lda_model()
         # parsed_doc = text_utils.parse_text(doc)
-        new_corpus = [self.dictionary.doc2bow(doc) for doc in parsed_docs]
+        new_corpus = self.corpus + [self.dictionary.doc2bow(doc) for doc in parsed_docs]
         self.model.update(new_corpus)
         self.save_LDA_model()
 
