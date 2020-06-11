@@ -28,9 +28,9 @@ class NewsAnalyzer:
         logger = logging.getLogger("NewsAnalyzer")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "../log/news_analyzer.log"
-        if not os.path.isdir("../log/"):
-            os.mkdir("../log/")
+        log_path = "log/news_analyzer.log"
+        if not os.path.isdir("log/"):
+            os.mkdir("log/")
         fh = logging.FileHandler(log_path)
         fh.setLevel(logging.DEBUG)
         # create formatter
@@ -64,12 +64,15 @@ class NewsAnalyzer:
     #     similarity = self.scoring(first_doc, second_doc)
 
     def encode_news(self, news):
+        # print("encode news started")
         text_rank = self.text_rank(news)
+        # print("text rank finished")
         if len(text_rank) > 0:
-            main_phrase = ""
+            main_phrase = []
             for i in range(min(3, len(text_rank))):
-                main_phrase += " " + text_rank[i][1]
-            res = self.BC.encode([main_phrase])
+                main_phrase.append(text_rank[i][1])
+            print("encoding started!!!")
+            res = self.BC.encode(main_phrase)
             final_res = []
             for elem in res[0]:
                 final_res.append(float(elem))

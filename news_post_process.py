@@ -53,6 +53,7 @@ class NewsPostProcess:
     def process_doc(self, doc, update_model=False):
         # topic extraction phase
         try:
+            print("topic extraction begun")
             doc = self.topic_extraction(doc, update_model)
             print("topic extraction completed")
         except Exception:
@@ -65,6 +66,7 @@ class NewsPostProcess:
 
         # bert enconding phase
         try:
+            print("bert encoding begun")
             doc = self.news_analysis(doc)
             print("bert encoding completed")
         except Exception:
@@ -77,6 +79,7 @@ class NewsPostProcess:
 
         # named entity recognition phase
         try:
+            print("ner begun")
             doc = self.ner_analysis(doc)
             print("ner completed")
         except Exception:
@@ -90,7 +93,7 @@ class NewsPostProcess:
         return doc, None
 
     def news_analysis(self, doc):
-        doc["bert_encoding"] = self.news_analyzer.encode_news(doc["parsed_text"])
+        doc["bert_encoding"] = self.news_analyzer.encode_news(doc["text"])
         return doc
 
     def format_topic_list(self, topics):
@@ -149,7 +152,7 @@ class NewsPostProcess:
                 "-model_dir",
                 self.CONFIG["news_analyzer"]["bert_model_path"],
                 "-num_worker=1",
-                "-max_seq_len=1000",
+                "-max_seq_len=40",
             ]
         )
         self.news_analyzer = NewsAnalyzer(self.CONFIG)
@@ -198,9 +201,9 @@ class NewsPostProcess:
         logger = logging.getLogger("NewsPostProcess")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "../log/news_post_process.log"
-        if not os.path.isdir("../log/"):
-            os.mkdir("../log/")
+        log_path = "log/news_post_process.log"
+        if not os.path.isdir("log/"):
+            os.mkdir("log/")
         fh = logging.FileHandler(log_path)
         fh.setLevel(logging.DEBUG)
         # create formatter
