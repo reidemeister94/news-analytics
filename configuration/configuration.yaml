@@ -7,7 +7,7 @@ collections_lang:
 - es
 mongourl: mongodb://localhost:27017
 news_analyzer:
-  bert_model_path: /Users/silvio/Documents/news-analytics/core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8
+  bert_model_path: core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8
 scraper:
   newsriver_api:
   - sBBqsGXiYgF0Db5OV5tAw-YX7LO2k1G_-c4hiC3impbrVk28bIQ7TKT1p6Egz9vrn2pHZrSf1gT2PUujH1YaQA
