@@ -183,7 +183,7 @@ class NewsPostProcess:
             i = 0
             self.LOGGER.info("Starting processing docs from db...")
             for doc in not_processed_docs:
-                if i % 10000 == 0:
+                if i % 10000 == 0 and i > 0:
                     self.LOGGER.info("10k Docs processed...")
                 if len(doc["text"]) > 0:
                     if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
