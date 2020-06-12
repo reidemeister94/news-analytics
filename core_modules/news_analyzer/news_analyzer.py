@@ -23,6 +23,7 @@ class NewsAnalyzer:
         self.CLIENT = MongoClient(self.CONFIG["mongourl"])
         self.BC = BertClient(port=5555, port_out=5556, check_version=False)
         self.LOGGER = self.__get_logger()
+        self.LOGGER.info("=" * 120)
         self.LOGGER.info("Bert client ready")
         # print("Bert client ready")
 

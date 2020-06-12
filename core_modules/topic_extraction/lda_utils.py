@@ -10,7 +10,9 @@ import os
 
 class LdaUtils:
     def __init__(self):
-        pass
+        self.LOGGER = self.__get_logger()
+        self.LOGGER.info("=" * 120)
+        self.LOGGER.info("LDA Utils Ready")
 
     def get_word_collocations(self, tokens):
         """
@@ -72,10 +74,10 @@ class LdaUtils:
 
     def __get_logger(self):
         # create logger
-        logger = logging.getLogger("LdaModule")
+        logger = logging.getLogger("LdaUtils")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "core_modules/log/LdaUtils.log"
+        log_path = "core_modules/log/lda_utils.log"
         if not os.path.isdir("core_modules/log"):
             os.mkdir("core_modules/log")
         fh = logging.FileHandler(log_path)

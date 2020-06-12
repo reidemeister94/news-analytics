@@ -31,13 +31,16 @@ class LdaModule:
             self.load_lda_model()
         else:
             self.model = None
+        self.LOGGER = self.__get_logger()
+        self.LOGGER.info("=" * 120)
+        self.LOGGER.info("LDA Module ready")
 
     def __get_logger(self):
         # create logger
         logger = logging.getLogger("LdaModule")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "core_modules/log/LdaModule.log"
+        log_path = "core_modules/log/lda_module.log"
         if not os.path.isdir("core_modules/log"):
             os.mkdir("core_modules/log")
         fh = logging.FileHandler(log_path)
@@ -55,10 +58,10 @@ class LdaModule:
     def build_dictionary(self, use_collocations=True, doc_threshold=3):
         assert len(self.doc_collection) != 0, "Missing input tokens."
 
-        print("... Building dictionary ...")
+        self.LOGGER.info("... Building dictionary ...")
 
         if use_collocations:
-            print("... Finding collocations ...")
+            self.LOGGER.info("... Finding collocations ...")
             self.doc_collection = self.utils.get_word_collocations(self.doc_collection)
         else:
             self.doc_collection = [
@@ -76,7 +79,7 @@ class LdaModule:
 
     def build_corpus(self):
 
-        print("... Building corpus ...")
+        self.LOGGER.info("... Building corpus ...")
 
         # Build corpus as list of bags of words from the documents
         self.corpus = [
@@ -87,7 +90,7 @@ class LdaModule:
     def build_lda_model(self, num_topics=20, passes=4, alpha=0.01, eta=0.01):
         assert len(self.dictionary) != 0, "Empty dictionary."
 
-        print("... Building LDA model ...")
+        self.LOGGER.info("... Building LDA model ...")
 
         self.model = models.LdaModel(
             self.corpus,
@@ -99,7 +102,7 @@ class LdaModule:
         )
 
     def get_topics(self):
-        print("... Retrieving topics ...")
+        self.LOGGER.info("... Retrieving topics ...")
         self.topics = [self.model[self.corpus[i]] for i in range(self.num_docs)]
 
     def get_topics_flat(self):
@@ -178,7 +181,6 @@ class LdaModule:
         self.utils.save_lda_model(self, path)
 
     def load_lda_model(self):
-        print("LOCAZIONE: {}".format(os.getcwd()))
         module = self.utils.load_lda_model(self.location + "lda_model_" + self.lang)
         self.dictionary = module.dictionary
         self.corpus = module.corpus

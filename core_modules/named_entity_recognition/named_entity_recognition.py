@@ -15,6 +15,7 @@ class NamedEntityRecognition:
         else:
             self.nlp = spacy.load("it_core_news_sm")
         self.LOGGER = self.__get_logger()
+        self.LOGGER.info("=" * 120)
         self.LOGGER.info("Named Entity Recognition Ready")
 
     def named_entity_recognition_process(self, doc):
@@ -43,7 +44,7 @@ class NamedEntityRecognition:
 
     def __get_logger(self):
         # create logger
-        logger = logging.getLogger("NewsAnalyzer")
+        logger = logging.getLogger("NamedEntityRecognition")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
         log_path = "core_modules/log/named_entity_recognition.log"

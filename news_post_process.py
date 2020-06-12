@@ -53,9 +53,9 @@ class NewsPostProcess:
     def process_doc(self, doc, update_model=False):
         # topic extraction phase
         try:
-            print("topic extraction started")
+            # print("topic extraction started")
             doc = self.topic_extraction(doc, update_model)
-            print("topic extraction completed")
+            # print("topic extraction completed")
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -66,9 +66,9 @@ class NewsPostProcess:
 
         # bert enconding phase
         try:
-            print("bert encoding started")
+            # print("bert encoding started")
             doc = self.news_analysis(doc)
-            print("bert encoding completed")
+            # print("bert encoding completed")
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -79,9 +79,9 @@ class NewsPostProcess:
 
         # named entity recognition phase
         try:
-            print("ner started")
+            # print("ner started")
             doc = self.ner_analysis(doc)
-            print("ner completed")
+            # print("ner completed")
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -100,13 +100,22 @@ class NewsPostProcess:
         return [(word, float(weight)) for word, weight in topics]
 
     def topic_extraction(self, doc, update_model):
-        parsed_text = self.nlp_utils.parse_text(doc["text"])
+        parsed_text = self.nlp_utils.parse_text(doc)
         self.batch_docs.append(parsed_text)
-        topics = self.lda_module.model.show_topics(
-            formatted=False,
-            num_topics=self.CONFIG["topic_extraction"]["num_topics"],
-            num_words=self.CONFIG["topic_extraction"]["num_words"],
-        )
+        try:
+            topics = self.lda_module.model.show_topics(
+                formatted=False,
+                num_topics=self.CONFIG["topic_extraction"]["num_topics"],
+                num_words=self.CONFIG["topic_extraction"]["num_words"],
+            )
+        except Exception:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
+            self.LOGGER.error(
+                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+            )
+            raise Exception("Error on lda module show topics")
         document_topic_info = {}
         for el in self.lda_module.model[
             self.lda_module.dictionary.doc2bow(parsed_text)
@@ -142,7 +151,7 @@ class NewsPostProcess:
 
     def init_core_modules(self, lang):
         for _ in range(3):
-            print("SPEGNITI")
+            # print("SPEGNITI")
             subprocess.run(["bert-serving-terminate", "-port", "5555"])
         subprocess.Popen(
             [
@@ -162,27 +171,32 @@ class NewsPostProcess:
     def main(self):
         # this is the main workflow: here the extraction and processing
         # phases are looped until no other news has to be analyzed
+        self.LOGGER.info("=" * 120)
+        self.LOGGER.info("STARTED POST PROCESSING")
         for lang in self.CONFIG["collections_lang"]:
+            self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
             self.LOGGER.info("Initializing core modules and extract news from db...")
             self.init_core_modules(lang)
             collection, not_processed_docs = self.db_news_extraction(lang)
             self.LOGGER.info("Core modules initialized and news from db extracted...")
             # print(len(list(not_processed_docs)))
             i = 0
+            self.LOGGER.info("Starting processing docs from db...")
             for doc in not_processed_docs:
-                # if i % 100 == 0:
-                #     pprint(doc)
-                if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
-                    updated_doc, error = self.process_doc(doc, update_model=True)
-                    self.batch_size = 0
-                    self.batch_docs.clear()
-                else:
-                    updated_doc, error = self.process_doc(doc, update_model=False)
-                if error is None:
-                    self.batch_size += 1
-                    self.db_news_update(collection, updated_doc)
-                    # print("DOC UPDATED TO DB!")
-                    i += 1
+                if i % 10000 == 0:
+                    self.LOGGER.info("10k Docs processed...")
+                if len(doc["text"]) > 0:
+                    if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
+                        updated_doc, error = self.process_doc(doc, update_model=True)
+                        self.batch_size = 0
+                        self.batch_docs.clear()
+                    else:
+                        updated_doc, error = self.process_doc(doc, update_model=False)
+                    if error is None:
+                        self.batch_size += 1
+                        self.db_news_update(collection, updated_doc)
+                        # print("DOC UPDATED TO DB!")
+                        i += 1
             subprocess.run(["bert-serving-terminate", "-port=5555"])
 
     def __stop(self, p, collection):

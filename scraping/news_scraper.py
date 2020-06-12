@@ -70,7 +70,7 @@ class NewsScraper:
             response = requests.get(url, headers={"Authorization": self.NEWS_API})
             response_json = response.json()
             return response_json
-        except Exception as e:
+        except Exception:
             exc_type, exc_obj, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             self.LOGGER.error(
@@ -129,8 +129,9 @@ class NewsScraper:
                     )
                     news["discoverDate"] = discover_date
                     try:
-                        collection.insert_one(news)
-                    except Exception as e:
+                        if len(news["text"]) > 0:
+                            collection.insert_one(news)
+                    except Exception:
                         exc_type, exc_obj, exc_tb = sys.exc_info()
                         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
                         self.LOGGER.error(
@@ -157,9 +158,11 @@ class NewsScraper:
         self.LOGGER.info("Scheduled News Scraping Done until {}".format(current_date))
 
     def stop_condition(self, article):
-        # current_date = dateparser.parse(article['discoverDate']).replace(tzinfo=None)
+        # current_date = dateparser.parse(article['discoverDate']).
+        # replace(tzinfo=None)
         if article["discoverDate"] >= self.stop_date:
-            # if dateparser.parse(article['discoverDate']).replace(tzinfo=None) >= self.stop_date:
+            # if dateparser.parse(article['discoverDate']).
+            # replace(tzinfo=None) >= self.stop_date:
             return True
         return False
 

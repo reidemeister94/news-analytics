@@ -4,6 +4,7 @@ import spacy
 import json
 import logging
 import os
+import sys
 
 from itertools import chain
 
@@ -28,25 +29,37 @@ class NLPUtils:
             self.nlp = spacy.load("en_core_web_md")
         self.fix_stop_words()
         self.load_custom_stop_words()
+        self.LOGGER = self.__get_logger()
+        self.LOGGER.info("=" * 120)
+        self.LOGGER.info("NLP Utils ready")
 
     def parse_text(self, raw_data):
         """
         General function to parse a set of texts
         """
         # Check parsing before this point (should be good with pymongo)
+        try:
+            # Build spaCy's doc object
+            self.doc = self.nlp(raw_data["text"])
+            # Retrieve sentences
+            sentences = self.sentence_tokenize(self.doc)
+            # print(len(sentences))
+            # Lemmatize + remove stop words
+            lemmas = self.lemmatize_tokens(sentences)
+            # print(len(lemmas))
+            # Flatten results into a single list
+            parsed_text = self.flatten_list(lemmas)
 
-        # Build spaCy's doc object
-        self.doc = self.nlp(raw_data)
-        # Retrieve sentences
-        sentences = self.sentence_tokenize(self.doc)
-        # print(len(sentences))
-        # Lemmatize + remove stop words
-        lemmas = self.lemmatize_tokens(sentences)
-        # print(len(lemmas))
-        # Flatten results into a single list
-        parsed_text = self.flatten_list(lemmas)
-
-        return parsed_text
+            return parsed_text
+        except Exception:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
+            self.LOGGER.error(
+                "{}, {}, {}, {}".format(
+                    raw_data["_id"], exc_type, fname, exc_tb.tb_lineno
+                )
+            )
 
     def fix_stop_words(self):
         """
@@ -105,10 +118,10 @@ class NLPUtils:
 
     def __get_logger(self):
         # create logger
-        logger = logging.getLogger("LdaModule")
+        logger = logging.getLogger("NLPUtils")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "core_modules/log/NLPUtils.log"
+        log_path = "core_modules/log/nlp_utils.log"
         if not os.path.isdir("core_modules/log"):
             os.mkdir("core_modules/log")
         fh = logging.FileHandler(log_path)
