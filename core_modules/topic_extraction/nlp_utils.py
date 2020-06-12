@@ -2,8 +2,11 @@ import pandas as pd
 
 import spacy
 import json
+import logging
+import os
 
 from itertools import chain
+
 
 # Utility functions to parse text
 class NLPUtils:
@@ -95,9 +98,26 @@ class NLPUtils:
 
     def flatten_list(self, data):
         """
-        Flattens the lemmatized sentences into a single list, ready for gensim's LDA implementation
+        Flattens the lemmatized sentences into a single list,
+        ready for gensim's LDA implementation
         """
         return list(chain.from_iterable(data))
+
+    def __get_logger(self):
+        # create logger
+        logger = logging.getLogger("LdaModule")
+        logger.setLevel(logging.DEBUG)
+        # create console handler and set level to debug
+        log_path = "core_modules/log/NLPUtils.log"
+        if not os.path.isdir("core_modules/log"):
+            os.mkdir("core_modules/log")
+        fh = logging.FileHandler(log_path)
+        fh.setLevel(logging.DEBUG)
+        # create formatter
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+        return logger
 
 
 if __name__ == "__main__":

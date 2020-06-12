@@ -37,9 +37,9 @@ class LdaModule:
         logger = logging.getLogger("LdaModule")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "log/LdaModule.log"
-        if not os.path.isdir("log"):
-            os.mkdir("log")
+        log_path = "core_modules/log/LdaModule.log"
+        if not os.path.isdir("core_modules/log"):
+            os.mkdir("core_modules/log")
         fh = logging.FileHandler(log_path)
         fh.setLevel(logging.DEBUG)
         # create formatter

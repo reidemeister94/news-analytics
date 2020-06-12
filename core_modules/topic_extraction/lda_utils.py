@@ -4,6 +4,8 @@ import ast
 import pickle
 import pandas as pd
 import json
+import logging
+import os
 
 
 class LdaUtils:
@@ -18,7 +20,6 @@ class LdaUtils:
         bigrams = Phrases(tokens)
         trigrams = Phrases(bigrams[tokens], min_count=1)
         return list(trigrams[bigrams[tokens]])
-        # return [self._string_to_list(tokens_list) for tokens_list in trigrams[bigrams[tokens]]]
 
     def topics_document_to_dataframe(self, topics_document, num_topics):
         """
@@ -68,6 +69,22 @@ class LdaUtils:
         with open(location + ".pickle", "rb") as input_file:
             ldaModule = pickle.load(input_file)
         return ldaModule
+
+    def __get_logger(self):
+        # create logger
+        logger = logging.getLogger("LdaModule")
+        logger.setLevel(logging.DEBUG)
+        # create console handler and set level to debug
+        log_path = "core_modules/log/LdaUtils.log"
+        if not os.path.isdir("core_modules/log"):
+            os.mkdir("core_modules/log")
+        fh = logging.FileHandler(log_path)
+        fh.setLevel(logging.DEBUG)
+        # create formatter
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+        return logger
 
 
 if __name__ == "__main__":
