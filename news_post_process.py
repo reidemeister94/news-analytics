@@ -53,11 +53,11 @@ class NewsPostProcess:
     def process_doc(self, doc, update_model=False):
         # topic extraction phase
         try:
-            print("topic extraction begun")
+            print("topic extraction started")
             doc = self.topic_extraction(doc, update_model)
             print("topic extraction completed")
         except Exception:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
+            exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             self.LOGGER.error(
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
@@ -66,11 +66,11 @@ class NewsPostProcess:
 
         # bert enconding phase
         try:
-            print("bert encoding begun")
+            print("bert encoding started")
             doc = self.news_analysis(doc)
             print("bert encoding completed")
         except Exception:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
+            exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             self.LOGGER.error(
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
@@ -79,11 +79,11 @@ class NewsPostProcess:
 
         # named entity recognition phase
         try:
-            print("ner begun")
+            print("ner started")
             doc = self.ner_analysis(doc)
             print("ner completed")
         except Exception:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
+            exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             self.LOGGER.error(
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
@@ -93,7 +93,7 @@ class NewsPostProcess:
         return doc, None
 
     def news_analysis(self, doc):
-        doc["bert_encoding"] = self.news_analyzer.encode_news(doc["text"])
+        doc["bert_encoding"] = self.news_analyzer.encode_news(doc)
         return doc
 
     def format_topic_list(self, topics):
@@ -123,9 +123,7 @@ class NewsPostProcess:
         return doc
 
     def ner_analysis(self, doc):
-        ner_data = self.named_entity_recognition.named_entity_recognition_process(
-            doc["parsed_text"]
-        )
+        ner_data = self.named_entity_recognition.named_entity_recognition_process(doc)
         doc["named_entity_recognition"] = ner_data
         return doc
 
@@ -153,7 +151,8 @@ class NewsPostProcess:
                 self.CONFIG["news_analyzer"]["bert_model_path"],
                 "-num_worker=1",
                 "-max_seq_len=40",
-            ]
+            ],
+            stdout=subprocess.DEVNULL,
         )
         self.news_analyzer = NewsAnalyzer(self.CONFIG)
         self.lda_module = LdaModule(lang=lang, trained=True)

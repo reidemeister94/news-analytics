@@ -9,6 +9,8 @@ import os
 from bert_serving.client import BertClient
 from pprint import pprint
 import math
+import sys
+import time
 
 
 class NewsAnalyzer:
@@ -21,23 +23,8 @@ class NewsAnalyzer:
         self.CLIENT = MongoClient(self.CONFIG["mongourl"])
         self.BC = BertClient(port=5555, port_out=5556, check_version=False)
         self.LOGGER = self.__get_logger()
-        print("Bert client ready")
-
-    def __get_logger(self):
-        # create logger
-        logger = logging.getLogger("NewsAnalyzer")
-        logger.setLevel(logging.DEBUG)
-        # create console handler and set level to debug
-        log_path = "log/news_analyzer.log"
-        if not os.path.isdir("log/"):
-            os.mkdir("log/")
-        fh = logging.FileHandler(log_path)
-        fh.setLevel(logging.DEBUG)
-        # create formatter
-        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)
-        return logger
+        self.LOGGER.info("Bert client ready")
+        # print("Bert client ready")
 
     def text_rank(self, document):
         sentence_tokenizer = PunktSentenceTokenizer()
@@ -63,22 +50,46 @@ class NewsAnalyzer:
     #     second_doc = None
     #     similarity = self.scoring(first_doc, second_doc)
 
-    def encode_news(self, news):
+    def encode_news(self, doc):
         # print("encode news started")
-        text_rank = self.text_rank(news)
-        # print("text rank finished")
-        if len(text_rank) > 0:
-            main_phrase = []
-            for i in range(min(3, len(text_rank))):
-                main_phrase.append(text_rank[i][1])
-            print("encoding started!!!")
-            res = self.BC.encode(main_phrase)
-            final_res = []
-            for elem in res[0]:
-                final_res.append(float(elem))
-            return final_res
-        else:
-            return []
+        try:
+            text_rank = self.text_rank(doc["text"])
+            # print("text rank finished")
+            if len(text_rank) > 0:
+                main_phrase = []
+                for i in range(min(3, len(text_rank))):
+                    main_phrase.append(text_rank[i][1])
+                # print("encoding started!!!")
+                res = self.BC.encode(main_phrase)
+                final_res = []
+                for elem in res[0]:
+                    final_res.append(float(elem))
+                return final_res
+            else:
+                return []
+        except Exception:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
+            self.LOGGER.error(
+                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+            )
+
+    def __get_logger(self):
+        # create logger
+        logger = logging.getLogger("NewsAnalyzer")
+        logger.setLevel(logging.DEBUG)
+        # create console handler and set level to debug
+        log_path = "core_modules/log/news_analyzer.log"
+        if not os.path.isdir("core_modules/log/"):
+            os.mkdir("core_modules/log/")
+        fh = logging.FileHandler(log_path)
+        fh.setLevel(logging.DEBUG)
+        # create formatter
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+        return logger
 
 
 if __name__ == "__main__":
