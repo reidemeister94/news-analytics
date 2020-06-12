@@ -12,10 +12,5 @@ __pycache__/
 .ipynb_checkpoints
 
 core_modules/news_analyzer/bert_models/
-log/news_scraper_de.log
-log/news_scraper_en.log
-log/news_scraper_es.log
-log/news_scraper_fr.log
-log/news_scraper_nl.log
-log/news_scraper.log
+core_modules/log/
 log/
