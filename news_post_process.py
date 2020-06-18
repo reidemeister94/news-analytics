@@ -46,7 +46,8 @@ class NewsPostProcess:
                     {"processedEncoding": False},
                     {"processedEncoding": {"$exists": False}},
                 ]
-            }
+            },
+            no_cursor_timeout=True,
         )
         return collection, not_processed_docs
 
@@ -150,9 +151,6 @@ class NewsPostProcess:
         collection.update_one(query, newvalues)
 
     def init_core_modules(self, lang):
-        for _ in range(3):
-            # print("SPEGNITI")
-            subprocess.run(["bert-serving-terminate", "-port", "5555"])
         subprocess.Popen(
             [
                 "bert-serving-start",
@@ -171,6 +169,9 @@ class NewsPostProcess:
     def main(self):
         # this is the main workflow: here the extraction and processing
         # phases are looped until no other news has to be analyzed
+        for _ in range(3):
+            # print("SPEGNITI")
+            subprocess.run(["bert-serving-terminate", "-port", "5555"])
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED POST PROCESSING")
         for lang in self.CONFIG["collections_lang"]:
@@ -183,6 +184,8 @@ class NewsPostProcess:
             i = 0
             self.LOGGER.info("Starting processing docs from db...")
             for doc in not_processed_docs:
+                if i % 500 == 0 and i > 0:
+                    print(i)
                 if i % 10000 == 0 and i > 0:
                     self.LOGGER.info("10k Docs processed...")
                 if len(doc["text"]) > 0:
@@ -197,6 +200,7 @@ class NewsPostProcess:
                         self.db_news_update(collection, updated_doc)
                         # print("DOC UPDATED TO DB!")
                         i += 1
+            not_processed_docs.close()
             subprocess.run(["bert-serving-terminate", "-port=5555"])
 
     def __stop(self, p, collection):

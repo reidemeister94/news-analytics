@@ -54,3 +54,6 @@ spacy = "^2.2.4"
 nltk = "^3.5"
 bert-serving-server = "^1.10.0"
 bert-serving-client = "^1.10.0"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.5.3"
