@@ -13,22 +13,29 @@ import neuralcoref
 
 nlp = spacy.load("en_core_web_lg")
 coref = neuralcoref.NeuralCoref(nlp.vocab)
-nlp.add_pipe(coref, name='neuralcoref')
+nlp.add_pipe(coref, name="neuralcoref")
 
 # dependency markers for subjects
-SUBJECTS = {"nsubj", "nsubjpass", "csubj", "csubjpass", "agent"}#, "expl"}
+SUBJECTS = {"nsubj", "nsubjpass", "csubj", "csubjpass", "agent"}  # , "expl"}
 # dependency markers for objects
 OBJECTS = {"dobj", "dative", "attr", "oprd", "pobj"}
 # POS tags that will break adjoining items
-BREAKER_POS = {"VERB"}#, "CCONJ"}
+BREAKER_POS = {"VERB"}  # , "CCONJ"}
 # words that are negations
 NEGATIONS = {"no", "not", "n't", "never", "none"}
 
 
 # does dependency set contain any coordinating conjunctions?
 def contains_conj(depSet):
-    return "and" in depSet or "or" in depSet or "nor" in depSet or \
-           "but" in depSet or "yet" in depSet or "so" in depSet or "for" in depSet
+    return (
+        "and" in depSet
+        or "or" in depSet
+        or "nor" in depSet
+        or "but" in depSet
+        or "yet" in depSet
+        or "so" in depSet
+        or "for" in depSet
+    )
 
 
 # get subs joined by conjunctions
@@ -39,7 +46,9 @@ def _get_subs_from_conjunctions(subs):
         rights = list(sub.rights)
         rightDeps = {tok.lower_ for tok in rights}
         if contains_conj(rightDeps):
-            more_subs.extend([tok for tok in rights if tok.dep_ in SUBJECTS or tok.pos_ == "NOUN"])
+            more_subs.extend(
+                [tok for tok in rights if tok.dep_ in SUBJECTS or tok.pos_ == "NOUN"]
+            )
             if len(more_subs) > 0:
                 more_subs.extend(_get_subs_from_conjunctions(more_subs))
     return more_subs
@@ -53,7 +62,9 @@ def _get_objs_from_conjunctions(objs):
         rights = list(obj.rights)
         rightDeps = {tok.lower_ for tok in rights}
         if contains_conj(rightDeps):
-            more_objs.extend([tok for tok in rights if tok.dep_ in OBJECTS or tok.pos_ == "NOUN"])
+            more_objs.extend(
+                [tok for tok in rights if tok.dep_ in OBJECTS or tok.pos_ == "NOUN"]
+            )
             if len(more_objs) > 0:
                 more_objs.extend(_get_objs_from_conjunctions(more_objs))
     return more_objs
@@ -84,22 +95,29 @@ def _is_negated(tok):
             return True
     return False
 
+
 # get grammatical objects for a given set of dependencies (including passive sentences)
 def _get_objs_from_prepositions(deps, is_pas):
     objs = []
     for dep in deps:
-        #SOLUZIONE SBAGLIATA, alle volte potrebbero servire
-        # if dep.pos_ == "ADP" and (dep.text == "in" or dep.text == "with") and dep.dep_ == "prep":
-        #     return objs
-        if dep.pos_ == "ADP" and (dep.dep_ == "prep" or (is_pas and dep.dep_ == "agent")):
-            objs.extend([tok for tok in dep.rights if tok.dep_  in OBJECTS or
-                         (tok.pos_ == "PRON" and tok.lower_ == "me") or
-                         (is_pas and tok.dep_ == 'pobj')])
+        if dep.pos_ == "ADP" and (
+            dep.dep_ == "prep" or (is_pas and dep.dep_ == "agent")
+        ):
+            objs.extend(
+                [
+                    tok
+                    for tok in dep.rights
+                    if tok.dep_ in OBJECTS
+                    or (tok.pos_ == "PRON" and tok.lower_ == "me")
+                    or (is_pas and tok.dep_ == "pobj")
+                ]
+            )
     return objs
+
 
 # get all functional subjects adjacent to the verb passed in
 def _get_all_subs(v):
-    subs = [tok for tok in v.lefts if tok.dep_ in SUBJECTS] # and tok.pos_ != "DET"]
+    subs = [tok for tok in v.lefts if tok.dep_ in SUBJECTS]  # and tok.pos_ != "DET"]
 
     if len(subs) > 0:
         subs.extend(_get_subs_from_conjunctions(subs))
@@ -118,16 +136,23 @@ def _get_all_subs(v):
                     true_subject = c
                     break
 
-        if found and true_subject.text != "of" and true_subject.text != None:
+        if found and true_subject.text != "of" and true_subject.text is not None:
             correct_subs.append(true_subject)
         elif not found:
             correct_subs.append(sub)
 
     return correct_subs
 
+
 # is the token a verb?  (include auxiliary verbs)
 def _is_verb_or_aux(tok):
-    return tok.pos_ == "VERB" and (tok.dep_ != "aux" and tok.dep_ != "auxpass") or tok.pos_ == "AUX" and (tok.dep_ != "aux" and tok.dep_ != "auxpass" and tok.dep_ != "xcomp")
+    return (
+        tok.pos_ == "VERB"
+        and (tok.dep_ != "aux" and tok.dep_ != "auxpass")
+        or tok.pos_ == "AUX"
+        and (tok.dep_ != "aux" and tok.dep_ != "auxpass" and tok.dep_ != "xcomp")
+    )
+
 
 # return the verb to the right of this verb in a CCONJ relationship if applicable
 # returns a tuple, first part True|False and second part the modified verb if True
@@ -136,7 +161,7 @@ def _right_of_verb_is_conj_verb(v):
     rights = list(v.rights)
 
     # VERB CCONJ VERB (e.g. he beat and hurt me)
-    if len(rights) > 1 and rights[0].pos_ == 'CCONJ':
+    if len(rights) > 1 and rights[0].pos_ == "CCONJ":
         for tok in rights[1:]:
             if _is_verb_or_aux(tok):
                 return True, tok
@@ -154,12 +179,17 @@ def _get_all_objs(v, is_pas):
     # rights is a generator
     rights = list(v.rights)
 
-    objs = [tok for tok in rights if tok.dep_ in OBJECTS] # or (is_pas and tok.dep_ == 'pobj')]
+    objs = [
+        tok for tok in rights if tok.dep_ in OBJECTS
+    ]  # or (is_pas and tok.dep_ == 'pobj')]
     if objs == []:
         objs.extend(_get_objs_from_prepositions(rights, is_pas))
 
-    # potential_new_verb, potential_new_objs = _get_obj_from_xcomp(rights, is_pas)
-    # if potential_new_verb is not None and potential_new_objs is not None and len(potential_new_objs) > 0:
+    # potential_new_verb, potential_new_objs =
+    # _get_obj_from_xcomp(rights, is_pas)
+    # if potential_new_verb is not None
+    # and potential_new_objs is not None
+    # and len(potential_new_objs) > 0:
     #     objs.extend(potential_new_objs)
     #     v = potential_new_verb
     if len(objs) > 0:
@@ -176,7 +206,7 @@ def _get_all_objs(v, is_pas):
                     true_object = c
                     break
 
-        if found and true_object.text != "of" and true_object.text != None:
+        if found and true_object.text != "of" and true_object.text is not None:
             correct_objs.append(true_object)
         elif not found:
             correct_objs.append(obj)
@@ -184,12 +214,15 @@ def _get_all_objs(v, is_pas):
     return v, correct_objs
 
 
-# return true if the sentence is passive - at he moment a sentence is assumed passive if it has an auxpass verb
+# return true if the sentence is passive -
+# at he moment a sentence is assumed passive
+# if it has an auxpass verb
 def _is_passive(tokens):
     for tok in tokens:
         if tok.dep_ == "auxpass":
             return True
     return False
+
 
 # convert a list of tokens to a string
 def to_str(tokens):
@@ -204,6 +237,7 @@ def to_str(tokens):
         tmp_text += item.text
 
     return tmp_text
+
 
 def is_subtext(text, svos):
     sub_subject = False
@@ -225,6 +259,7 @@ def is_subtext(text, svos):
     else:
         return False
 
+
 def populate_svos_array(verb, is_pas, sub, svos, tokens, visited, isConj, conjVerb):
     current_verb, objs = _get_all_objs(verb, is_pas)
     if objs == [] and isConj:
@@ -236,26 +271,34 @@ def populate_svos_array(verb, is_pas, sub, svos, tokens, visited, isConj, conjVe
         negation = ""
         # objNegated = _is_negated(obj)
         if verbNegated:
-                negation = "not "
+            negation = "not "
         if is_pas:
-            first = [obj] # expand(obj, tokens, visited)
-            second = [sub] # expand(sub, tokens, visited)
-
+            first = [obj]  # expand(obj, tokens, visited)
+            second = [sub]  # expand(sub, tokens, visited)
 
             if not (len(first) == 1 and first[0].pos_ == "DET"):
-                text = (to_str(first), negation + current_verb.lemma_, to_str(second)) # to_str([current_verb])
+                text = (
+                    to_str(first),
+                    negation + current_verb.lemma_,
+                    to_str(second),
+                )  # to_str([current_verb])
 
                 if text not in svos and not is_subtext(text, svos):
                     svos.append(text)
         else:
-            first = [sub] # expand(sub, tokens, visited)
-            second = [obj] # expand(obj, tokens, visited)
+            first = [sub]  # expand(sub, tokens, visited)
+            second = [obj]  # expand(obj, tokens, visited)
 
             if not (len(first) == 1 and first[0].pos_ == "DET"):
-                text = (to_str(first), negation + current_verb.lemma_, to_str(second)) # get_complete_verb(current_verb)
+                text = (
+                    to_str(first),
+                    negation + current_verb.lemma_,
+                    to_str(second),
+                )  # get_complete_verb(current_verb)
 
                 if text not in svos and not is_subtext(text, svos):
                     svos.append(text)
+
 
 # find verbs and their subjects / objects to create SVOs, detect passive/active sentences
 def findSVOs(tokens):
@@ -274,24 +317,61 @@ def findSVOs(tokens):
             while isConjVerb:
                 isConjVerb, conjV = _right_of_verb_is_conj_verb(current_verb)
                 if isConjVerb:
-                    #get all objects on the right of the second verb
+                    # get all objects on the right of the second verb
 
                     for sub in subs:
                         # if is_pas:  # reverse object / subject for passive
                         if conjV.dep_ != "xcomp":
-                            populate_svos_array(current_verb, is_pas, sub, svos, tokens, visited, isConjVerb, conjV)
-                            populate_svos_array(conjV, is_pas, sub, svos, tokens, visited, isConjVerb, conjV)
+                            populate_svos_array(
+                                current_verb,
+                                is_pas,
+                                sub,
+                                svos,
+                                tokens,
+                                visited,
+                                isConjVerb,
+                                conjV,
+                            )
+                            populate_svos_array(
+                                conjV,
+                                is_pas,
+                                sub,
+                                svos,
+                                tokens,
+                                visited,
+                                isConjVerb,
+                                conjV,
+                            )
 
                         else:
-                            populate_svos_array(current_verb, is_pas, sub, svos, tokens, visited, isConjVerb, conjV)
+                            populate_svos_array(
+                                current_verb,
+                                is_pas,
+                                sub,
+                                svos,
+                                tokens,
+                                visited,
+                                isConjVerb,
+                                conjV,
+                            )
 
                 else:
                     for sub in subs:
-                        populate_svos_array(current_verb, is_pas, sub, svos, tokens, visited, isConjVerb, conjV)
+                        populate_svos_array(
+                            current_verb,
+                            is_pas,
+                            sub,
+                            svos,
+                            tokens,
+                            visited,
+                            isConjVerb,
+                            conjV,
+                        )
 
                 current_verb = conjV
 
     return svos
+
 
 def resolve_coreferences(original_text):
     doc = nlp(original_text)
@@ -303,7 +383,10 @@ def resolve_coreferences(original_text):
         for coref in doc._.coref_clusters:
             for c in coref:
                 if c != coref[0]:
-                    if not (len(coref[0]) == 1 and coref[0][0].dep_ == "poss") or len(coref[0]) > 1:
+                    if (
+                        not (len(coref[0]) == 1 and coref[0][0].dep_ == "poss")
+                        or len(coref[0]) > 1
+                    ):
                         pos_to_change.append(c.start)
                         pos_to_change.append(c.end)
                         new_terms.append(coref[0])
@@ -315,7 +398,7 @@ def resolve_coreferences(original_text):
             pos_to_change.remove(pos_to_change[0])
 
             while True:
-                new_doc.append(doc[begin_pos : end_pos].text)
+                new_doc.append(doc[begin_pos:end_pos].text)
                 if len(new_terms) > 0:
                     new_doc.append(new_terms[0].text)
                     new_terms.remove(new_terms[0])
@@ -339,49 +422,79 @@ def resolve_coreferences(original_text):
                 new_text += el.replace("\\", "")
                 new_text += " "
 
-            sentence_array = new_text.split('. ')
-            if '' in sentence_array:
-                sentence_array.remove('')
+            sentence_array = new_text.split(". ")
+            if "" in sentence_array:
+                sentence_array.remove("")
         else:
-            sentence_array = original_text.split('. ')
-            if '' in sentence_array:
-                sentence_array.remove('')
+            sentence_array = original_text.split(". ")
+            if "" in sentence_array:
+                sentence_array.remove("")
     else:
-        sentence_array = original_text.split('. ')
-        if '' in sentence_array:
-            sentence_array.remove('')
+        sentence_array = original_text.split(". ")
+        if "" in sentence_array:
+            sentence_array.remove("")
 
     return sentence_array
 
-paragraph_array = ["The UK outlines his plans to break free of European Court after Brexit. The British government will outline its plans to escape the direct jurisdiction of the European Court of Justice after Brexit. One of Prime Minister Theresa May's main aims in talks is to unravel 40 years of European Union membership.",
-                   "Both sides provide a PhD supervisor and funding comes from a mix of public and private sources. Industrial PhDs can work in any discipline, but in practice science and technology subjects dominate, with the social sciences and humanities remaining at the margins.",
-                   "Both sides provide a PhD supervisor. Funding comes from a mix of public and private sources. Industrial PhDs can work in any discipline, but in practice science and technology subjects dominate, with the social sciences and humanities remaining at the margins.",
-                   "Companies would benefit from access to academic expertise and resources, while universities would have a chance to forge links with industry, extend their research and apply its results.",
-                   "Her objective was to become part of the band.",
-                   "Her objective was to be part of the band. She didn't manage to become part of it.",
-                   "You should do your homework",
-                   "Mika ate an apple. She loved it.",
-                   "Mika ate an apple and a banana. She loved them.",
-                   "He beat and hurt me.",
-                   "Both territories still have high numbers of cases, which are threatening to overwhelm their hospital systems.",
-                   "Obama, who was elected by the people, arrived home",
-                   'Mr Macron also confirmed that the second round of municipal elections, originally scheduled for March, would go ahead on 28 June. But, he added, mass gatherings would need to remain "tightly controlled" because they were "the main occasions for spreading the virus". All of mainland France will now be in the "green zone" virus alert level while the overseas territories of Mayotte and French Guiana will remain at the "orange" alert level.',
-                   'My recovery took a bash in early lockdown as I replaced my recovery with chats I was having with a girl. The nature of addiction being a bigger picture than drugs, this didn\'t go well, but it\'s OK now. There\'s a recovery phrase "whatever you put in front of your recovery, you will lose," and I learned the hard way on that and won\'t be putting anything in front of my recovery again. Recovery comes first and the rest falls in place.']
 
-if 'neuralcoref' not in nlp.pipe_names:
+paragraph_array = [
+    """The UK outlines his plans to break free of European Court after Brexit.
+     The British government will outline its plans to escape the direct jurisdiction
+     of the European Court of Justice after Brexit. One of Prime Minister Theresa May's
+     main aims in talks is to unravel 40 years of European Union membership.""",
+    """Both sides provide a PhD supervisor and funding comes from a mix of
+     public and private sources. Industrial PhDs can work in any discipline,
+      but in practice science and technology subjects dominate, with the
+       social sciences and humanities remaining at the margins.""",
+    """Both sides provide a PhD supervisor. Funding comes from a mix
+     of public and private sources. Industrial PhDs can work in any
+      discipline, but in practice science and technology subjects
+       dominate, with the social sciences and humanities
+        remaining at the margins.""",
+    """Companies would benefit from access to academic expertise
+     and resources, while universities would have a chance
+      to forge links with industry, extend their research
+       and apply its results.""",
+    """Her objective was to become part of the band.""",
+    """Her objective was to be part of the band. She didn't manage
+     to become part of it.""",
+    """You should do your homework.""",
+    """Mika ate an apple. She loved it.""",
+    """Mika ate an apple and a banana. She loved them.""",
+    """He beat and hurt me.""",
+    """Both territories still have high numbers of cases,
+     which are threatening to overwhelm their hospital systems.""",
+    """Obama, who was elected by the people, arrived home""",
+    """Mr Macron also confirmed that the second round of municipal
+     elections, originally scheduled for March, would go ahead on 28 June.
+      But, he added, mass gatherings would need to remain "tightly controlled"
+       because they were "the main occasions for spreading the virus".
+        All of mainland France will now be in the "green zone" virus alert
+         level while the overseas territories of Mayotte and French Guiana
+          will remain at the "orange" alert level.""",
+    """My recovery took a bash in early lockdown as I replaced my recovery
+     with chats I was having with a girl. The nature of addiction being a
+      bigger picture than drugs, this didn't go well, but it's OK now.
+       There's a recovery phrase \"whatever you put in front of your recovery,
+        you will lose,\" and I learned the hard way on that and won't be putting
+         anything in front of my recovery again. Recovery comes first and the rest
+          falls in place.""",
+]
+
+if "neuralcoref" not in nlp.pipe_names:
     coref = neuralcoref.NeuralCoref(nlp.vocab)
-    nlp.add_pipe(coref, name='neuralcoref')
+    nlp.add_pipe(coref, name="neuralcoref")
 
 for paragraph in paragraph_array:
     original_text_array = resolve_coreferences(paragraph)
     print(paragraph)
     for text in original_text_array:
-        print(text, end = "\n")
+        print(text, end="\n")
 
         # displacy.render(nlp(text), style = "dep", jupyter = True)
         svo = findSVOs(nlp(text))
 
         for s in svo:
-          print("  ", s[0], "-", s[1], "-", s[2])
+            print("  ", s[0], "-", s[1], "-", s[2])
 
     print("")
