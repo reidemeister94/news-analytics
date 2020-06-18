@@ -57,3 +57,9 @@ bert-serving-client = "^1.10.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.5.3"
+en_core_web_md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.2.5/en_core_web_md-2.2.5.tar.gz"}
+de_core_news_md = {url = "https://github.com/explosion/spacy-models/releases/download/de_core_news_md-2.2.5/de_core_news_md-2.2.5.tar.gz"}
+fr_core_news_md = {url = "https://github.com/explosion/spacy-models/releases/download/fr_core_news_md-2.2.5/fr_core_news_md-2.2.5.tar.gz"}
+it_core_news_sm = {url = "https://github.com/explosion/spacy-models/releases/download/it_core_news_sm-2.2.5/it_core_news_sm-2.2.5.tar.gz"}
+nl_core_news_sm = {url = "https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-2.2.5/nl_core_news_sm-2.2.5.tar.gz"}
+es_core_news_md = {url = "https://github.com/explosion/spacy-models/releases/download/es_core_news_md-2.2.5/es_core_news_md-2.2.5.tar.gz"}
