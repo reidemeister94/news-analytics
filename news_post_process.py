@@ -118,9 +118,7 @@ class NewsPostProcess:
             )
             raise Exception("Error on lda module show topics")
         document_topic_info = {}
-        for el in self.lda_module.model[
-            self.lda_module.dictionary.doc2bow(parsed_text)
-        ]:
+        for el in self.lda_module.model[self.lda_module.dictionary.doc2bow(parsed_text)]:
             document_topic_info[str(el[0])] = [
                 float(round(el[1], 2)),
                 self.format_topic_list(topics[el[0]][1]),
@@ -169,9 +167,9 @@ class NewsPostProcess:
     def main(self):
         # this is the main workflow: here the extraction and processing
         # phases are looped until no other news has to be analyzed
-        for _ in range(3):
-            # print("SPEGNITI")
-            subprocess.run(["bert-serving-terminate", "-port", "5555"])
+        # for _ in range(3):
+        #     # print("SPEGNITI")
+        #     subprocess.run(["bert-serving-terminate", "-port", "5555"])
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED POST PROCESSING")
         for lang in self.CONFIG["collections_lang"]:
@@ -201,7 +199,7 @@ class NewsPostProcess:
                         # print("DOC UPDATED TO DB!")
                         i += 1
             not_processed_docs.close()
-            subprocess.run(["bert-serving-terminate", "-port=5555"])
+            # subprocess.run(["bert-serving-terminate", "-port=5555"])
 
     def __stop(self, p, collection):
         # is_old_post = collection.find_one({"id_post": p["id_post"]})
