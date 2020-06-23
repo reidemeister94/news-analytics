@@ -3,10 +3,11 @@ import numpy as np
 from pymongo import MongoClient
 from nltk.tokenize.punkt import PunktSentenceTokenizer
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
+from transformers import TFBertModel, BertTokenizer
+import tensorflow as tf
 import yaml
 import logging
 import os
-from bert_serving.client import BertClient
 from pprint import pprint
 import math
 import sys
@@ -21,11 +22,11 @@ class NewsAnalyzer:
             with open("configuration/configuration.yaml") as f:
                 self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.CLIENT = MongoClient(self.CONFIG["mongourl"])
-        self.BC = BertClient(port=5555, port_out=5556, check_version=False)
         self.LOGGER = self.__get_logger()
+        self.BERT_TOKENIZER = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
+        self.BERT_MODEL = TFBertModel.from_pretrained("bert-base-multilingual-cased")
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("Bert client ready")
-        # print("Bert client ready")
 
     def text_rank(self, document):
         sentence_tokenizer = PunktSentenceTokenizer()
@@ -57,15 +58,21 @@ class NewsAnalyzer:
             text_rank = self.text_rank(doc["text"])
             # print("text rank finished")
             if len(text_rank) > 0:
-                main_phrase = []
+                main_phrase = ""
                 for i in range(min(3, len(text_rank))):
-                    main_phrase.append(text_rank[i][1])
-                # print("encoding started!!!")
-                res = self.BC.encode(main_phrase)
+                    main_phrase += text_rank[i][1] + " "
+
+                input_ids = tf.convert_to_tensor(
+                    [self.BERT_TOKENIZER.encode(main_phrase, add_special_tokens=True)]
+                )
+                last_hidden_states = self.BERT_MODEL(input_ids)[0]
+                res = tf.reduce_mean(last_hidden_states, axis=1)
+
                 final_res = []
-                for elem in res[0]:
+                for elem in res.numpy()[0]:
                     final_res.append(float(elem))
                 return final_res
+
             else:
                 return []
         except Exception:

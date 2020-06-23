@@ -149,16 +149,6 @@ class NewsPostProcess:
         collection.update_one(query, newvalues)
 
     def init_core_modules(self, lang):
-        subprocess.Popen(
-            [
-                "bert-serving-start",
-                "-model_dir",
-                self.CONFIG["news_analyzer"]["bert_model_path"],
-                "-num_worker=1",
-                "-max_seq_len=40",
-            ],
-            stdout=subprocess.DEVNULL,
-        )
         self.news_analyzer = NewsAnalyzer(self.CONFIG)
         self.lda_module = LdaModule(lang=lang, trained=True)
         self.nlp_utils = NLPUtils(lang=lang)
