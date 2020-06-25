@@ -13,6 +13,8 @@ import math
 import sys
 import time
 
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 
 class NewsAnalyzer:
     def __init__(self, CONFIG=None):
@@ -27,6 +29,7 @@ class NewsAnalyzer:
         self.BERT_MODEL = TFBertModel.from_pretrained("bert-base-multilingual-cased")
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("Bert client ready")
+        self.MAX_LENGTH = 60
 
     def text_rank(self, document):
         sentence_tokenizer = PunktSentenceTokenizer()
@@ -58,21 +61,25 @@ class NewsAnalyzer:
             text_rank = self.text_rank(doc["text"])
             # print("text rank finished")
             if len(text_rank) > 0:
-                main_phrase = ""
+                encodings = []
                 for i in range(min(3, len(text_rank))):
-                    main_phrase += text_rank[i][1] + " "
-
-                input_ids = tf.convert_to_tensor(
-                    [self.BERT_TOKENIZER.encode(main_phrase, add_special_tokens=True)]
-                )
-                last_hidden_states = self.BERT_MODEL(input_ids)[0]
-                res = tf.reduce_mean(last_hidden_states, axis=1)
-
+                    encoded = tf.convert_to_tensor(
+                        [
+                            self.BERT_TOKENIZER.encode(
+                                text_rank[i][1],
+                                max_length=self.MAX_LENGTH,
+                                pad_to_max_length=True,
+                                padding_side="right",
+                            )
+                        ]
+                    )
+                    encoded = self.BERT_MODEL(encoded)[0]
+                    encodings.append(tf.reduce_mean(encoded, axis=1))
+                res = np.average(encodings, axis=0)
                 final_res = []
-                for elem in res.numpy()[0]:
+                for elem in res[0]:
                     final_res.append(float(elem))
                 return final_res
-
             else:
                 return []
         except Exception:
@@ -102,6 +109,6 @@ class NewsAnalyzer:
 
 if __name__ == "__main__":
     news_analyzer = NewsAnalyzer()
-    doc = "text"
+    doc = {"text": "the cat is on the table and the story ends here."}
     enc = news_analyzer.encode_news(doc)
-    print(type(enc))
+    print(enc)
