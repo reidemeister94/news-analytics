@@ -149,7 +149,7 @@ class NewsPostProcess:
         collection.update_one(query, newvalues)
 
     def init_core_modules(self, lang):
-        self.news_analyzer = NewsAnalyzer(self.CONFIG)
+        self.news_analyzer = NewsAnalyzer(self.CONFIG, self.MONGO_CLIENT)
         self.lda_module = LdaModule(lang=lang, trained=True)
         self.nlp_utils = NLPUtils(lang=lang)
         self.named_entity_recognition = NamedEntityRecognition(self.nlp_utils.nlp)
@@ -172,6 +172,7 @@ class NewsPostProcess:
             i = 0
             self.LOGGER.info("Starting processing docs from db...")
             for doc in not_processed_docs:
+                # start_time = time.time()
                 if i % 500 == 0 and i > 0:
                     print(i)
                 if i % 10000 == 0 and i > 0:
@@ -188,6 +189,7 @@ class NewsPostProcess:
                         self.db_news_update(collection, updated_doc)
                         # print("DOC UPDATED TO DB!")
                         i += 1
+                # print("--- %s seconds ---" % (time.time() - start_time))
             not_processed_docs.close()
             # subprocess.run(["bert-serving-terminate", "-port=5555"])
 

@@ -17,19 +17,22 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 
 class NewsAnalyzer:
-    def __init__(self, CONFIG=None):
+    def __init__(self, CONFIG=None, MONGO_CLIENT=None):
         if CONFIG is not None:
             self.CONFIG = CONFIG
         else:
             with open("configuration/configuration.yaml") as f:
                 self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
-        self.CLIENT = MongoClient(self.CONFIG["mongourl"])
+        if MONGO_CLIENT is not None:
+            self.CLIENT = MONGO_CLIENT
+        else:
+            self.CLIENT = MongoClient(self.CONFIG["mongourl"])
         self.LOGGER = self.__get_logger()
         self.BERT_TOKENIZER = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
         self.BERT_MODEL = TFBertModel.from_pretrained("bert-base-multilingual-cased")
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("Bert client ready")
-        self.MAX_LENGTH = 60
+        self.MAX_LENGTH = 40
 
     def text_rank(self, document):
         sentence_tokenizer = PunktSentenceTokenizer()

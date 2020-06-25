@@ -21,9 +21,9 @@ class NLPUtils:
         elif self.lang == "fr":
             self.nlp = spacy.load("fr_core_news_md")
         elif self.lang == "it":
-            self.nlp = spacy.load("it_core_news_sm")
+            self.nlp = spacy.load("it_core_news_md")
         elif self.lang == "nl":
-            self.nlp = spacy.load("nl_core_news_sm")
+            self.nlp = spacy.load("nl_core_news_md")
         else:
             # English is default
             self.nlp = spacy.load("en_core_web_md")
@@ -56,9 +56,7 @@ class NLPUtils:
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(
-                    raw_data["_id"], exc_type, fname, exc_tb.tb_lineno
-                )
+                "{}, {}, {}, {}".format(raw_data["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
 
     def fix_stop_words(self):
