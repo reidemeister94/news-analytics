@@ -30,11 +30,12 @@ class TripleExtraction:
         if nlp_model is not None:
             self.nlp = nlp_model
         else:
-            self.nlp = spacy.load("en_core_web_lg")
+            # self.nlp = spacy.load("en_core_web_lg")
+            self.nlp = spacy.load("en_core_web_md")
 
-        if "neuralcoref" not in self.nlp.pipe_names:
-            coref = neuralcoref.NeuralCoref(self.nlp.vocab)
-            self.nlp.add_pipe(coref, name="neuralcoref")
+        # if "neuralcoref" not in self.nlp.pipe_names:
+        #     coref = neuralcoref.NeuralCoref(self.nlp.vocab)
+        #     self.nlp.add_pipe(coref, name="neuralcoref")
         self.LOGGER = self.__get_logger()
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("Triple Extraction Ready")
@@ -488,10 +489,18 @@ class TripleExtraction:
             ]
         else:
             paragraph_array = p_array
+        res = []
         for paragraph in paragraph_array:
 
-            original_text_array = self.resolve_coreferences(paragraph)
+            # Soluzione tappa-buchi
+            # Funzione da chiamare poi:
+            # original_text_array = self.resolve_coreferences(paragraph)
+            original_text_array = paragraph.split(". ")
+            if "" in original_text_array:
+                original_text_array.remove("")
             # print(paragraph)
+            # ========
+
             for text in original_text_array:
                 try:
                     print(text, end="\n")
@@ -503,6 +512,7 @@ class TripleExtraction:
                         print("  ", s[0], "-", s[1], "-", s[2])
 
                     print("")
+                    res.append(svo)
 
                 except Exception:
                     exc_type, _, exc_tb = sys.exc_info()
@@ -513,6 +523,8 @@ class TripleExtraction:
                             self.nlp(text)["_id"], exc_type, fname, exc_tb.tb_lineno
                         )
                     )
+                    return None
+            return res
 
 
 if __name__ == "__main__":
