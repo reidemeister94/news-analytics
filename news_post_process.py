@@ -166,42 +166,45 @@ class NewsPostProcess:
             self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
             self.LOGGER.info("Initializing core modules and extract news from db...")
             self.init_core_modules(lang)
-            collection, not_processed_docs = self.db_news_extraction(lang)
-            self.LOGGER.info("Core modules initialized and news from db extracted...")
-            # print(len(list(not_processed_docs)))
-            i = 0
-            self.LOGGER.info("Starting processing docs from db...")
-            for doc in not_processed_docs:
-                # start_time = time.time()
-                if i % 500 == 0 and i > 0:
-                    print(i)
-                if i % 10000 == 0 and i > 0:
-                    self.LOGGER.info("10k Docs processed...")
-                if len(doc["text"]) > 0:
-                    if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
-                        updated_doc, error = self.process_doc(doc, update_model=True)
-                        self.batch_size = 0
-                        self.batch_docs.clear()
-                    else:
-                        updated_doc, error = self.process_doc(doc, update_model=False)
-                    if error is None:
-                        self.batch_size += 1
-                        self.db_news_update(collection, updated_doc)
-                        # print("DOC UPDATED TO DB!")
-                        i += 1
-                # print("--- %s seconds ---" % (time.time() - start_time))
-            not_processed_docs.close()
-            # subprocess.run(["bert-serving-terminate", "-port=5555"])
-
-    def __stop(self, p, collection):
-        # is_old_post = collection.find_one({"id_post": p["id_post"]})
-        # if is_old_post is None and p["timestamp"] >= self.min_date_post:
-        #    return False
-        # if p['timestamp'] >= self.min_date_post:
-        #     return False
-        # else:
-        #    return True
-        pass
+            stop = False
+            while not stop:
+                collection, not_processed_docs = self.db_news_extraction(lang)
+                not_processed_docs_count = not_processed_docs.count()
+                self.LOGGER.info("{} Articles to analyze...".format(not_processed_docs_count))
+                if not_processed_docs_count < 100:
+                    stop = True
+                    not_processed_docs.close()
+                    self.LOGGER.info(
+                        "Less than 100 articles to analyze ({} to be precise), \
+                            proceeding to next collection...".format(
+                            not_processed_docs_count
+                        )
+                    )
+                    break
+                self.LOGGER.info("Core modules initialized and news from db extracted...")
+                # print(len(list(not_processed_docs)))
+                i = 0
+                self.LOGGER.info("Starting processing docs from db...")
+                for doc in not_processed_docs:
+                    # start_time = time.time()
+                    if i % 10 == 0 and i > 0:
+                        print(i)
+                    if i % 10000 == 0 and i > 0:
+                        self.LOGGER.info("10k Docs processed...")
+                    if len(doc["text"]) > 0:
+                        if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
+                            updated_doc, error = self.process_doc(doc, update_model=True)
+                            self.batch_size = 0
+                            self.batch_docs.clear()
+                        else:
+                            updated_doc, error = self.process_doc(doc, update_model=False)
+                        if error is None:
+                            self.batch_size += 1
+                            self.db_news_update(collection, updated_doc)
+                            # print("DOC UPDATED TO DB!")
+                            i += 1
+                    # print("--- %s seconds ---" % (time.time() - start_time))
+                not_processed_docs.close()
 
     def __get_logger(self):
         # create logger
