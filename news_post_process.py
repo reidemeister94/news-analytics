@@ -1,5 +1,6 @@
 import bson
 from pymongo import MongoClient
+from pymongo.errors import CursorNotFound
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
 from core_modules.named_entity_recognition.named_entity_recognition import (
@@ -185,25 +186,31 @@ class NewsPostProcess:
                 # print(len(list(not_processed_docs)))
                 i = 0
                 self.LOGGER.info("Starting processing docs from db...")
-                for doc in not_processed_docs:
-                    # start_time = time.time()
-                    if i % 10 == 0 and i > 0:
-                        print(i)
-                    if i % 10000 == 0 and i > 0:
-                        self.LOGGER.info("10k Docs processed...")
-                    if len(doc["text"]) > 0:
-                        if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
-                            updated_doc, error = self.process_doc(doc, update_model=True)
-                            self.batch_size = 0
-                            self.batch_docs.clear()
-                        else:
-                            updated_doc, error = self.process_doc(doc, update_model=False)
-                        if error is None:
-                            self.batch_size += 1
-                            self.db_news_update(collection, updated_doc)
-                            # print("DOC UPDATED TO DB!")
-                            i += 1
-                    # print("--- %s seconds ---" % (time.time() - start_time))
+                try:
+                    for doc in not_processed_docs:
+                        # start_time = time.time()
+                        if i % 10 == 0 and i > 0:
+                            print(i)
+                        if i % 10000 == 0 and i > 0:
+                            self.LOGGER.info("10k Docs processed...")
+                        if len(doc["text"]) > 0:
+                            if (
+                                self.batch_size
+                                == self.CONFIG["topic_extraction"]["batch_size"]
+                            ):
+                                updated_doc, error = self.process_doc(doc, update_model=True)
+                                self.batch_size = 0
+                                self.batch_docs.clear()
+                            else:
+                                updated_doc, error = self.process_doc(doc, update_model=False)
+                            if error is None:
+                                self.batch_size += 1
+                                self.db_news_update(collection, updated_doc)
+                                # print("DOC UPDATED TO DB!")
+                                i += 1
+                        # print("--- %s seconds ---" % (time.time() - start_time))
+                except CursorNotFound:
+                    self.LOGGER.error("Lost cursor. Retry...")
                 not_processed_docs.close()
 
     def __get_logger(self):
