@@ -1,6 +1,7 @@
 import bson
+from bson.objectid import ObjectId
 from pymongo import MongoClient
-from pymongo.errors import CursorNotFound
+from pymongo.errors import CursorNotFound, ServerSelectionTimeoutError
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
 from core_modules.named_entity_recognition.named_entity_recognition import (
@@ -34,6 +35,10 @@ class NewsPostProcess:
         self.nlp_utils = None
         self.batch_size = 0
         self.batch_docs = []
+        self.QUERY = {
+            "$or": [{"processedEncoding": False}, {"processedEncoding": {"$exists": False}}]
+        }
+        # self.QUERY = {"_id": ObjectId("5e7ceeb9dab3970e51e924a8")}
 
     def db_news_extraction(self, lang):
         if lang != "it":
@@ -41,21 +46,16 @@ class NewsPostProcess:
         else:
             name_coll = "article"
         collection = self.MONGO_CLIENT["news"][name_coll]
-        not_processed_docs = collection.find(
-            {
-                "$or": [
-                    {"processedEncoding": False},
-                    {"processedEncoding": {"$exists": False}},
-                ]
-            },
-            no_cursor_timeout=True,
-        )
+        not_processed_docs = collection.find(self.QUERY, no_cursor_timeout=True)
+        # not_processed_docs = collection.find(
+        #     {"_id": ObjectId("5e7ceeb9dab3970e51e924a8")}, no_cursor_timeout=True,
+        # )
         return collection, not_processed_docs
 
     def process_doc(self, doc, update_model=False):
         # topic extraction phase
         try:
-            # print("topic extraction started")
+            print("topic extraction started")
             doc = self.topic_extraction(doc, update_model)
             # print("topic extraction completed")
         except Exception:
@@ -68,7 +68,7 @@ class NewsPostProcess:
 
         # bert enconding phase
         try:
-            # print("bert encoding started")
+            print("bert encoding started")
             doc = self.news_analysis(doc)
             # print("bert encoding completed")
         except Exception:
@@ -81,7 +81,7 @@ class NewsPostProcess:
 
         # named entity recognition phase
         try:
-            # print("ner started")
+            print("ner started")
             doc = self.ner_analysis(doc)
             # print("ner completed")
         except Exception:
@@ -138,15 +138,26 @@ class NewsPostProcess:
 
     def db_news_update(self, collection, doc):
         query = {"_id": doc["_id"]}
-        newvalues = {
-            "$set": {
-                "parsedText": doc["parsed_text"],
-                "topicExtraction": doc["topic_extraction"],
-                "namedEntityRecognition": doc["named_entity_recognition"],
-                "bertEncoding": doc["bert_encoding"],
-                "processedEncoding": True,
+        if len(doc["text"]) == 0 or doc["text"].isspace():
+            newvalues = {
+                "$set": {
+                    "parsedText": "",
+                    "topicExtraction": {},
+                    "namedEntityRecognition": {},
+                    "bertEncoding": [],
+                    "processedEncoding": True,
+                }
             }
-        }
+        else:
+            newvalues = {
+                "$set": {
+                    "parsedText": doc["parsed_text"],
+                    "topicExtraction": doc["topic_extraction"],
+                    "namedEntityRecognition": doc["named_entity_recognition"],
+                    "bertEncoding": doc["bert_encoding"],
+                    "processedEncoding": True,
+                }
+            }
         collection.update_one(query, newvalues)
 
     def init_core_modules(self, lang):
@@ -170,7 +181,7 @@ class NewsPostProcess:
             stop = False
             while not stop:
                 collection, not_processed_docs = self.db_news_extraction(lang)
-                not_processed_docs_count = not_processed_docs.count()
+                not_processed_docs_count = collection.count_documents(self.QUERY)
                 self.LOGGER.info("{} Articles to analyze...".format(not_processed_docs_count))
                 if not_processed_docs_count < 100:
                     stop = True
@@ -189,6 +200,7 @@ class NewsPostProcess:
                 try:
                     for doc in not_processed_docs:
                         # start_time = time.time()
+                        # print(i)
                         if i % 10 == 0 and i > 0:
                             print(i)
                         if i % 10000 == 0 and i > 0:
@@ -209,7 +221,8 @@ class NewsPostProcess:
                                 # print("DOC UPDATED TO DB!")
                                 i += 1
                         # print("--- %s seconds ---" % (time.time() - start_time))
-                except CursorNotFound:
+                except (CursorNotFound, ServerSelectionTimeoutError) as e:
+                    print(type(e))
                     self.LOGGER.error("Lost cursor. Retry...")
                 not_processed_docs.close()
 

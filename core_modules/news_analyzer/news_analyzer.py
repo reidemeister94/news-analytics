@@ -61,7 +61,7 @@ class NewsAnalyzer:
     def encode_news(self, doc):
         # print("encode news started")
         try:
-            text_rank = self.text_rank(doc["text"])
+            text_rank = self.text_rank(doc["text"][:5000])  # temp fix
             # print("text rank finished")
             if len(text_rank) > 0:
                 encodings = []
@@ -85,12 +85,14 @@ class NewsAnalyzer:
                 return final_res
             else:
                 return []
-        except Exception:
+        except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+                "{}, {}, {}, {}, {}".format(
+                    doc["_id"], exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
             )
 
     def __get_logger(self):
