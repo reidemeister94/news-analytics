@@ -55,7 +55,7 @@ class NewsPostProcess:
     def process_doc(self, doc, update_model=False):
         # topic extraction phase
         try:
-            print("topic extraction started")
+            # print("topic extraction started")
             doc = self.topic_extraction(doc, update_model)
             # print("topic extraction completed")
         except Exception:
@@ -68,7 +68,7 @@ class NewsPostProcess:
 
         # bert enconding phase
         try:
-            print("bert encoding started")
+            # print("bert encoding started")
             doc = self.news_analysis(doc)
             # print("bert encoding completed")
         except Exception:
@@ -81,7 +81,7 @@ class NewsPostProcess:
 
         # named entity recognition phase
         try:
-            print("ner started")
+            # print("ner started")
             doc = self.ner_analysis(doc)
             # print("ner completed")
         except Exception:
