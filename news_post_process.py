@@ -193,7 +193,7 @@ class NewsPostProcess:
                             print(i)
                         if i % 10000 == 0 and i > 0:
                             self.LOGGER.info("10k Docs processed...")
-                        if len(doc["text"]) > 0:
+                        if len(doc["text"]) > 0 and not doc["text"].isspace():
                             if (
                                 self.batch_size
                                 == self.CONFIG["topic_extraction"]["batch_size"]
