@@ -60,12 +60,14 @@ class NewsAnalyzer:
 
     def encode_news(self, doc):
         # print("encode news started")
+        triples_extraction_container = []
         try:
             text_rank = self.text_rank(doc["text"][:5000])  # temp fix
             # print("text rank finished")
             if len(text_rank) > 0:
                 encodings = []
                 for i in range(min(3, len(text_rank))):
+                    triples_extraction_container.append(text_rank[i][1])
                     encoded = tf.convert_to_tensor(
                         [
                             self.BERT_TOKENIZER.encode(
@@ -82,9 +84,9 @@ class NewsAnalyzer:
                 final_res = []
                 for elem in res[0]:
                     final_res.append(float(elem))
-                return final_res
+                return final_res, triples_extraction_container
             else:
-                return []
+                return [], []
         except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]

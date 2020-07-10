@@ -1,4 +1,4 @@
-from triples_from_other import TripleExtraction
+from triples_extraction import TripleExtraction
 
 triple_extractor = TripleExtraction()
 

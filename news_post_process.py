@@ -8,6 +8,7 @@ from core_modules.named_entity_recognition.named_entity_recognition import (
     NamedEntityRecognition,
 )
 from core_modules.news_analyzer.news_analyzer import NewsAnalyzer
+from core_modules.triple_extraction.triples_extraction import TripleExtraction
 from scraping.news_scraper import NewsScraper
 import os
 import time
@@ -68,8 +69,9 @@ class NewsPostProcess:
 
         # bert enconding phase
         try:
+            triples_extraction_container = []
             # print("bert encoding started")
-            doc = self.news_analysis(doc)
+            doc, triples_extraction_container = self.news_analysis(doc)
             # print("bert encoding completed")
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
@@ -92,11 +94,33 @@ class NewsPostProcess:
             )
             return None, "error"
 
+        # triples extraction phase
+        try:
+            # print("triples extraction started")
+            triples = self.triples_extraction(triples_extraction_container)
+            doc["triples_extraction"] = triples
+            # print("triples extraction completed")
+        except Exception:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+            )
+            return None, "error"
+
         return doc, None
 
     def news_analysis(self, doc):
-        doc["bert_encoding"] = self.news_analyzer.encode_news(doc)
-        return doc
+        doc["bert_encoding"], triples_extraction_container = self.news_analyzer.encode_news(
+            doc
+        )
+        return doc, triples_extraction_container
+
+    def triples_extraction(self, triples_extraction_container):
+        triples = self.triples_extraction.perform_triples_extraction(
+            triples_extraction_container
+        )
+        return triples
 
     def format_topic_list(self, topics):
         return [(word, float(weight)) for word, weight in topics]
@@ -165,6 +189,7 @@ class NewsPostProcess:
         self.lda_module = LdaModule(lang=lang, trained=True)
         self.nlp_utils = NLPUtils(lang=lang)
         self.named_entity_recognition = NamedEntityRecognition(self.nlp_utils.nlp)
+        self.triples_extraction = TripleExtraction(self.nlp_utils.nlp)
 
     def main(self):
         # this is the main workflow: here the extraction and processing
