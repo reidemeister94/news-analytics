@@ -480,13 +480,7 @@ class TripleExtraction:
 
     def perform_triples_extraction(self, p_array=None):
         if p_array is None:
-            paragraph_array = [
-                """The UK outlines his plans to break free of European Court after
-                Brexit. The British government will outline its plans to escape the
-                direct jurisdiction of the European Court of Justice after Brexit.
-                One of Prime Minister Theresa May's main aims in talks is to unravel
-                40 years of European Union membership."""
-            ]
+            return []
         else:
             paragraph_array = p_array
         res = []
@@ -503,15 +497,15 @@ class TripleExtraction:
 
             for text in original_text_array:
                 try:
-                    print(text, end="\n")
+                    # print(text, end="\n")
 
                     # displacy.render(nlp(text), style = "dep", jupyter = True)
                     svo = self.findSVOs(self.nlp(text))
 
-                    for s in svo:
-                        print("  ", s[0], "-", s[1], "-", s[2])
+                    # for s in svo:
+                    #     print("  ", s[0], "-", s[1], "-", s[2])
 
-                    print("")
+                    # print("")
                     res.append(svo)
 
                 except Exception:

@@ -170,6 +170,7 @@ class NewsPostProcess:
                     "namedEntityRecognition": {},
                     "bertEncoding": [],
                     "processedEncoding": True,
+                    "triplesExtraction": [],
                 }
             }
         else:
@@ -180,6 +181,7 @@ class NewsPostProcess:
                     "namedEntityRecognition": doc["named_entity_recognition"],
                     "bertEncoding": doc["bert_encoding"],
                     "processedEncoding": True,
+                    "triplesExtraction": doc["triples_extraction"],
                 }
             }
         collection.update_one(query, newvalues)
