@@ -54,7 +54,7 @@ class NewsPostProcess:
         # )
         return collection, not_processed_docs
 
-    def process_doc(self, doc, update_model=False):
+    def process_doc(self, doc, current_lang, update_model=False):
         # topic extraction phase
         try:
             # print("topic extraction started")
@@ -96,18 +96,19 @@ class NewsPostProcess:
             return None, "error"
 
         # triples extraction phase
-        try:
-            # print("triples extraction started")
-            triples = self.triples_extraction(triples_extraction_container)
-            doc["triples_extraction"] = triples
-            # print("triples extraction completed")
-        except Exception:
-            exc_type, _, exc_tb = sys.exc_info()
-            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            self.LOGGER.error(
-                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
-            )
-            return None, "error"
+        if current_lang == "en":
+            try:
+                # print("triples extraction started")
+                triples = self.triples_extraction(triples_extraction_container)
+                doc["triples_extraction"] = triples
+                # print("triples extraction completed")
+            except Exception:
+                exc_type, _, exc_tb = sys.exc_info()
+                fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                self.LOGGER.error(
+                    "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+                )
+                return None, "error"
 
         return doc, None
 
@@ -161,9 +162,9 @@ class NewsPostProcess:
         doc["named_entity_recognition"] = ner_data
         return doc
 
-    def db_news_update(self, collection, doc):
+    def db_news_update(self, collection, doc, empty=False):
         query = {"_id": doc["_id"]}
-        if len(doc["text"]) == 0 or doc["text"].isspace():
+        if empty:
             newvalues = {
                 "$set": {
                     "parsedText": "",
@@ -188,6 +189,11 @@ class NewsPostProcess:
         collection.update_one(query, newvalues)
 
     def init_core_modules(self, lang):
+        self.news_analyzer = None
+        self.lda_module = None
+        self.nlp_utils = None
+        self.named_entity_recognition = None
+        self.triples_extractor = None
         self.news_analyzer = NewsAnalyzer(self.CONFIG, self.MONGO_CLIENT)
         self.lda_module = LdaModule(lang=lang, trained=True)
         self.nlp_utils = NLPUtils(lang=lang)
@@ -238,17 +244,23 @@ class NewsPostProcess:
                                 self.batch_size
                                 == self.CONFIG["topic_extraction"]["batch_size"]
                             ):
-                                updated_doc, error = self.process_doc(doc, update_model=True)
+                                updated_doc, error = self.process_doc(
+                                    doc, lang, update_model=True
+                                )
                                 self.batch_size = 0
                                 self.batch_docs.clear()
                             else:
-                                updated_doc, error = self.process_doc(doc, update_model=False)
+                                updated_doc, error = self.process_doc(
+                                    doc, lang, update_model=False
+                                )
                             if error is None:
                                 self.batch_size += 1
-                                self.db_news_update(collection, updated_doc)
+                                self.db_news_update(collection, updated_doc, empty=False)
                                 # print("DOC UPDATED TO DB!")
                                 i += 1
                         # print("--- %s seconds ---" % (time.time() - start_time))
+                        else:
+                            self.db_news_update(collection, doc, empty=True)
                 except (CursorNotFound, ServerSelectionTimeoutError) as e:
                     print(type(e))
                     self.LOGGER.error("Lost cursor. Retry...")
