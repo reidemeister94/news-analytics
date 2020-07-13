@@ -34,6 +34,7 @@ class NewsPostProcess:
         self.named_entity_recognition = None
         self.lda_module = None
         self.nlp_utils = None
+        self.triples_extractor = None
         self.batch_size = 0
         self.batch_docs = []
         self.QUERY = {
@@ -117,7 +118,7 @@ class NewsPostProcess:
         return doc, triples_extraction_container
 
     def triples_extraction(self, triples_extraction_container):
-        triples = self.triples_extraction.perform_triples_extraction(
+        triples = self.triples_extractor.perform_triples_extraction(
             triples_extraction_container
         )
         return triples
@@ -191,7 +192,7 @@ class NewsPostProcess:
         self.lda_module = LdaModule(lang=lang, trained=True)
         self.nlp_utils = NLPUtils(lang=lang)
         self.named_entity_recognition = NamedEntityRecognition(self.nlp_utils.nlp)
-        self.triples_extraction = TripleExtraction(self.nlp_utils.nlp)
+        self.triples_extractor = TripleExtraction(self.nlp_utils.nlp)
 
     def main(self):
         # this is the main workflow: here the extraction and processing
