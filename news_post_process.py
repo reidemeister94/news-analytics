@@ -154,7 +154,6 @@ class NewsPostProcess:
             ]
         doc["topic_extraction"] = document_topic_info
         doc["parsed_text"] = " ".join(word for word in parsed_text)
-
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)
         return doc

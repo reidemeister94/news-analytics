@@ -11,9 +11,7 @@ import yaml
 
 
 class LdaModule:
-    def __init__(
-        self, lang="en", num_docs=0, doc_collection=[], num_topics=0, trained=False
-    ):
+    def __init__(self, lang="en", num_docs=0, doc_collection=[], num_topics=0, trained=False):
         with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.lang = lang
@@ -64,9 +62,7 @@ class LdaModule:
             self.LOGGER.info("... Finding collocations ...")
             self.doc_collection = self.utils.get_word_collocations(self.doc_collection)
         else:
-            self.doc_collection = [
-                self.utils.string_to_list(t) for t in self.doc_collection
-            ]
+            self.doc_collection = [self.utils.string_to_list(t) for t in self.doc_collection]
 
         # Build dictionary
         dictionary = corpora.Dictionary(self.doc_collection)
@@ -83,8 +79,7 @@ class LdaModule:
 
         # Build corpus as list of bags of words from the documents
         self.corpus = [
-            self.dictionary.doc2bow(list_of_tokens)
-            for list_of_tokens in self.doc_collection
+            self.dictionary.doc2bow(list_of_tokens) for list_of_tokens in self.doc_collection
         ]
 
     def build_lda_model(self, num_topics=20, passes=4, alpha=0.01, eta=0.01):

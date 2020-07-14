@@ -40,7 +40,7 @@ class NLPUtils:
         # Check parsing before this point (should be good with pymongo)
         try:
             # Build spaCy's doc object
-            self.doc = self.nlp(raw_data["text"])
+            self.doc = self.nlp(raw_data["text"][:20000])  # temp fix
             # Retrieve sentences
             sentences = self.sentence_tokenize(self.doc)
             # print(len(sentences))
