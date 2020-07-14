@@ -145,8 +145,9 @@ class TripleExtraction:
                         true_subject = c
                         break
 
-            if found and true_subject.text != "of" and true_subject.text is not None:
-                correct_subs.append(true_subject)
+            if found and true_subject is not None:
+                if true_subject.text != "of":
+                    correct_subs.append(true_subject)
             elif not found:
                 correct_subs.append(sub)
 
@@ -212,8 +213,9 @@ class TripleExtraction:
                         true_object = c
                         break
 
-            if found and true_object.text != "of" and true_object.text is not None:
-                correct_objs.append(true_object)
+            if found and true_object is not None:
+                if true_object.text != "of":
+                    correct_objs.append(true_object)
             elif not found:
                 correct_objs.append(obj)
 
@@ -303,12 +305,14 @@ class TripleExtraction:
                         if text not in svos and not self.is_subtext(text, svos):
                             svos.append(text)
 
-        except Exception:
+        except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             # print("{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
+                "{}, {}, {}, {}, {}".format(
+                    self.DOC_ID, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
             )
 
     # find verbs and their subjects / objects to create SVOs, detect passive/active sentences
@@ -383,12 +387,14 @@ class TripleExtraction:
 
             return svos
 
-        except Exception:
+        except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             # print("{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
+                "{}, {}, {}, {}, {}".format(
+                    self.DOC_ID, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
             )
 
     def resolve_coreferences(self, original_text):
@@ -455,12 +461,14 @@ class TripleExtraction:
 
             return sentence_array
 
-        except Exception:
+        except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             # print("{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
+                "{}, {}, {}, {}, {}".format(
+                    self.DOC_ID, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
             )
 
     def __get_logger(self):
@@ -510,12 +518,14 @@ class TripleExtraction:
                     # print("")
                     res.append(svo)
 
-                except Exception:
+                except Exception as e:
                     exc_type, _, exc_tb = sys.exc_info()
                     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
                     # print("{},{},{},{}".format(docself.DOC_ID],exc_type,fname,exc_tb.tb_lineno))
                     self.LOGGER.error(
-                        "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
+                        "{}, {}, {}, {}, {}".format(
+                            self.DOC_ID, exc_type, fname, exc_tb.tb_lineno, str(e)
+                        )
                     )
                     return None
             return res
