@@ -55,6 +55,7 @@ class NewsPostProcess:
         return collection, not_processed_docs
 
     def process_doc(self, doc, current_lang, update_model=False):
+        triples_extraction_container = []
         # topic extraction phase
         try:
             # print("topic extraction started")
@@ -70,7 +71,6 @@ class NewsPostProcess:
 
         # bert enconding phase
         try:
-            triples_extraction_container = []
             # print("bert encoding started")
             doc, triples_extraction_container = self.news_analysis(doc)
             # print("bert encoding completed")
@@ -99,14 +99,16 @@ class NewsPostProcess:
         if current_lang == "en":
             try:
                 # print("triples extraction started")
-                triples = self.triples_extraction(triples_extraction_container)
+                triples = self.triples_extraction(triples_extraction_container, doc["_id"])
                 doc["triples_extraction"] = triples
                 # print("triples extraction completed")
-            except Exception:
+            except Exception as e:
                 exc_type, _, exc_tb = sys.exc_info()
                 fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
                 self.LOGGER.error(
-                    "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+                    "{}, {}, {}, {}, {}".format(
+                        doc["_id"], exc_type, fname, exc_tb.tb_lineno, str(e)
+                    )
                 )
                 return None, "error"
 
@@ -118,9 +120,9 @@ class NewsPostProcess:
         )
         return doc, triples_extraction_container
 
-    def triples_extraction(self, triples_extraction_container):
+    def triples_extraction(self, triples_extraction_container, doc_id):
         triples = self.triples_extractor.perform_triples_extraction(
-            triples_extraction_container
+            doc_id, triples_extraction_container
         )
         return triples
 

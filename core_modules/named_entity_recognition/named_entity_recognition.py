@@ -26,13 +26,16 @@ class NamedEntityRecognition:
                 v["freq"] = freq_dict[k]
                 return v
 
+            def escaping(k):
+                return k.replace("$", "\\$")
+
             parsed_doc = self.nlp(doc["parsed_text"])
             freq_dict = defaultdict(int)
             ner_data = {}
             for ent in parsed_doc.ents:
                 freq_dict[ent.text.lower()] += 1
                 ner_data[ent.text.lower()] = {"label": ent.label_, "freq": None}
-            ner_data = {k: add_freq(k, v) for k, v in ner_data.items()}
+            ner_data = {escaping(k): add_freq(k, v) for k, v in ner_data.items()}
             return ner_data
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()

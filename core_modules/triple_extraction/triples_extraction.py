@@ -33,9 +33,10 @@ class TripleExtraction:
             # self.nlp = spacy.load("en_core_web_lg")
             self.nlp = spacy.load("en_core_web_md")
 
-        # if "neuralcoref" not in self.nlp.pipe_names:
-        #     coref = neuralcoref.NeuralCoref(self.nlp.vocab)
-        #     self.nlp.add_pipe(coref, name="neuralcoref")
+        if "neuralcoref" not in self.nlp.pipe_names:
+            coref = neuralcoref.NeuralCoref(self.nlp.vocab)
+            self.nlp.add_pipe(coref, name="neuralcoref")
+        self.DOC_ID = ""
         self.LOGGER = self.__get_logger()
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("Triple Extraction Ready")
@@ -305,9 +306,9 @@ class TripleExtraction:
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
+            # print("{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(tokens["_id"], exc_type, fname, exc_tb.tb_lineno)
+                "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
             )
 
     # find verbs and their subjects / objects to create SVOs, detect passive/active sentences
@@ -385,9 +386,9 @@ class TripleExtraction:
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
+            # print("{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(tokens["_id"], exc_type, fname, exc_tb.tb_lineno)
+                "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
             )
 
     def resolve_coreferences(self, original_text):
@@ -457,9 +458,9 @@ class TripleExtraction:
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            # print("{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno))
+            # print("{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno))
             self.LOGGER.error(
-                "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
+                "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
             )
 
     def __get_logger(self):
@@ -478,8 +479,9 @@ class TripleExtraction:
         logger.addHandler(fh)
         return logger
 
-    def perform_triples_extraction(self, p_array=None):
-        if p_array is None:
+    def perform_triples_extraction(self, doc_id, p_array=None):
+        self.DOC_ID = doc_id
+        if p_array is None or len(p_array) == 0:
             return []
         else:
             paragraph_array = p_array
@@ -488,10 +490,10 @@ class TripleExtraction:
 
             # Soluzione tappa-buchi
             # Funzione da chiamare poi:
-            # original_text_array = self.resolve_coreferences(paragraph)
-            original_text_array = paragraph.split(". ")
-            if "" in original_text_array:
-                original_text_array.remove("")
+            original_text_array = self.resolve_coreferences(paragraph)
+            # original_text_array = paragraph.split(". ")
+            # if "" in original_text_array:
+            #     original_text_array.remove("")
             # print(paragraph)
             # ========
 
@@ -511,11 +513,9 @@ class TripleExtraction:
                 except Exception:
                     exc_type, _, exc_tb = sys.exc_info()
                     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-                    # print("{},{},{},{}".format(doc["_id"],exc_type,fname,exc_tb.tb_lineno))
+                    # print("{},{},{},{}".format(docself.DOC_ID],exc_type,fname,exc_tb.tb_lineno))
                     self.LOGGER.error(
-                        "{}, {}, {}, {}".format(
-                            self.nlp(text)["_id"], exc_type, fname, exc_tb.tb_lineno
-                        )
+                        "{}, {}, {}, {}".format(self.DOC_ID, exc_type, fname, exc_tb.tb_lineno)
                     )
                     return None
             return res
