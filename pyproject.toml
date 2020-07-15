@@ -52,9 +52,6 @@ dateparser = "^0.7.5"
 tensorflow = "^2.2.0"
 spacy = "^2.2.4"
 nltk = "^3.5"
-bert-serving-server = "^1.10.0"
-bert-serving-client = "^1.10.0"
-neuralcoref = "^4.0"
 transformers = "^2.11.0"
 
 [tool.poetry.dev-dependencies]
