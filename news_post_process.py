@@ -55,6 +55,7 @@ class NewsPostProcess:
         return collection, not_processed_docs
 
     def process_doc(self, doc, current_lang, update_model=False):
+        doc["text"] = doc["text"][:10000]  # temp fix ^ 2
         triples_extraction_container = []
         # topic extraction phase
         try:

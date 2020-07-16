@@ -62,7 +62,7 @@ class NewsAnalyzer:
         # print("encode news started")
         triples_extraction_container = []
         try:
-            text_rank = self.text_rank(doc["text"][:5000])  # temp fix
+            text_rank = self.text_rank(doc["text"])
             # print("text rank finished")
             if len(text_rank) > 0:
                 encodings = []
