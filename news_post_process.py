@@ -112,7 +112,8 @@ class NewsPostProcess:
                     )
                 )
                 return None, "error"
-
+        else:
+            doc["triples_extraction"] = []
         return doc, None
 
     def news_analysis(self, doc):
