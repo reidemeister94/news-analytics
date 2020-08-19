@@ -60,7 +60,7 @@ class NewsPostProcess:
         triples_extraction_container = []
 
         # topic extraction phase
-        start_time = time.time()
+        # start_time = time.time()
         try:
             # print("topic extraction started")
             doc = self.topic_extraction(doc, update_model)
@@ -72,10 +72,10 @@ class NewsPostProcess:
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
             return None, "error"
-        print("--- %s seconds for topic extraction ---" % (time.time() - start_time))
+        # print("--- %s seconds for topic extraction ---" % (time.time() - start_time))
 
         # bert enconding phase
-        start_time = time.time()
+        # start_time = time.time()
         try:
             # print("bert encoding started")
             doc, triples_extraction_container = self.news_analysis(doc)
@@ -87,10 +87,10 @@ class NewsPostProcess:
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
             return None, "error"
-        print("--- %s seconds for bert encoding ---" % (time.time() - start_time))
+        # print("--- %s seconds for bert encoding ---" % (time.time() - start_time))
 
         # named entity recognition phase
-        start_time = time.time()
+        # start_time = time.time()
         try:
             # print("ner started")
             doc = self.ner_analysis(doc)
@@ -102,11 +102,11 @@ class NewsPostProcess:
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
             return None, "error"
-        print("--- %s seconds for named entity rec. ---" % (time.time() - start_time))
+        # print("--- %s seconds for named entity rec. ---" % (time.time() - start_time))
 
         # triples extraction phase
         if current_lang == "en":
-            start_time = time.time()
+            # start_time = time.time()
             try:
                 # print("triples extraction started")
                 triples = self.triples_extraction(triples_extraction_container, doc["_id"])
@@ -121,7 +121,7 @@ class NewsPostProcess:
                     )
                 )
                 return None, "error"
-            print("--- %s seconds for triples extraction ---" % (time.time() - start_time))
+            # print("--- %s seconds for triples extraction ---" % (time.time() - start_time))
         else:
             doc["triples_extraction"] = []
         return doc, None
