@@ -221,7 +221,8 @@ class NewsPostProcess:
         #     subprocess.run(["bert-serving-terminate", "-port", "5555"])
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED POST PROCESSING")
-        for lang in self.CONFIG["collections_lang"]:
+        # for lang in self.CONFIG["collections_lang"]:
+        for lang in ["en"]:  # temp change just for processing english articles
             self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
             self.LOGGER.info("Initializing core modules and extract news from db...")
             self.init_core_modules(lang)
