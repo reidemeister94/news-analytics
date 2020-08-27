@@ -72,6 +72,7 @@ class NewsPostProcess:
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
             return None, "error"
+        gc.collect()
         # print("--- %s seconds for topic extraction ---" % (time.time() - start_time))
 
         # bert enconding phase
@@ -87,6 +88,7 @@ class NewsPostProcess:
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
             return None, "error"
+        gc.collect()
         # print("--- %s seconds for bert encoding ---" % (time.time() - start_time))
 
         # named entity recognition phase
@@ -102,6 +104,7 @@ class NewsPostProcess:
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
             return None, "error"
+        gc.collect()
         # print("--- %s seconds for named entity rec. ---" % (time.time() - start_time))
 
         # triples extraction phase
@@ -121,6 +124,7 @@ class NewsPostProcess:
                     )
                 )
                 return None, "error"
+            gc.collect()
             # print("--- %s seconds for triples extraction ---" % (time.time() - start_time))
         else:
             doc["triples_extraction"] = []
@@ -222,7 +226,7 @@ class NewsPostProcess:
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED POST PROCESSING")
         # for lang in self.CONFIG["collections_lang"]:
-        for lang in ["en"]:  # temp change just for processing english articles
+        for lang in self.CONFIG["collections_lang"]:
             self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
             self.LOGGER.info("Initializing core modules and extract news from db...")
             self.init_core_modules(lang)
