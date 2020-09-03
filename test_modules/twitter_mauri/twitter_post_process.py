@@ -5,15 +5,14 @@ import requests
 import json
 import dateutil
 import pytz
-from datetime import datetime
-
-import schedule
 import time
+import schedule
+from datetime import datetime
 
 
 class TwitterPostProcess:
     def __init__(self):
-        with open("./configuration.yaml", "r") as f:
+        with open("configuration.yaml", "r") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         # self.LOGGER = self.__get_logger()
         self.HOST = self.CONFIG["twitter_es"]["host"]
@@ -50,8 +49,8 @@ class TwitterPostProcess:
         return hits
 
     def get_last_post_date(self, data):
-        l = len(data)
-        if l > 0:
+        length = len(data)
+        if length > 0:
             # Save the last tweet timestamp to resume
             day = data[-1]["_source"]["created_at"]
             print("Saving last timestamp...")
@@ -121,9 +120,7 @@ if __name__ == "__main__":
         }
     }
 
-    num_results = (
-        0  # if 0 -> no 'size' in the request, elasticsearch defaults to 10 results
-    )
+    num_results = 0  # if 0 -> no 'size' in the request, elasticsearch defaults to 10 results
     twitter_post_process.scheduled_test(query_simple, num_results)
 
     schedule.every(2).minutes.do(
