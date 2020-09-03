@@ -162,14 +162,29 @@ class NewsPostProcess:
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
             raise Exception("Error on lda module show topics")
-        document_topic_info = {}
+        document_topic_info = []  # old: {}
         for el in self.lda_module.model[self.lda_module.dictionary.doc2bow(parsed_text)]:
-            document_topic_info[str(el[0])] = [
-                float(round(el[1], 2)),
-                self.format_topic_list(topics[el[0]][1]),
-            ]
-        formatted_topics = self.lda_module.format_topics(document_topic_info)
-        doc["topic_extraction"] = formatted_topics
+            # str(el[0]) -> key -> topic number
+            # float(round(el[1], 2)) -> topic probability
+            # self.format_topic_list(topics[el[0]][1]) -> tokens list and contibutions
+            new_entry = {}
+            new_entry["topic_number"] = str(el[0])
+            new_entry["topic_prob"] = float(round(el[1], 2))
+            temp_topic_list = self.format_topic_list(topics[el[0]][1])
+            tokens_list = []
+            for token in temp_topic_list:
+                new_token = {}
+                new_token["token"] = token[0]
+                new_token["contrib"] = token[1]
+                tokens_list.append(new_token)
+            new_entry["topic_tokens"] = tokens_list
+            document_topic_info.append(new_entry)
+
+            # document_topic_info[str(el[0])] = [
+            #     float(round(el[1], 2)),
+            #     self.format_topic_list(topics[el[0]][1]),
+            # ]
+        doc["topic_extraction"] = document_topic_info
         doc["parsed_text"] = " ".join(word for word in parsed_text)
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)

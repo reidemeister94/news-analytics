@@ -192,22 +192,6 @@ class LdaModule:
         self.model.update(new_corpus)
         self.save_LDA_model()
 
-    def format_topics(self, topics_list):
-        new_topics = []
-        for topic in topics_list.keys():
-            new_entry = {}
-            new_entry["topic_number"] = topic
-            new_entry["topic_prob"] = topics_list[topic][0]
-            tokens_list = []
-            for token in topics_list[topic][1]:
-                new_token = {}
-                new_token["token"] = token[0]
-                new_token["contrib"] = token[1]
-                tokens_list.append(new_token)
-            new_entry["topic_tokens"] = tokens_list
-            new_topics.append(new_entry)
-        return new_topics
-
 
 if __name__ == "__main__":
     lda = LdaModule()
