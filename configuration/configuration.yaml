@@ -35,12 +35,12 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-08-27 22:22:44.913000
-  start_date_de: 2020-08-27 21:43:59.153000
-  start_date_en: 2020-08-27 20:59:33.544000
-  start_date_es: 2020-08-27 19:46:00.312000
-  start_date_fr: 2020-08-27 17:55:53.444000
-  start_date_nl: 2020-08-22 09:07:42.103000
+  start_date: 2020-09-03 08:01:56.324000
+  start_date_de: 2020-08-30 21:46:22.314000
+  start_date_en: 2020-09-03 06:04:37.737000
+  start_date_es: 2020-09-02 04:58:59.244000
+  start_date_fr: 2020-09-03 08:58:54.063000
+  start_date_nl: 2020-09-02 10:55:32.156000
   start_date_tr: 2019-12-01 00:00:00
   turkish_news_urls:
   - http://hurriyetdailynews.com
