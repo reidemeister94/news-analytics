@@ -36,6 +36,7 @@ class NamedEntityRecognition:
                 freq_dict[ent.text.lower()] += 1
                 ner_data[ent.text.lower()] = {"label": ent.label_, "freq": None}
             ner_data = {escaping(k): add_freq(k, v) for k, v in ner_data.items()}
+            ner_data = self.format_ner_data(ner_data)
             return ner_data
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
@@ -44,6 +45,16 @@ class NamedEntityRecognition:
             self.LOGGER.error(
                 "{}, {}, {}, {}".format(doc["_id"], exc_type, fname, exc_tb.tb_lineno)
             )
+
+    def format_ner_data(self, ner_data):
+        ner_data_fixed = []
+        for entity in ner_data.keys():
+            new_entry = {}
+            new_entry["entity_name"] = entity
+            new_entry["label"] = ner_data[entity]["label"]
+            new_entry["freq"] = ner_data[entity]["freq"]
+            ner_data_fixed.append(new_entry)
+        return ner_data_fixed
 
     def __get_logger(self):
         # create logger
