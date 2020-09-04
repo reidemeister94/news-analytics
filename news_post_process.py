@@ -164,9 +164,6 @@ class NewsPostProcess:
             raise Exception("Error on lda module show topics")
         document_topic_info = []  # old: {}
         for el in self.lda_module.model[self.lda_module.dictionary.doc2bow(parsed_text)]:
-            # str(el[0]) -> key -> topic number
-            # float(round(el[1], 2)) -> topic probability
-            # self.format_topic_list(topics[el[0]][1]) -> tokens list and contibutions
             new_entry = {}
             new_entry["topic_number"] = str(el[0])
             new_entry["topic_prob"] = float(round(el[1], 2))
@@ -179,11 +176,6 @@ class NewsPostProcess:
                 tokens_list.append(new_token)
             new_entry["topic_tokens"] = tokens_list
             document_topic_info.append(new_entry)
-
-            # document_topic_info[str(el[0])] = [
-            #     float(round(el[1], 2)),
-            #     self.format_topic_list(topics[el[0]][1]),
-            # ]
         doc["topic_extraction"] = document_topic_info
         doc["parsed_text"] = " ".join(word for word in parsed_text)
         if update_model:
