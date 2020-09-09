@@ -86,7 +86,7 @@ class FixDocuments:
                         gc.collect()
                     updated_doc, error = self.process_doc(doc)
                     if error is None:
-                        print("No Error")
+                        # print("No Error")
                         self.db_news_update(collection, updated_doc)
                     i += 1
                 stop = True
