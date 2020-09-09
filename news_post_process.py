@@ -140,7 +140,14 @@ class NewsPostProcess:
         triples = self.triples_extractor.perform_triples_extraction(
             doc_id, triples_extraction_container
         )
-        return triples
+        triples_formatted = []
+        for t in triples[0]:
+            new_entry = {}
+            new_entry["subject"] = t[0]
+            new_entry["verb"] = t[1]
+            new_entry["complement"] = t[2]
+            triples_formatted.append(new_entry)
+        return triples_formatted
 
     def format_topic_list(self, topics):
         return [(word, float(weight)) for word, weight in topics]
