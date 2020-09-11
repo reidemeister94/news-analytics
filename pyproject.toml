@@ -22,7 +22,7 @@ description = ""
 authors = ["Silvio Pavanetto <silvio.pavanetto@polimi.it>, Lorenzo Corti <lorenzo.corti@polimi.it, Andrea Tocchetti <andrea.tocchetti@polimi.it>"]
 
 [tool.poetry.dependencies]
-python = "3.7.6"
+python = "^3.7"
 black = "^19.10b0"
 gensim = "^3.8.3"
 ipykernel = "^5.1.4"
