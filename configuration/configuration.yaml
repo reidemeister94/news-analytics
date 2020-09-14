@@ -35,9 +35,9 @@ scraper:
   sort_order:
     asc: ASC
     desc: DESC
-  start_date: 2020-09-08 18:46:59.792000
+  start_date: 2020-09-14 14:15:57.481000
   start_date_de: 2020-09-08 10:41:32.754000
-  start_date_en: 2020-09-08 18:00:25.471000
+  start_date_en: 2020-09-09 21:48:16.335000
   start_date_es: 2020-09-08 15:32:18.515000
   start_date_fr: 2020-09-08 08:59:32.943000
   start_date_nl: 2020-09-03 18:01:27.730000
