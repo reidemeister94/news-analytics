@@ -10,13 +10,13 @@ with open("configuration/configuration.yaml") as f:
 
 collection = MONGO_CLIENT["news"]["article"]
 not_processed = collection.find(
-    {"$or": [{"processedEncoding": False}, {"processedEncoding": {"$exists": False}},]}
+    {"$or": [{"processedEncoding": False}, {"processedEncoding": {"$exists": False}}]}
 )
 i = 0
 for doc in not_processed:
     if i == 0:
         query = {"_id": doc["_id"]}
-        newvalues = {"$set": {"testUpdate": True,}}
+        newvalues = {"$set": {"testUpdate": True}}
         pprint(doc)
         collection.update_one(query, newvalues)
         i += 1

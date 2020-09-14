@@ -27,10 +27,7 @@ while True:
     table = soup.find(name="table", attrs={"id": "tableID"})
     res = res.append(table_to_df(table))
     res.to_csv(
-        os.path.join(PATH, "BIC", "table.csv"),
-        index=None,
-        sep=";",
-        encoding="iso-8859-1",
+        os.path.join(PATH, "BIC", "table.csv"), index=None, sep=";", encoding="iso-8859-1",
     )
     url = next_page(soup)
     counter += 1

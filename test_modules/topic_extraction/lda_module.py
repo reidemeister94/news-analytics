@@ -24,22 +24,6 @@ class LdaModule:
         else:
             self.model = None
 
-    def __get_logger(self):
-        # create logger
-        logger = logging.getLogger("LdaModule")
-        logger.setLevel(logging.DEBUG)
-        # create console handler and set level to debug
-        log_path = "../log/LdaModule.log"
-        if not os.path.isdir("../log/"):
-            os.mkdir("../log/")
-        fh = logging.FileHandler(log_path)
-        fh.setLevel(logging.DEBUG)
-        # create formatter
-        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)
-        return logger
-
     def parse_text(self, raw_data, custom_stop_words=None):
         return self.nlp_utils.parse_text(raw_data, custom_stop_words)
 
@@ -52,9 +36,7 @@ class LdaModule:
             print("... Finding collocations ...")
             self.doc_collection = self.utils.get_word_collocations(self.doc_collection)
         else:
-            self.doc_collection = [
-                self.utils.string_to_list(t) for t in self.doc_collection
-            ]
+            self.doc_collection = [self.utils.string_to_list(t) for t in self.doc_collection]
 
         # Build dictionary
         dictionary = corpora.Dictionary(self.doc_collection)
@@ -71,8 +53,7 @@ class LdaModule:
 
         # Build corpus as list of bags of words from the documents
         self.corpus = [
-            self.dictionary.doc2bow(list_of_tokens)
-            for list_of_tokens in self.doc_collection
+            self.dictionary.doc2bow(list_of_tokens) for list_of_tokens in self.doc_collection
         ]
 
     def build_lda_model(self, num_topics=20, passes=4, alpha=0.01, eta=0.01):
@@ -107,7 +88,7 @@ class LdaModule:
         assert len(self.topics != 0), "LDA model not present."
         document_info = pd.DataFrame(
             [
-                (el[0], round(el[1], 2), topics[el[0]][1])
+                (el[0], round(el[1], 2), self.topics[el[0]][1])
                 for el in self.model[self.dictionary.doc2bow(doc_tokens)]
             ],
             columns=["topic #", "weight", "words in topic"],
