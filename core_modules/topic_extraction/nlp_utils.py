@@ -94,17 +94,18 @@ class NLPUtils:
         """
         lemmas = []
         for sent in data:
-            lemmas.append(
-                [
-                    token.lemma_
-                    for token in sent
-                    if (
-                        not self.nlp.vocab[token.lower_].is_stop
-                        and not token.is_punct
-                        and len(token.text) > 1
-                    )
-                ]
-            )
+            sent_tokens = []
+            for token in sent:
+                candidate = token.lemma_.replace("’", "")
+                if (
+                    not self.nlp.vocab[candidate].is_stop
+                    and not token.is_punct
+                    and len(candidate) > 1
+                    and not candidate.isspace()
+                ):
+                    sent_tokens.append(candidate)
+            lemmas.append(sent_tokens)
+            sent_tokens = []
         return lemmas
 
     def flatten_list(self, data):
