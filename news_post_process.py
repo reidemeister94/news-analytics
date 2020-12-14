@@ -149,9 +149,6 @@ class NewsPostProcess:
             triples_formatted.append(new_entry)
         return triples_formatted
 
-    def format_topic_list(self, topics):
-        return [(word, float(weight)) for word, weight in topics]
-
     def topic_extraction(self, doc, update_model):
         parsed_text = self.nlp_utils.parse_text(doc)
         self.batch_docs.append(parsed_text)
@@ -174,14 +171,7 @@ class NewsPostProcess:
             new_entry = {}
             new_entry["topic_number"] = str(el[0])
             new_entry["topic_prob"] = float(round(el[1], 2))
-            temp_topic_list = self.format_topic_list(topics[el[0]][1])
-            tokens_list = []
-            for token in temp_topic_list:
-                new_token = {}
-                new_token["token"] = token[0]
-                new_token["contrib"] = token[1]
-                tokens_list.append(new_token)
-            new_entry["topic_tokens"] = tokens_list
+            new_entry["topic_tokens"] = self.lda_module.format_topic_list(topics[el[0]][1])
             document_topic_info.append(new_entry)
         doc["topic_extraction"] = document_topic_info
         doc["parsed_text"] = " ".join(word for word in parsed_text)
