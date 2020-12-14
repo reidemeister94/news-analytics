@@ -1,7 +1,11 @@
 from gensim.models import Phrases
 
 import ast
-import pickle
+
+try:
+    import pickle5 as pickle
+except Exception:
+    import pickle
 import pandas as pd
 import json
 import logging
