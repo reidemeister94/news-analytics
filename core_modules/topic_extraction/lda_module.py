@@ -121,24 +121,17 @@ class LdaModule:
         )
         return document_info
 
-    def get_top2doc_matrix(self):
+    def format_topic_list(self, topics):
         """
-		Future: now it's unused, maybe to remove...
-		"""
-        assert len(self.topics != 0), "LDA model not present."
-        num_topics = len(self.topics)
-
-        t2d_matrix = (
-            pd.concat(
-                [
-                    self.utils.topics_document_to_dataframe(topics_document, num_topics)
-                    for topics_document in self.topics
-                ]
-            )
-            .reset_index(drop=True)
-            .fillna(0)
-        )
-        return t2d_matrix
+        Formatting topics list
+        """
+        formatted_topics = []
+        for el in topics:
+            new_token = {}
+            new_token["token"] = el[0]
+            new_token["contrib"] = el[1]
+            formatted_topics.append(new_token)
+        return formatted_topics
 
     def get_docs_topics_dict(self):
         docs_topics_dict = {}
