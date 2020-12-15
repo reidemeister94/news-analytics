@@ -129,7 +129,7 @@ class LdaModule:
         for el in topics:
             new_token = {}
             new_token["token"] = el[0]
-            new_token["contrib"] = el[1]
+            new_token["contrib"] = float(el[1])
             formatted_topics.append(new_token)
         return formatted_topics
 
