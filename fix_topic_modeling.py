@@ -146,67 +146,62 @@ class FixTopicProcess:
         # phases are looped until no other news has to be analyzed
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED POST PROCESSING")
+        lang = "nl"
         # for lang in self.CONFIG["collections_lang"]:
-        for lang in self.CONFIG["collections_lang"]:
-            self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
-            self.LOGGER.info("Initializing core modules and extract news from db...")
-            self.init_core_modules(lang)
-            stop = False
-            while not stop:
-                collection, not_processed_docs = self.db_news_extraction(lang)
-                not_processed_docs_count = collection.count_documents(self.QUERY)
-                self.LOGGER.info("{} Articles to analyze...".format(not_processed_docs_count))
-                if not_processed_docs_count < 100:
-                    stop = True
-                    not_processed_docs.close()
-                    self.LOGGER.info(
-                        "Less than 100 articles to analyze ({} to be precise), \
-                            proceeding to next collection...".format(
-                            not_processed_docs_count
-                        )
-                    )
-                    break
-                self.LOGGER.info("Core modules initialized and news from db extracted...")
-                # print(len(list(not_processed_docs)))
-                i = 0
-                self.LOGGER.info("Starting processing docs from db...")
-                try:
-                    for doc in not_processed_docs:
-                        # start_time = time.time()
-                        # print(i)
-                        if i % 10 == 0 and i > 0:
-                            print(i)
-                        if i % 1000 == 0 and i > 0:
-                            gc.collect()
-                        if i % 10000 == 0 and i > 0:
-                            self.LOGGER.info("10k Docs processed...")
-                        if len(doc["text"]) > 0 and not doc["text"].isspace():
-                            if (
-                                self.batch_size
-                                == self.CONFIG["topic_extraction"]["batch_size"]
-                            ):
-                                print("== Updated topics ==")
-                                updated_doc, error = self.process_doc(
-                                    doc, lang, update_model=True
-                                )
-                                self.batch_size = 0
-                                self.batch_docs.clear()
-                            else:
-                                updated_doc, error = self.process_doc(
-                                    doc, lang, update_model=False
-                                )
-                            if error is None:
-                                self.batch_size += 1
-                                self.db_news_update(collection, updated_doc, empty=False)
-                                # print("DOC UPDATED TO DB!")
-                                i += 1
-                        # print("--- %s seconds ---" % (time.time() - start_time))
-                        else:
-                            self.db_news_update(collection, doc, empty=True)
-                except (CursorNotFound, ServerSelectionTimeoutError) as e:
-                    print(type(e))
-                    self.LOGGER.error("Lost cursor. Retry...")
+        self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
+        self.LOGGER.info("Initializing core modules and extract news from db...")
+        self.init_core_modules(lang)
+        stop = False
+        while not stop:
+            collection, not_processed_docs = self.db_news_extraction(lang)
+            not_processed_docs_count = collection.count_documents(self.QUERY)
+            self.LOGGER.info("{} Articles to analyze...".format(not_processed_docs_count))
+            if not_processed_docs_count < 100:
+                stop = True
                 not_processed_docs.close()
+                self.LOGGER.info(
+                    "Less than 100 articles to analyze ({} to be precise), \
+                        proceeding to next collection...".format(
+                        not_processed_docs_count
+                    )
+                )
+                break
+            self.LOGGER.info("Core modules initialized and news from db extracted...")
+            # print(len(list(not_processed_docs)))
+            i = 0
+            self.LOGGER.info("Starting processing docs from db...")
+            try:
+                for doc in not_processed_docs:
+                    # start_time = time.time()
+                    # print(i)
+                    if i % 10 == 0 and i > 0:
+                        print(i)
+                    if i % 1000 == 0 and i > 0:
+                        gc.collect()
+                    if i % 10000 == 0 and i > 0:
+                        self.LOGGER.info("10k Docs processed...")
+                    if len(doc["text"]) > 0 and not doc["text"].isspace():
+                        if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
+                            print("== Updated topics ==")
+                            updated_doc, error = self.process_doc(doc, lang, update_model=True)
+                            self.batch_size = 0
+                            self.batch_docs.clear()
+                        else:
+                            updated_doc, error = self.process_doc(
+                                doc, lang, update_model=False
+                            )
+                        if error is None:
+                            self.batch_size += 1
+                            self.db_news_update(collection, updated_doc, empty=False)
+                            # print("DOC UPDATED TO DB!")
+                            i += 1
+                    # print("--- %s seconds ---" % (time.time() - start_time))
+                    else:
+                        self.db_news_update(collection, doc, empty=True)
+            except (CursorNotFound, ServerSelectionTimeoutError) as e:
+                print(type(e))
+                self.LOGGER.error("Lost cursor. Retry...")
+            not_processed_docs.close()
 
     def __get_logger(self):
         # create logger
