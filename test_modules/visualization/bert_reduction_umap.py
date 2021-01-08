@@ -23,7 +23,12 @@ class NewsPostProcess:
         # Articoli da agosto in poi
         start = datetime(2020, 6, 1, 0, 0)
         end = datetime(2020, 7, 1, 0, 0)
-        self.QUERY = {"discoverDate": {"$gte": start, "$lt": end}}
+        self.QUERY = {
+            "$and": [
+                {"discoverDate": {"$gte": start, "$lt": end}},
+                {"$where": "this.bertEncoding.length > 0"},
+            ]
+        }
         # self.QUERY = {}
 
     def db_news_extraction(self, lang, limit=10):
