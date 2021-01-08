@@ -6,6 +6,7 @@ from os import path
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 import pickle5 as pickle
 import yaml
 
@@ -34,16 +35,16 @@ class NewsPostProcess:
 
     def reduce_dim(self, docs, limit):
         # n_components must be between 0 and min(n_samples, n_features)
-        file_name = "./gianni.pickle"
-        if path.exists(file_name):
-            with open(file_name, "rb") as f:
-                pca = pickle.load(f)
-        else:
-            pca = PCA(n_components=limit, random_state=7)
+        # file_name = "./gianni.pickle"
+        # if path.exists(file_name):
+        #     with open(file_name, "rb") as f:
+        #         pca = pickle.load(f)
+        # else:
+        pca = PCA(n_components=limit, random_state=7)
         res_pca = pca.fit_transform(docs)
         print("Shape after PCA: ", res_pca.shape)
-        with open(file_name, "wb") as f:
-            pickle.dump(pca, f)
+        # with open(file_name, "wb") as f:
+        #     pickle.dump(pca, f)
         tsne = TSNE(
             n_components=2, perplexity=10, random_state=6, learning_rate=1000, n_iter=1500
         )
@@ -55,26 +56,36 @@ class NewsPostProcess:
         lang = "en"
         limit = 200
         bert_embedding_size = 768
+        num_topics = 20
         collection, not_processed_docs = self.db_news_extraction(lang)
         # i = 0
         embeddings = []
+        topic_numbers = []
+
         for doc in not_processed_docs:
             embeddings = np.append(embeddings, np.array(doc["bertEncoding"]))
+            topic_probs = [el["topic_prob"] for el in doc["topicExtraction"]]
+            topic_max_prob = np.argmax(topic_probs)
+            topic_numbers = np.append(
+                topic_numbers, doc["topicExtraction"][topic_max_prob]["topic_number"]
+            )
+        topic_numbers = topic_numbers.astype("int32")
         try:
             print(embeddings.shape)
         except Exception:
             print(len(embeddings))
         embeddings = np.reshape(embeddings, (-1, bert_embedding_size))
         print(embeddings.shape)
+        print(topic_numbers)
+        print(type(topic_numbers[0]))
         results = self.reduce_dim(embeddings, limit)
-        colors = np.random.rand(embeddings.shape[0])
+        color_map = np.sort(np.random.rand(num_topics))
+        colors = []
+        for t in topic_numbers:
+            colors.append(color_map[t])
         plt.figure(figsize=(8, 8))
         plt.scatter(results[:, 0], results[:, 1], s=100, c=colors, alpha=0.5)
         plt.show()
-        # for doc in not_processed_docs:
-        # i += 1
-        # if i % 10 == 0:
-        # self.save_pictures(bert_reduced)
         not_processed_docs.close()
 
 
