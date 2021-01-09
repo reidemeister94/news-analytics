@@ -110,7 +110,7 @@ class NewsPostProcess:
         bert_embedding_size = 768
         num_topics = 20
 
-        while self.END_MONTH <= 2 and self.END_YEAR <= 2021:
+        while self.END_YEAR <= 2020:
             print(
                 "Looking from {} to {}".format(
                     self.START.strftime("%Y/%m"), self.END.strftime("%Y/%m")
