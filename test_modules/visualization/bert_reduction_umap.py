@@ -15,10 +15,10 @@ class NewsPostProcess:
     def __init__(self):
         mongourl = "mongodb://admin:adminpassword@localhost:27017"
         self.MONGO_CLIENT = MongoClient(mongourl)
-        self.START_YEAR = 2020
-        self.START_MONTH = 4
+        self.START_YEAR = 2019
+        self.START_MONTH = 12
         self.END_YEAR = 2020
-        self.END_MONTH = 5
+        self.END_MONTH = 1
         self.START = datetime(self.START_YEAR, self.START_MONTH, 1, 0, 0)
         self.END = datetime(self.END_YEAR, self.END_MONTH, 1, 0, 0)
         self.DIR_PLOT = "dim_red_plots_umap"
