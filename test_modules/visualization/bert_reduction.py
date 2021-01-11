@@ -21,16 +21,6 @@ class NewsPostProcess:
         self.END_MONTH = 1
         self.START = datetime(self.START_YEAR, self.START_MONTH, 1, 0, 0)
         self.END = datetime(self.END_YEAR, self.END_MONTH, 1, 0, 0)
-        # Articoli da agosto in poi
-        # start = datetime(2020, 6, 1, 0, 0)
-        # end = datetime(2020, 7, 1, 0, 0)
-        # self.QUERY = {
-        #     "$and": [
-        #         {"discoverDate": {"$gte": start, "$lt": end}},
-        #         {"$where": "this.bertEncoding.length > 0"},
-        #     ]
-        # }
-        # self.QUERY = {}
         self.DIR_PLOT = "dim_red_plots"
         self.setup_folder()
 
@@ -44,17 +34,9 @@ class NewsPostProcess:
         return collection, not_processed_docs
 
     def reduce_dim(self, docs, limit):
-        # n_components must be between 0 and min(n_samples, n_features)
-        # file_name = "./gianni.pickle"
-        # if path.exists(file_name):
-        #     with open(file_name, "rb") as f:
-        #         pca = pickle.load(f)
-        # else:
         pca = PCA(n_components=limit, random_state=7)
         res_pca = pca.fit_transform(docs)
         print("Shape after PCA: ", res_pca.shape)
-        # with open(file_name, "wb") as f:
-        #     pickle.dump(pca, f)
         tsne = TSNE(
             n_components=2, perplexity=10, random_state=6, learning_rate=1000, n_iter=1500
         )
@@ -67,6 +49,7 @@ class NewsPostProcess:
             "$and": [
                 {"discoverDate": {"$gte": self.START, "$lt": self.END}},
                 {"$where": "this.bertEncoding.length > 0"},
+                # {"testTopicExtraction": {"$exists": True}},
             ]
         }
         return q
@@ -123,36 +106,24 @@ class NewsPostProcess:
             topic_numbers = []
             for doc in not_processed_docs:
                 embeddings = np.append(embeddings, np.array(doc["bertEncoding"]))
+                # topic_probs = [el["topic_prob"] for el in doc["testTopicExtraction"]]
                 topic_probs = [el["topic_prob"] for el in doc["topicExtraction"]]
                 topic_max_prob = np.argmax(topic_probs)
-                topic_numbers = np.append(
-                    topic_numbers, doc["topicExtraction"][topic_max_prob]["topic_number"]
-                )
+                # doc_topic_max_prob = doc["testTopicExtraction"][topic_max_prob]
+                doc_topic_max_prob = doc["topicExtraction"][topic_max_prob]
+                topic_numbers = np.append(topic_numbers, doc_topic_max_prob["topic_number"])
             if len(topic_numbers) > 0:
                 print("Found some articles")
                 topic_numbers = np.asarray(topic_numbers)
                 topic_numbers = topic_numbers.astype("int32")
-                # try:
-                #     print(embeddings.shape)
-                # except Exception:
-                #     print(len(embeddings))
                 embeddings = np.reshape(embeddings, (-1, bert_embedding_size))
                 print(embeddings.shape)
-                # print(topic_numbers)
-                # print(type(topic_numbers[0]))
                 print("Reducing dimensions")
                 results = self.reduce_dim(embeddings, limit)
                 print(results.shape)
                 self.plot_dim_reduction(
                     results, num_topics, topic_numbers, self.create_file_path()
                 )
-                # color_map = np.sort(np.random.rand(num_topics))
-                # colors = []
-                # for t in topic_numbers:
-                #     colors.append(color_map[t])
-                # plt.figure(figsize=(8, 8))
-                # plt.scatter(results[:, 0], results[:, 1], s=100, c=colors, alpha=0.5)
-                # plt.show()
             self.update_dates()
 
         not_processed_docs.close()

@@ -44,6 +44,7 @@ class NewsPostProcess:
             "$and": [
                 {"discoverDate": {"$gte": self.START, "$lt": self.END}},
                 {"$where": "this.bertEncoding.length > 0"},
+                # {"testTopicExtraction": {"$exists": True}},
             ]
         }
         return q
@@ -100,11 +101,12 @@ class NewsPostProcess:
             topic_numbers = []
             for doc in not_processed_docs:
                 embeddings = np.append(embeddings, np.array(doc["bertEncoding"]))
+                # topic_probs = [el["topic_prob"] for el in doc["testTopicExtraction"]]
                 topic_probs = [el["topic_prob"] for el in doc["topicExtraction"]]
                 topic_max_prob = np.argmax(topic_probs)
-                topic_numbers = np.append(
-                    topic_numbers, doc["topicExtraction"][topic_max_prob]["topic_number"]
-                )
+                # doc_topic_max_prob = doc["testTopicExtraction"][topic_max_prob]
+                doc_topic_max_prob = doc["topicExtraction"][topic_max_prob]
+                topic_numbers = np.append(topic_numbers, doc_topic_max_prob["topic_number"])
             if len(topic_numbers) > 0:
                 print("Found some articles")
                 topic_numbers = np.asarray(topic_numbers)
