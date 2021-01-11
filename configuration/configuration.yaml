@@ -6,6 +6,14 @@ collections_lang:
 - nl
 - es
 mongourl: mongodb://localhost:27017
+most_frequent_word_extraction:
+  days_range: 30
+  last_ts_de: 1575068400
+  last_ts_en: 1575068400
+  last_ts_es: 1575068400
+  last_ts_fr: 1575068400
+  last_ts_it: 1575068400
+  last_ts_nl: 1575068400
 news_analyzer:
   bert_model_path: core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8
 scraper:
@@ -64,30 +72,30 @@ scraper:
 topic_extraction:
   batch_size: 3000
   lda_models_path: core_modules/topic_extraction/lda_checkpoint/
+  model_params:
+  - alpha: 0.61
+    beta: 0.91
+    en: null
+    passes: 10
+  - alpha: 0.31
+    beta: 0.31
+    it: null
+    passes: 20
+  - alpha: 0.91
+    beta: 0.31
+    fr: null
+    passes: 40
+  - alpha: 0.31
+    beta: 0.91
+    es: null
+    passes: 20
+  - alpha: 0.01
+    beta: 0.91
+    de: null
+    passes: 30
+  - alpha: 0.31
+    beta: 0.01
+    nl: null
+    passes: 10
   num_topics: 5
   num_words: 10
-  model_params:
-  - en:
-    alpha: 0.61
-    beta: 0.91
-    passes: 10
-  - it:
-    alpha: 0.31
-    beta: 0.31
-    passes: 20
-  - fr:
-    alpha: 0.91
-    beta: 0.31
-    passes: 40
-  - es:
-    alpha: 0.31
-    beta: 0.91
-    passes: 20
-  - de:
-    alpha: 0.01
-    beta: 0.91
-    passes: 30
-  - nl:
-    alpha: 0.31
-    beta: 0.01
-    passes: 10
