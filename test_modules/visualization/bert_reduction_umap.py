@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from datetime import datetime
 from os import path
+from sklearn.decomposition import PCA
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,8 +14,8 @@ import umap
 
 class NewsPostProcess:
     def __init__(self):
-        # mongourl = "mongodb://admin:adminpassword@localhost:27017"
-        mongourl = "mongodb://localhost:27017"
+        mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        # mongourl = "mongodb://localhost:27017"
         self.MONGO_CLIENT = MongoClient(mongourl)
         self.START_YEAR = 2019
         self.START_MONTH = 12
@@ -31,11 +32,14 @@ class NewsPostProcess:
         else:
             name_coll = "article"
         collection = self.MONGO_CLIENT["news"][name_coll]
-        not_processed_docs = collection.find(query, no_cursor_timeout=True).limit(1000)
+        not_processed_docs = collection.find(query, no_cursor_timeout=True).limit(limit)
         return collection, not_processed_docs
 
-    def reduce_dim(self, docs, limit):
-        reducer = umap.UMAP()
+    def reduce_dim(self, docs, n_dims):
+        pca = PCA(n_components=n_dims, random_state=7)
+        res_pca = pca.fit_transform(docs)
+        print("Shape after PCA: ", res_pca.shape)
+        reducer = umap.UMAP(n_neighbors=n_dims)
         res_umap = reducer.fit_transform(docs)
         print("Shape after UMAP: ", res_umap.shape)
         return res_umap
@@ -44,6 +48,7 @@ class NewsPostProcess:
         q = {
             "$and": [
                 {"discoverDate": {"$gte": self.START, "$lt": self.END}},
+                {"bertEncoding": {"$exists": True}},
                 {"$where": "this.bertEncoding.length > 0"},
                 # {"testTopicExtraction": {"$exists": True}},
             ]
@@ -85,7 +90,7 @@ class NewsPostProcess:
 
     def main(self):
         lang = "en"
-        limit = 200
+        n_dims = 50
         bert_embedding_size = 768
         num_topics = 20
 
@@ -96,7 +101,7 @@ class NewsPostProcess:
                 )
             )
             query = self.build_query()
-            collection, not_processed_docs = self.db_news_extraction(lang, query)
+            collection, not_processed_docs = self.db_news_extraction(lang, query, limit=1000)
 
             embeddings = []
             topic_numbers = []
@@ -115,7 +120,7 @@ class NewsPostProcess:
                 embeddings = np.reshape(embeddings, (-1, bert_embedding_size))
                 print(embeddings.shape)
                 print("Reducing dimensions")
-                results = self.reduce_dim(embeddings, limit)
+                results = self.reduce_dim(embeddings, n_dims)
                 print(results.shape)
                 self.plot_dim_reduction(
                     results, num_topics, topic_numbers, self.create_file_path()

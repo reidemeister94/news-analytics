@@ -49,6 +49,7 @@ class NewsPostProcess:
         q = {
             "$and": [
                 {"discoverDate": {"$gte": self.START, "$lt": self.END}},
+                {"bertEncoding": {"$exists": True}},
                 {"$where": "this.bertEncoding.length > 0"},
                 # {"testTopicExtraction": {"$exists": True}},
             ]
