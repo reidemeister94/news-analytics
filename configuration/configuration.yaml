@@ -62,7 +62,32 @@ scraper:
   - https://www.haber3.com/
   - https://www.sondakika.com/
 topic_extraction:
-  batch_size: 1000
+  batch_size: 3000
   lda_models_path: core_modules/topic_extraction/lda_checkpoint/
-  num_topics: 20
-  num_words: 20
+  num_topics: 5
+  num_words: 10
+  model_params:
+  - en:
+    alpha: 0.61
+    beta: 0.91
+    passes: 10
+  - it:
+    alpha: 0.31
+    beta: 0.31
+    passes: 20
+  - fr:
+    alpha: 0.91
+    beta: 0.31
+    passes: 40
+  - es:
+    alpha: 0.31
+    beta: 0.91
+    passes: 20
+  - de:
+    alpha: 0.01
+    beta: 0.91
+    passes: 30
+  - nl:
+    alpha: 0.31
+    beta: 0.01
+    passes: 10
