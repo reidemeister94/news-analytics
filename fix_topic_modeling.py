@@ -1,12 +1,9 @@
-import bson
-from bson.objectid import ObjectId
 from pymongo import MongoClient
 from pymongo.errors import CursorNotFound, ServerSelectionTimeoutError
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
 import os
 import time
-import json
 import logging
 import yaml
 import sys
@@ -36,9 +33,8 @@ class FixTopicProcess:
         else:
             name_coll = "article"
         collection = self.MONGO_CLIENT["news"][name_coll]
-        not_processed_docs = collection.find(self.QUERY, no_cursor_timeout=True).sort(
-            [("$natural", -1)]
-        )
+        not_processed_docs = collection.find(self.QUERY, no_cursor_timeout=True)
+        # .sort([("$natural", -1)])
         return collection, not_processed_docs
 
     def process_doc(self, doc, current_lang, update_model=False):
@@ -87,7 +83,7 @@ class FixTopicProcess:
             # list of topics -> current topic (el[0]) -> list of words (el[0][1])
             new_entry["topic_tokens"] = self.lda_module.format_topic_list(topics[el[0]][1])
             document_topic_info.append(new_entry)
-        doc["topic_extraction"] = document_topic_info
+        doc["test_topic_extraction"] = document_topic_info
         doc["parsed_text"] = " ".join(word for word in parsed_text)
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)
@@ -117,11 +113,8 @@ class FixTopicProcess:
             newvalues = {
                 "$set": {
                     "parsedText": doc["parsed_text"],
-                    "topicExtraction": doc["topic_extraction"],
-                    "namedEntityRecognition": {},
-                    "bertEncoding": [],
+                    "testTopicExtraction": doc["test_topic_extraction"],
                     "processedEncoding": True,
-                    "triplesExtraction": [],
                 }
             }
         collection.update_one(query, newvalues)
@@ -146,7 +139,7 @@ class FixTopicProcess:
         # phases are looped until no other news has to be analyzed
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED POST PROCESSING")
-        lang = "nl"
+        lang = "it"
         # for lang in self.CONFIG["collections_lang"]:
         self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
         self.LOGGER.info("Initializing core modules and extract news from db...")
@@ -174,7 +167,7 @@ class FixTopicProcess:
                 for doc in not_processed_docs:
                     # start_time = time.time()
                     # print(i)
-                    if i % 10 == 0 and i > 0:
+                    if i % 100 == 0 and i > 0:
                         print(i)
                     if i % 1000 == 0 and i > 0:
                         gc.collect()
@@ -205,10 +198,10 @@ class FixTopicProcess:
 
     def __get_logger(self):
         # create logger
-        logger = logging.getLogger("NewsPostProcess")
+        logger = logging.getLogger("FixTopicProcess")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "log/news_post_process.log"
+        log_path = "log/fix_topic_process.log"
         if not os.path.isdir("log/"):
             os.mkdir("log/")
         fh = logging.FileHandler(log_path)
