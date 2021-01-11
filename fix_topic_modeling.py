@@ -17,15 +17,14 @@ class FixTopicProcess:
         with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.LOGGER = self.__get_logger()
-        mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        # mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        mongourl = self.CONFIG["mongourl"]
         self.MONGO_CLIENT = MongoClient(mongourl)
         self.lda_module = None
         self.nlp_utils = None
         self.batch_size = 0
         self.batch_docs = []
-        self.QUERY = {
-            "$or": [{"processedEncoding": False}, {"processedEncoding": {"$exists": False}}]
-        }
+        self.QUERY = {}
 
     def db_news_extraction(self, lang):
         if lang != "it":
@@ -83,37 +82,31 @@ class FixTopicProcess:
             # list of topics -> current topic (el[0]) -> list of words (el[0][1])
             new_entry["topic_tokens"] = self.lda_module.format_topic_list(topics[el[0]][1])
             document_topic_info.append(new_entry)
-        doc["test_topic_extraction"] = document_topic_info
+        # doc["test_topic_extraction"] = document_topic_info
+        doc["topic_extraction"] = document_topic_info
         doc["parsed_text"] = " ".join(word for word in parsed_text)
         if update_model:
             self.lda_module.update_lda_model(self.batch_docs)
-            pprint.pprint(
-                self.lda_module.model.show_topics(
-                    formatted=False,
-                    num_topics=self.CONFIG["topic_extraction"]["num_topics"],
-                    num_words=self.CONFIG["topic_extraction"]["num_words"],
-                )
-            )
+            # pprint.pprint(
+            #     self.lda_module.model.show_topics(
+            #         formatted=False,
+            #         num_topics=self.CONFIG["topic_extraction"]["num_topics"],
+            #         num_words=self.CONFIG["topic_extraction"]["num_words"],
+            #     )
+            # )
         return doc
 
     def db_news_update(self, collection, doc, empty=False):
         query = {"_id": doc["_id"]}
         if empty:
             newvalues = {
-                "$set": {
-                    "parsedText": "",
-                    "topicExtraction": {},
-                    "namedEntityRecognition": {},
-                    "bertEncoding": [],
-                    "processedEncoding": True,
-                    "triplesExtraction": [],
-                }
+                "$set": {"parsedText": "", "topicExtraction": {}, "processedEncoding": True}
             }
         else:
             newvalues = {
                 "$set": {
                     "parsedText": doc["parsed_text"],
-                    "testTopicExtraction": doc["test_topic_extraction"],
+                    "topicExtraction": doc["topic_extraction"],
                     "processedEncoding": True,
                 }
             }
@@ -125,14 +118,14 @@ class FixTopicProcess:
         self.lda_module = LdaModule(lang=lang, trained=True)
         self.nlp_utils = NLPUtils(lang=lang)
 
-        print("== Initial topics ==")
-        pprint.pprint(
-            self.lda_module.model.show_topics(
-                formatted=False,
-                num_topics=self.CONFIG["topic_extraction"]["num_topics"],
-                num_words=self.CONFIG["topic_extraction"]["num_words"],
-            )
-        )
+        # print("== Initial topics ==")
+        # pprint.pprint(
+        #     self.lda_module.model.show_topics(
+        #         formatted=False,
+        #         num_topics=self.CONFIG["topic_extraction"]["num_topics"],
+        #         num_words=self.CONFIG["topic_extraction"]["num_words"],
+        #     )
+        # )
 
     def main(self):
         # this is the main workflow: here the extraction and processing
@@ -175,7 +168,7 @@ class FixTopicProcess:
                         self.LOGGER.info("10k Docs processed...")
                     if len(doc["text"]) > 0 and not doc["text"].isspace():
                         if self.batch_size == self.CONFIG["topic_extraction"]["batch_size"]:
-                            print("== Updated topics ==")
+                            # print("== Updated topics ==")
                             updated_doc, error = self.process_doc(doc, lang, update_model=True)
                             self.batch_size = 0
                             self.batch_docs.clear()
