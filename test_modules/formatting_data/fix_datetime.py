@@ -10,7 +10,8 @@ from datetime import datetime
 
 class FixDateTime:
     def __init__(self):
-        mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        # mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        mongourl = "mongodb://localhost:27017"
         self.MONGO_CLIENT = MongoClient(mongourl)
         self.QUERY = {"discoverDate": {"$type": 2}}
 

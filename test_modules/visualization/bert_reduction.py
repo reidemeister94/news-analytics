@@ -13,7 +13,8 @@ import os
 
 class NewsPostProcess:
     def __init__(self):
-        mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        # mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        mongourl = "mongodb://localhost:27017"
         self.MONGO_CLIENT = MongoClient(mongourl)
         self.START_YEAR = 2019
         self.START_MONTH = 12
