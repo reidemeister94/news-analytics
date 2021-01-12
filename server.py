@@ -1,12 +1,23 @@
-from flask import Flask, request
 import json
 from bokeh.plotting import figure
 from bokeh.embed import json_item
 from bokeh.sampledata.iris import flowers
 import hashlib
+import yaml
+import datetime
+import sys
 
+
+class MyServer:
+    def __init__(self):
+        with open("configuration/configuration.yaml") as f:
+            self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
+
+
+from flask import Flask, request, abort, jsonify
 
 app = Flask(__name__)
+my_server = MyServer()
 colormap = {"setosa": "red", "versicolor": "green", "virginica": "blue"}
 colors = [colormap[x] for x in flowers["species"]]
 
@@ -17,22 +28,24 @@ def encrypt_string(hash_string):
 
 
 def check_authorization(request):
-    # Note: Define your check, for instance cookie, session.
-    # print(request.args)
-    if request.args.get("auth", None) is None:
+    if "auth" not in request.args or "ts" not in request.args:
         return False
-    auth = request.args["auth"]
-    # my_hash = str(timestamp) + "como>>milano"
-    # my_hash = encrypt_string(my_hash)
-    # print("=" * 50)
-    # print("my hash: " + my_hash)
-    # print("user hash: " + user_hash)
-    # print("=" * 75)
-    if auth == "como>>milano":
-        flag = True
+    auth_request = request.args["auth"]
+    ts_request = request.args["ts"]
+    if len(auth_request) != 64 or len(ts_request) != 10:
+        return False
     else:
-        flag = False
-    return flag
+        curr_ts = int(datetime.datetime.now().timestamp())
+        if int(ts_request) < curr_ts - 60000 or int(ts_request) > curr_ts + 100:
+            # ts too old (10 minutes) or in the future (?)
+            return False
+    # print(auth_request, file=sys.stderr)
+    # print(ts_request, file=sys.stderr)
+    my_hash = encrypt_string(str(ts_request) + my_server.CONFIG["server"]["server_secret_key"])
+    print(my_hash, file=sys.stderr)
+    if my_hash != auth_request:
+        return False
+    return True
 
 
 def make_plot(x, y):
@@ -43,6 +56,11 @@ def make_plot(x, y):
     return p
 
 
+@app.errorhandler(401)
+def not_authorized(e):
+    return jsonify(error=str(e)), 401
+
+
 @app.route("/plot")
 def plot():
     authorized = check_authorization(request)
@@ -50,7 +68,20 @@ def plot():
         p = make_plot("petal_width", "petal_length")
         return json.dumps(json_item(p, "myplot"))
     else:
-        return {"status": "not_authorized"}
+        abort(401)
+        # return {"status": "not_authorized"}
+
+
+@app.route("/common_words")
+def common_words():
+    # this endpoint receives START_DATEas parameter
+    authorized = check_authorization(request)
+    if authorized:
+        if 
+        common_words_json = get_common_words()
+        return json.dumps({"ciao": "bello"})
+    else:
+        abort(401)
 
 
 if __name__ == "__main__":

@@ -8,12 +8,12 @@ collections_lang:
 mongourl: mongodb://localhost:27017
 most_frequent_word_extraction:
   days_range: 30
-  last_ts_de: 1575068400
-  last_ts_en: 1575068400
-  last_ts_es: 1575068400
-  last_ts_fr: 1575068400
-  last_ts_it: 1575068400
-  last_ts_nl: 1575068400
+  last_ts_de: 1575072000
+  last_ts_en: 1575072000
+  last_ts_es: 1575072000
+  last_ts_fr: 1575072000
+  last_ts_it: 1577750400
+  last_ts_nl: 1575072000
 news_analyzer:
   bert_model_path: core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8
 scraper:
@@ -69,6 +69,8 @@ scraper:
   - https://www.gazetevatan.com/
   - https://www.haber3.com/
   - https://www.sondakika.com/
+server:
+  server_secret_key: como>>milano
 topic_extraction:
   batch_size: 3000
   lda_models_path: core_modules/topic_extraction/lda_checkpoint/
