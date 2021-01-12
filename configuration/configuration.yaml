@@ -12,7 +12,7 @@ most_frequent_word_extraction:
   last_ts_en: 1575072000
   last_ts_es: 1575072000
   last_ts_fr: 1575072000
-  last_ts_it: 1580428800
+  last_ts_it: 1577750400
   last_ts_nl: 1575072000
 news_analyzer:
   bert_model_path: core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8

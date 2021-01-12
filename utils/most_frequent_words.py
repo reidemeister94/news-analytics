@@ -11,6 +11,7 @@ import pprint
 import datetime
 from collections import Counter
 from dateutil.relativedelta import relativedelta
+import re
 
 
 class MostFrequentWords:
@@ -85,6 +86,21 @@ class MostFrequentWords:
             return False
         return True
 
+    def clean_text(self, text):
+        text = (
+            text.lower()
+            .replace("stare", "")
+            .replace("dio", "")
+            .replace(".", "")
+            .replace("'", "")
+            .replace(",", "")
+        )
+        text = re.sub("(\s+)(a|an|and|the)(\s+)", " ", text)
+        text = re.sub(
+            "(\s+)(il|lo|la|il|gli|le|di|a|da|in|con|su|per|tra|fra|l)(\s+)", " ", text
+        )
+        return text
+
     def main(self):
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED EXTRACTION OF MOST FREQUENT WORDS")
@@ -126,7 +142,7 @@ class MostFrequentWords:
                             for doc in not_processed_docs:
                                 if "parsedText" in doc:
                                     doc_text = doc["parsedText"]
-                                    doc_text = doc_text.lower().replace('stare','').replace('dio','')
+                                    doc_text = self.clean_text(doc_text)
                                     counter.update(doc_text.split())
                             most_frequents = dict(counter.most_common(self.N_MOST_FREQUENT))
                             res = self.update_db(lang, most_frequents, end_date)
