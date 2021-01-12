@@ -10,6 +10,7 @@ import gc
 import pprint
 import datetime
 from collections import Counter
+from dateutil.relativedelta import relativedelta
 
 
 class MostFrequentWords:
@@ -25,9 +26,7 @@ class MostFrequentWords:
         self.QUERY = {}
 
     def set_query(self, start_date):
-        end_date = start_date + datetime.timedelta(
-            days=self.CONFIG["most_frequent_word_extraction"]["days_range"]
-        )
+        end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
         self.QUERY = {
             "discoverDate": {"$gte": start_date, "$lte": end_date},
         }
@@ -44,9 +43,17 @@ class MostFrequentWords:
 
     def update_db(self, lang, most_frequent_words, end_date):
         collection = self.MONGO_CLIENT["statistics"]["month_" + lang]
+        start_date = end_date.replace(day=1)
         end_ts = int(end_date.timestamp())
+        date_range = "{}-{}".format(str(start_date), str(end_date))
         try:
-            collection.insert_one({"ts": end_ts, "most_frequent_words": most_frequent_words})
+            collection.insert_one(
+                {
+                    "ts": end_ts,
+                    "dateRange": date_range,
+                    "most_frequent_words": most_frequent_words,
+                }
+            )
             return 1
         except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()
@@ -79,8 +86,6 @@ class MostFrequentWords:
         return True
 
     def main(self):
-        # this is the main workflow: here the extraction and processing
-        # phases are looped until no other news has to be analyzed
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED EXTRACTION OF MOST FREQUENT WORDS")
         for lang in self.CONFIG["collections_lang"]:
@@ -92,9 +97,7 @@ class MostFrequentWords:
                 last_ts = self.CONFIG["most_frequent_word_extraction"]["last_ts_" + lang]
                 datetime_from_ts = datetime.datetime.fromtimestamp(last_ts)
                 start_date = datetime_from_ts + datetime.timedelta(days=1)
-                end_date = start_date + datetime.timedelta(
-                    days=self.CONFIG["most_frequent_word_extraction"]["days_range"]
-                )
+                end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
                 while not stop:
                     collection, not_processed_docs = self.db_news_extraction(lang, start_date)
                     not_processed_docs_count = collection.count_documents(self.QUERY)
@@ -115,14 +118,16 @@ class MostFrequentWords:
                             yaml.dump(self.CONFIG, f)
                         datetime_from_ts = datetime.datetime.fromtimestamp(end_ts)
                         start_date = datetime_from_ts + datetime.timedelta(days=1)
-                        end_date = start_date + datetime.timedelta(
-                            days=self.CONFIG["most_frequent_word_extraction"]["days_range"]
+                        end_date = (
+                            start_date + relativedelta(months=1) - datetime.timedelta(days=1)
                         )
                     else:
                         try:
                             for doc in not_processed_docs:
                                 if "parsedText" in doc:
-                                    counter.update(doc["parsedText"].split())
+                                    doc_text = doc["parsedText"]
+                                    doc_text = doc_text.lower().replace('stare','').replace('dio','')
+                                    counter.update(doc_text.split())
                             most_frequents = dict(counter.most_common(self.N_MOST_FREQUENT))
                             res = self.update_db(lang, most_frequents, end_date)
                             if res:
@@ -135,10 +140,10 @@ class MostFrequentWords:
                                     yaml.dump(self.CONFIG, f)
                                 datetime_from_ts = datetime.datetime.fromtimestamp(end_ts)
                                 start_date = datetime_from_ts + datetime.timedelta(days=1)
-                                end_date = start_date + datetime.timedelta(
-                                    days=self.CONFIG["most_frequent_word_extraction"][
-                                        "days_range"
-                                    ]
+                                end_date = (
+                                    start_date
+                                    + relativedelta(months=1)
+                                    - datetime.timedelta(days=1)
                                 )
                             stop = self.check_stop_condition(lang, end_date)
                         except (CursorNotFound, ServerSelectionTimeoutError):
