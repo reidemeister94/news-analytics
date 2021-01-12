@@ -24,7 +24,9 @@ class FixTopicProcess:
         self.nlp_utils = None
         self.batch_size = 0
         self.batch_docs = []
-        self.QUERY = {}
+        self.QUERY = {
+            "$or": [{"processedEncoding": False}, {"processedEncoding": {"$exists": False}}]
+        }
 
     def db_news_extraction(self, lang):
         if lang != "it":
