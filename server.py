@@ -56,9 +56,18 @@ def make_plot(x, y):
     return p
 
 
+def get_common_words(start_date):
+    return {"ciao": "bello"}
+
+
 @app.errorhandler(401)
 def not_authorized(e):
     return jsonify(error=str(e)), 401
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify(error=str(e)), 404
 
 
 @app.route("/plot")
@@ -72,14 +81,21 @@ def plot():
         # return {"status": "not_authorized"}
 
 
+@app.route("/")
+def home_page():
+    return "Hello world!"
+
+
 @app.route("/common_words")
 def common_words():
     # this endpoint receives START_DATEas parameter
     authorized = check_authorization(request)
     if authorized:
-        if 
-        common_words_json = get_common_words()
-        return json.dumps({"ciao": "bello"})
+        if "date" not in request.args:
+            abort(404)
+        else:
+            common_words = get_common_words(request.args["date"])
+            return json.dumps(common_words)
     else:
         abort(401)
 
