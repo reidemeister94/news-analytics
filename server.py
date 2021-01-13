@@ -81,9 +81,9 @@ def plot():
         # return {"status": "not_authorized"}
 
 
-@app.route("/")
-def home_page():
-    return "Hello world!"
+# @app.route("/")
+# def home_page():
+#     return "Hello world!"
 
 
 @app.route("/common_words")
