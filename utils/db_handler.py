@@ -15,11 +15,14 @@ import re
 
 class DBHandler:
     def __init__(self):
-        with open("../configuration/configuration.yaml") as f:
+        with open("configuration/configuration.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
         self.LOGGER = self.__get_logger()
         mongourl = self.CONFIG["mongourl"]
         self.MONGO_CLIENT = MongoClient(mongourl)
+
+    def get_common_words(self, start_date):
+        return {"ciao": "bello"}
 
     def __get_logger(self):
         # create logger
