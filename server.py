@@ -5,49 +5,55 @@ from bokeh.sampledata.iris import flowers
 import hashlib
 import yaml
 import datetime
+import os
+import logging
 import sys
 from utils.db_handler import DBHandler
+from functools import wraps
 
 
 class MyServer:
     def __init__(self):
-        with open("configuration/configuration.yaml") as f:
+        with open("configuration/config_server.yaml") as f:
             self.CONFIG = yaml.load(f, Loader=yaml.FullLoader)
+        self.allowed_ip = self.CONFIG["allowed_ip"]
+        self.api_tokens = self.CONFIG["api_tokens"]
+        self.LOGGER = self.__get_logger()
+
+    def __get_logger(self):
+        # create logger
+        logger = logging.getLogger("ServerLog")
+        logger.setLevel(logging.DEBUG)
+        # create console handler and set level to debug
+        log_path = "log/server_log.log"
+        if not os.path.isdir("log/"):
+            os.mkdir("log/")
+        fh = logging.FileHandler(log_path)
+        fh.setLevel(logging.DEBUG)
+        # create formatter
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+        return logger
 
 
 from flask import Flask, request, abort, jsonify
+from flask_httpauth import HTTPTokenAuth
 
 app = Flask(__name__)
+auth = HTTPTokenAuth(scheme="Bearer")
 my_server = MyServer()
 db_handler = DBHandler()
 colormap = {"setosa": "red", "versicolor": "green", "virginica": "blue"}
 colors = [colormap[x] for x in flowers["species"]]
 
 
-def encrypt_string(hash_string):
-    sha_signature = hashlib.sha256(hash_string.encode()).hexdigest()
-    return sha_signature
-
-
-def check_authorization(request):
-    if "auth" not in request.args or "ts" not in request.args:
-        return False
-    auth_request = request.args["auth"]
-    ts_request = request.args["ts"]
-    if len(auth_request) != 64 or len(ts_request) != 10:
-        return False
-    else:
-        curr_ts = int(datetime.datetime.now().timestamp())
-        if int(ts_request) < curr_ts - 60000 or int(ts_request) > curr_ts + 100:
-            # ts too old (10 minutes) or in the future (?)
-            return False
-    # print(auth_request, file=sys.stderr)
-    # print(ts_request, file=sys.stderr)
-    my_hash = encrypt_string(str(ts_request) + my_server.CONFIG["server"]["server_secret_key"])
-    # print(my_hash, file=sys.stderr)
-    if my_hash != auth_request:
-        return False
-    return True
+@auth.verify_token
+def verify_token(token):
+    # my_server.LOGGER.info(token)
+    # my_server.LOGGER.info(my_server.api_tokens)
+    if token in my_server.api_tokens:
+        return my_server.api_tokens[token]
 
 
 def make_plot(x, y):
@@ -56,6 +62,21 @@ def make_plot(x, y):
     p.yaxis.axis_label = y
     p.circle(flowers[x], flowers[y], color=colors, fill_alpha=0.2, size=10)
     return p
+
+
+def check_ip(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        ip_client = request.environ.get("HTTP_X_REAL_IP", request.remote_addr)
+        if ip_client in my_server.allowed_ip:
+            # my_server.LOGGER.info(
+            #     "allowed - {} - {}".format(request.remote_addr, my_server.allowed_ip)
+            # )
+            return f(*args, **kwargs)
+        else:
+            return abort(401)
+
+    return wrapped
 
 
 @app.errorhandler(401)
@@ -74,33 +95,29 @@ def not_found(e):
 
 
 @app.route("/plot")
+@auth.login_required
+@check_ip
 def plot():
-    authorized = check_authorization(request)
-    if authorized:
-        p = make_plot("petal_width", "petal_length")
-        return json.dumps(json_item(p, "myplot"))
-    else:
-        abort(401)
-        # return {"status": "not_authorized"}
+    p = make_plot("petal_width", "petal_length")
+    return json.dumps(json_item(p, "myplot"))
 
 
-# @app.route("/")
-# def home_page():
-#     return "Hello world!"
+@app.route("/")
+@auth.login_required
+@check_ip
+def index():
+    return "Hello, {}!".format(auth.current_user())
 
 
 @app.route("/common_words")
+@auth.login_required
+@check_ip
 def common_words():
-    # this endpoint receives START_DATEas parameter
-    authorized = check_authorization(request)
-    if authorized:
-        if "date" not in request.args:
-            abort(400)
-        else:
-            common_words = db_handler.get_common_words(request.args["date"])
-            return json.dumps(common_words)
+    if "date" not in request.args:
+        abort(400)
     else:
-        abort(401)
+        common_words = db_handler.get_common_words(request.args["date"])
+        return json.dumps(common_words)
 
 
 if __name__ == "__main__":

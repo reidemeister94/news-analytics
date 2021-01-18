@@ -69,8 +69,6 @@ scraper:
   - https://www.gazetevatan.com/
   - https://www.haber3.com/
   - https://www.sondakika.com/
-server:
-  server_secret_key: como>>milano
 topic_extraction:
   batch_size: 3000
   lda_models_path: core_modules/topic_extraction/lda_checkpoint/
