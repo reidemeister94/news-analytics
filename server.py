@@ -47,6 +47,8 @@ db_handler = DBHandler()
 colormap = {"setosa": "red", "versicolor": "green", "virginica": "blue"}
 colors = [colormap[x] for x in flowers["species"]]
 
+### Decorators and error code handlers related functions ###
+
 
 @auth.verify_token
 def verify_token(token):
@@ -54,14 +56,6 @@ def verify_token(token):
     # my_server.LOGGER.info(my_server.api_tokens)
     if token in my_server.api_tokens:
         return my_server.api_tokens[token]
-
-
-def make_plot(x, y):
-    p = figure(title="Iris Morphology", sizing_mode="fixed", plot_width=400, plot_height=400)
-    p.xaxis.axis_label = x
-    p.yaxis.axis_label = y
-    p.circle(flowers[x], flowers[y], color=colors, fill_alpha=0.2, size=10)
-    return p
 
 
 def check_ip(f):
@@ -92,6 +86,20 @@ def bad_request(e):
 @app.errorhandler(404)
 def not_found(e):
     return jsonify(error=str(e)), 404
+
+
+### Utility functions for handling data to return to the client ###
+
+
+def make_plot(x, y):
+    p = figure(title="Iris Morphology", sizing_mode="fixed", plot_width=400, plot_height=400)
+    p.xaxis.axis_label = x
+    p.yaxis.axis_label = y
+    p.circle(flowers[x], flowers[y], color=colors, fill_alpha=0.2, size=10)
+    return p
+
+
+### Routes ###
 
 
 @app.route("/plot")
