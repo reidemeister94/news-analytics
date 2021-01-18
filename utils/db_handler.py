@@ -33,7 +33,16 @@ class DBHandler:
         if documents is not None:
             res = {"data": []}
             for doc in documents:
-                res["data"].append({"most_frequent_words": doc["most_frequent_words"]})
+                date_range = doc["dateRange"]
+                date_range = date_range.split("00:00:00-")
+                for i in range(len(date_range)):
+                    date_range[i] = date_range[i].replace("00:00:00", "").strip()
+                res["data"].append(
+                    {
+                        "date_range": "{}__{}".format(date_range[0], date_range[1]),
+                        "most_frequent_words": doc["most_frequent_words"],
+                    }
+                )
             return res
         return None
 

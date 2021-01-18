@@ -33,3 +33,4 @@
 209.141.60.195 - - [18/Jan/2021:16:26:34 +0000] "GET /config/getuser?index=0 HTTP/1.1" 404 134 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0" "1.32"
 128.116.133.48 - - [18/Jan/2021:16:30:47 +0000] "GET /common_words?date=2020-03-01&lang=it HTTP/1.1" 200 2 "-" "PostmanRuntime/7.26.8" "-"
 128.116.133.48 - - [18/Jan/2021:16:31:17 +0000] "GET /common_words?date=2020-03-01&lang=it HTTP/1.1" 200 996 "-" "PostmanRuntime/7.26.8" "1.95"
+128.116.133.48 - - [18/Jan/2021:16:51:03 +0000] "GET /common_words?date=2020-03-01&lang=it HTTP/1.1" 200 1021 "-" "PostmanRuntime/7.26.8" "1.94"
