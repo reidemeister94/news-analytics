@@ -21,17 +21,30 @@ class DBHandler:
         mongourl = self.CONFIG["mongourl"]
         self.MONGO_CLIENT = MongoClient(mongourl)
 
-    def get_common_words(self, start_date):
-        return {"ciao": "bello"}
+    def get_common_words(self, start_date, lang):
+        if type(start_date) is str:
+            start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+        end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
+        collection = self.MONGO_CLIENT["statistics"]["month_" + lang]
+        ts = int(datetime.datetime.timestamp(end_date))
+        query = {"ts": ts}
+        # self.LOGGER.info(query)
+        documents = collection.find(query)
+        if documents is not None:
+            res = {"data": []}
+            for doc in documents:
+                res["data"].append({"most_frequent_words": doc["most_frequent_words"]})
+            return res
+        return None
 
     def __get_logger(self):
         # create logger
         logger = logging.getLogger("DBHandler")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "../log/db_handler.log"
-        if not os.path.isdir("../log/"):
-            os.mkdir("../log/")
+        log_path = "log/db_handler.log"
+        if not os.path.isdir("log/"):
+            os.mkdir("log/")
         fh = logging.FileHandler(log_path)
         fh.setLevel(logging.DEBUG)
         # create formatter

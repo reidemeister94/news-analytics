@@ -121,11 +121,14 @@ def index():
 @auth.login_required
 @check_ip
 def common_words():
-    if "date" not in request.args:
+    if "date" not in request.args or "lang" not in request.args:
         abort(400)
     else:
-        common_words = db_handler.get_common_words(request.args["date"])
-        return json.dumps(common_words)
+        common_words = db_handler.get_common_words(request.args["date"], request.args["lang"])
+        if common_words is not None:
+            return json.dumps(common_words)
+        else:
+            return "Something went wrong"
 
 
 if __name__ == "__main__":
