@@ -39,7 +39,7 @@ class NewsPostProcess:
         pca = PCA(n_components=n_dims, random_state=7)
         res_pca = pca.fit_transform(docs)
         print("Shape after PCA: ", res_pca.shape)
-        reducer = umap.UMAP(n_neighbors=n_dims)
+        reducer = umap.UMAP(n_neighbors=n_dims, min_dist=0.5)
         res_umap = reducer.fit_transform(docs)
         print("Shape after UMAP: ", res_umap.shape)
         return res_umap
