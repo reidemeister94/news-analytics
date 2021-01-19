@@ -15,3 +15,4 @@ core_modules/news_analyzer/bert_models/
 core_modules/log/
 log/
 access.log
+error.log
