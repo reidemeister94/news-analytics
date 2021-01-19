@@ -134,7 +134,7 @@ class FixTopicProcess:
         # phases are looped until no other news has to be analyzed
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED POST PROCESSING")
-        lang = "es"
+        lang = "nl"
         # for lang in self.CONFIG["collections_lang"]:
         self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
         self.LOGGER.info("Initializing core modules and extract news from db...")

@@ -110,11 +110,11 @@ def plot():
     return json.dumps(json_item(p, "myplot"))
 
 
-@app.route("/")
-@auth.login_required
-@check_ip
-def index():
-    return "Hello, {}!".format(auth.current_user())
+# @app.route("/")
+# @auth.login_required
+# @check_ip
+# def index():
+#     return "Hello, {}!".format(auth.current_user())
 
 
 @app.route("/common_words")
