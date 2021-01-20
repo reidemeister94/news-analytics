@@ -16,3 +16,4 @@ core_modules/log/
 log/
 access.log
 error.log
+*.log

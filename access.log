@@ -124,3 +124,4 @@
 128.116.133.48 - - [20/Jan/2021:15:23:52 +0000] "GET /common_words?date=2020-03-01&lang=it HTTP/1.1" 200 1021 "http://disinformationpolimi.me/common_words?date=2020-03-01&lang=it" "PostmanRuntime/7.26.8" "1.94"
 128.116.133.48 - - [20/Jan/2021:15:24:20 +0000] "GET /common_words?date=2020-03-01&lang=it HTTP/1.1" 200 1021 "-" "PostmanRuntime/7.26.8" "1.94"
 128.116.133.48 - - [20/Jan/2021:15:25:53 +0000] "GET /common_words?date=2020-03-01&lang=it HTTP/1.1" 200 1957 "-" "PostmanRuntime/7.26.8" "-"
+70.37.73.202 - - [20/Jan/2021:15:32:26 +0000] "GET / HTTP/1.1" 200 396 "-" "python-requests/2.23.0" "1.59"
