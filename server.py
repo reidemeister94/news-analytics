@@ -39,6 +39,7 @@ class MyServer:
 
 from flask import Flask, request, abort, jsonify
 from flask_httpauth import HTTPTokenAuth
+from waitress import serve
 
 app = Flask(__name__)
 auth = HTTPTokenAuth(scheme="Bearer")
@@ -126,10 +127,13 @@ def common_words():
     else:
         common_words = db_handler.get_common_words(request.args["date"], request.args["lang"])
         if common_words is not None:
-            return json.dumps(common_words)
+            response = app.response_class(
+                response=json.dumps(common_words), mimetype="application/json"
+            )
+            return response
         else:
             return "Something went wrong"
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    serve(app, host="0.0.0.0", url_scheme="https")

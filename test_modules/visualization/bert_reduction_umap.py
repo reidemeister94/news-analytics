@@ -101,7 +101,7 @@ class NewsPostProcess:
                 )
             )
             query = self.build_query()
-            collection, not_processed_docs = self.db_news_extraction(lang, query, limit=1000)
+            _, not_processed_docs = self.db_news_extraction(lang, query, limit=1000)
 
             embeddings = []
             topic_numbers = []
