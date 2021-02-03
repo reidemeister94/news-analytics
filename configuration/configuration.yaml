@@ -8,12 +8,12 @@ collections_lang:
 mongourl: mongodb://localhost:27017
 most_frequent_word_extraction:
   days_range: 30
-  last_ts_de: 1606694400
-  last_ts_en: 1606694400
-  last_ts_es: 1606694400
-  last_ts_fr: 1606694400
-  last_ts_it: 1606694400
-  last_ts_nl: 1606694400
+  last_ts_de: 1612051200
+  last_ts_en: 1612051200
+  last_ts_es: 1612051200
+  last_ts_fr: 1612051200
+  last_ts_it: 1612051200
+  last_ts_nl: 1612051200
 news_analyzer:
   bert_model_path: core_modules/news_analyzer/bert_models/uncased_L-4_H-512_A-8
 scraper:
