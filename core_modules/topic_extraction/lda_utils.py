@@ -56,7 +56,7 @@ class LdaUtils:
         # with open(location + '_corpus.json', 'w') as writer:
         #     json.dumps(dict(ldaModule.corpus), writer)
         # return
-        with open(location + ".pickle", "wb") as output:
+        with open("{}.pickle".format(location), "wb") as output:
             pickle.dump(ldaModule, output, pickle.HIGHEST_PROTOCOL)
 
     def load_lda_model(self, location):
@@ -72,7 +72,7 @@ class LdaUtils:
         # with open(location + '_corpus.json', 'r') as jsonfile:
         #     corpus = json.load(jsonfile)
         # return loaded_lda, dictionary, corpus
-        with open(location + ".pickle", "rb") as input_file:
+        with open("{}.pickle".format(location), "rb") as input_file:
             ldaModule = pickle.load(input_file)
         return ldaModule
 

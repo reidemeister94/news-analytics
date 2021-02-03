@@ -26,7 +26,8 @@ class LdaModule:
         self.utils = LdaUtils()
         # If the model has already been trained we restore it
         if trained:
-            self.load_lda_model()
+            # Take the first month
+            self.load_lda_model(self.lang, datetime.datetime(2020, 1, 1, 0, 0, 0))
         else:
             self.model = None
         self.LOGGER = self.__get_logger()
@@ -82,7 +83,7 @@ class LdaModule:
             self.dictionary.doc2bow(list_of_tokens) for list_of_tokens in self.doc_collection
         ]
 
-    def build_lda_model(self, num_topics=20, passes=4, alpha=0.01, eta=0.01):
+    def build_lda_model(self, num_topics=3, passes=30, alpha=0.01, eta=0.91):
         assert len(self.dictionary) != 0, "Empty dictionary."
 
         self.LOGGER.info("... Building LDA model ...")
@@ -160,30 +161,42 @@ class LdaModule:
         self.build_lda_model()
         self.get_topics()
 
-    def save_LDA_model(self):
-        # now = datetime.datetime.now()
-        # timestamp = now.strftime("%m-%d-%Y_%H-%M-%S")
-        path = self.location + "lda_model_" + self.lang
-        if not os.path.isdir(self.location):
+    def save_LDA_model(self, subfolder, file_name):
+        path = "{}{}/{}".format(self.location, subfolder, file_name)
+        try:
             os.mkdir(self.location)
+        except Exception:
+            print("{} already exists".format(self.location))
+        try:
+            os.mkdir("{}{}".format(self.location, subfolder))
+        except Exception:
+            print("{} already exists".format("{}{}".format(self.location, subfolder)))
         self.utils.save_lda_model(self, path)
 
-    def load_lda_model(self):
-        module = self.utils.load_lda_model(self.location + "lda_model_" + self.lang)
+    def load_lda_model(self, lang, date):
+        file_name = "{}lda_{}/lda_{}_{}".format(
+            self.location, lang, lang, date.strftime("%m_%Y")
+        )
+        module = self.utils.load_lda_model(file_name)
         self.dictionary = module.dictionary
         self.corpus = module.corpus
         self.model = module.model
         self.topics = module.topics
         self.lang = module.lang
 
-    def update_lda_model(self, parsed_docs):
+    def update_lda_model(self, parsed_docs, lang, date=None):
         # text_utils = NLPUtils(self.lang)
         if self.model is None:
-            self.load_lda_model()
+            if date is None:
+                # Jan 1st 2020
+                dummy_date = datetime.datetime(2020, 1, 1, 0, 0, 0)
+                self.load_lda_model(lang, dummy_date)
+            else:
+                self.load_lda_model(lang, date)
         # parsed_doc = text_utils.parse_text(doc)
         new_corpus = self.corpus + [self.dictionary.doc2bow(doc) for doc in parsed_docs]
         self.model.update(new_corpus)
-        self.save_LDA_model()
+        self.save_LDA_model("update", "updated_model")
 
 
 if __name__ == "__main__":

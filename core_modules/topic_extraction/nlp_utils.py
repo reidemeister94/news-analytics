@@ -66,6 +66,10 @@ class NLPUtils:
         """
         for word in self.nlp.Defaults.stop_words:
             self.nlp.vocab[word].is_stop = True
+        if self.lang == "it":
+            self.nlp.vocab["dio"].is_stop = True
+        elif self.lang == "de":
+            self.nlp.vocab["Prozent"].is_stop = True
         return
 
     def load_custom_stop_words(self):
