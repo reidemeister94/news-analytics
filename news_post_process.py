@@ -63,7 +63,7 @@ class NewsPostProcess:
         # start_time = time.time()
         try:
             # print("topic extraction started")
-            doc = self.topic_extraction(doc, update_model)
+            doc = self.topic_extraction(doc, current_lang, update_model)
             # print("topic extraction completed")
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
@@ -149,7 +149,7 @@ class NewsPostProcess:
             triples_formatted.append(new_entry)
         return triples_formatted
 
-    def topic_extraction(self, doc, update_model):
+    def topic_extraction(self, doc, lang, update_model):
         parsed_text = self.nlp_utils.parse_text(doc)
         self.batch_docs.append(parsed_text)
         try:
@@ -176,7 +176,7 @@ class NewsPostProcess:
         doc["topic_extraction"] = document_topic_info
         doc["parsed_text"] = " ".join(word for word in parsed_text)
         if update_model:
-            self.lda_module.update_lda_model(self.batch_docs)
+            self.lda_module.update_lda_model(self.batch_docs, lang)
         return doc
 
     def ner_analysis(self, doc):
