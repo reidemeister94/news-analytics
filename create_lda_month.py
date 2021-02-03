@@ -130,12 +130,6 @@ def main():
     mongourl = CONFIG["mongourl"]
     MONGO_CLIENT = MongoClient(mongourl)
 
-    START_YEAR = 2020
-    START_MONTH = 1
-    END_YEAR = 2020
-    END_MONTH = 2
-    START = datetime(START_YEAR, START_MONTH, 1, 0, 0)
-    END = datetime(END_YEAR, END_MONTH, 1, 0, 0)
     # lang = "it"
     chunk_size = 5000
 
@@ -146,12 +140,19 @@ def main():
 
     # Create folder for LDA models for a given lang
     base_folder = "lda_checkpoint"
-    try:
-        os.mkdir(base_folder)
-    except Exception:
-        print("{} already exists".format(base_folder))
+    # try:
+    #     os.mkdir(base_folder)
+    # except Exception:
+    #     print("{} already exists".format(base_folder))
 
     for lang in CONFIG["collections_lang"]:
+        print("Processing {}".format(lang))
+        START_YEAR = 2020
+        START_MONTH = 1
+        END_YEAR = 2020
+        END_MONTH = 2
+        START = datetime(START_YEAR, START_MONTH, 1, 0, 0)
+        END = datetime(END_YEAR, END_MONTH, 1, 0, 0)
 
         if lang == "en":
             nlp = spacy.load("en_core_web_md")
