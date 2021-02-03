@@ -11,10 +11,10 @@ import yaml
 import os
 
 
-class NewsPostProcess:
+class DimReductionProcess:
     def __init__(self):
-        # mongourl = "mongodb://admin:adminpassword@localhost:27017"
-        mongourl = "mongodb://localhost:27017"
+        mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        # mongourl = "mongodb://localhost:27017"
         self.MONGO_CLIENT = MongoClient(mongourl)
         self.START_YEAR = 2019
         self.START_MONTH = 12
@@ -51,7 +51,7 @@ class NewsPostProcess:
                 {"discoverDate": {"$gte": self.START, "$lt": self.END}},
                 {"bertEncoding": {"$exists": True}},
                 {"$where": "this.bertEncoding.length > 0"},
-                # {"testTopicExtraction": {"$exists": True}},
+                {"testTopicExtraction": {"$exists": True}},
             ]
         }
         return q
@@ -90,7 +90,7 @@ class NewsPostProcess:
         return "{}_to_{}".format(s, e)
 
     def main(self):
-        lang = "en"
+        lang = "it"
         limit = 200
         bert_embedding_size = 768
         num_topics = 20
@@ -108,11 +108,11 @@ class NewsPostProcess:
             topic_numbers = []
             for doc in not_processed_docs:
                 embeddings = np.append(embeddings, np.array(doc["bertEncoding"]))
-                # topic_probs = [el["topic_prob"] for el in doc["testTopicExtraction"]]
-                topic_probs = [el["topic_prob"] for el in doc["topicExtraction"]]
+                topic_probs = [el["topic_prob"] for el in doc["testTopicExtraction"]]
+                # topic_probs = [el["topic_prob"] for el in doc["topicExtraction"]]
                 topic_max_prob = np.argmax(topic_probs)
-                # doc_topic_max_prob = doc["testTopicExtraction"][topic_max_prob]
-                doc_topic_max_prob = doc["topicExtraction"][topic_max_prob]
+                doc_topic_max_prob = doc["testTopicExtraction"][topic_max_prob]
+                # doc_topic_max_prob = doc["topicExtraction"][topic_max_prob]
                 topic_numbers = np.append(topic_numbers, doc_topic_max_prob["topic_number"])
             if len(topic_numbers) > 0:
                 print("Found some articles")
@@ -132,5 +132,5 @@ class NewsPostProcess:
 
 
 if __name__ == "__main__":
-    news_post_process = NewsPostProcess()
-    news_post_process.main()
+    dim_red_process = DimReductionProcess()
+    dim_red_process.main()
