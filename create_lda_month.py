@@ -139,7 +139,7 @@ def main():
     num_topics = CONFIG["topic_extraction"]["model_params"]["num_topics"]  # 3
 
     # Create folder for LDA models for a given lang
-    base_folder = "lda_checkpoint"
+    # base_folder = "lda_checkpoint"
     # try:
     #     os.mkdir(base_folder)
     # except Exception:
@@ -178,10 +178,10 @@ def main():
                 # Create folder structure
                 subfolder = "lda_{}".format(lang)
 
-                try:
-                    os.mkdir("{}/{}".format(base_folder, subfolder))
-                except Exception:
-                    print("{}/{} already exists".format(base_folder, subfolder))
+                # try:
+                #     os.mkdir("{}/{}".format(base_folder, subfolder))
+                # except Exception:
+                #     print("{}/{} already exists".format(base_folder, subfolder))
 
                 module = LdaModule(
                     lang=lang,
