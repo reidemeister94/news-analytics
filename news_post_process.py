@@ -155,8 +155,8 @@ class NewsPostProcess:
         try:
             topics = self.lda_module.model.show_topics(
                 formatted=False,
-                num_topics=self.CONFIG["topic_extraction"]["num_topics"],
-                num_words=self.CONFIG["topic_extraction"]["num_words"],
+                num_topics=self.CONFIG["topic_extraction"]["model_params"]["num_topics"],
+                num_words=self.CONFIG["topic_extraction"]["model_params"]["num_words"],
             )
         except Exception:
             exc_type, _, exc_tb = sys.exc_info()
