@@ -161,7 +161,7 @@ def main():
 
         fix_stop_words(lang, nlp)
 
-        while END.year <= 2020:
+        while END.year <= 2020 or (END.year <= 2021 and END.month <= 1):
             # Get documents from DB and parse them
             documents = []
             query = build_query(START, END)

@@ -95,7 +95,7 @@ class DimReductionProcess:
         bert_embedding_size = 768
         num_topics = 20
 
-        while self.END_YEAR <= 2020:
+        while self.END.year <= 2020 or (self.END.year <= 2021 and self.END.month <= 1):
             print(
                 "Looking from {} to {}".format(
                     self.START.strftime("%Y/%m"), self.END.strftime("%Y/%m")

@@ -111,7 +111,7 @@ class DimReductionProcess:
 
         chunk_size = 5000
 
-        while self.END.year <= 2020:
+        while self.END.year <= 2020 or (self.END.year <= 2021 and self.END.month <= 1):
             try:
                 print(
                     "Looking from {} to {}".format(

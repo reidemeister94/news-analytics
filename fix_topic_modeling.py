@@ -148,7 +148,7 @@ class FixTopicProcess:
             self.nlp_utils = None
             self.nlp_utils = NLPUtils(lang=lang)
 
-            while end.year <= 2020:
+            while end.year <= 2020 or (end.year <= 2021 and end.month <= 1):
                 query = self.build_query(start, end)
                 collection, not_processed_docs = self.db_news_extraction(
                     lang, query, chunk_size, limit=100
