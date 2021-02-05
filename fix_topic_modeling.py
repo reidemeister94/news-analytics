@@ -2,6 +2,8 @@ from datetime import datetime
 from pymongo import MongoClient
 from core_modules.topic_extraction.nlp_utils import NLPUtils
 from core_modules.topic_extraction.lda_module import LdaModule
+from pymongo.errors import CursorNotFound, ServerSelectionTimeoutError
+
 import os
 import logging
 import yaml
@@ -171,23 +173,26 @@ class FixTopicProcess:
                 self.LOGGER.info(
                     "Starting processing docs from {}".format(start.strftime("%b_%Y"))
                 )
-                chunks = self.yield_rows(not_processed_docs, chunk_size)
-                for chunk in chunks:
-                    for doc in chunk:
-                        if i % 1000 == 0 and i > 0:
-                            print(i)
-                            gc.collect()
-                        if i % 10000 == 0 and i > 0:
-                            self.LOGGER.info("10k Docs processed...")
-                        if len(doc["text"]) > 0 and not doc["text"].isspace():
-                            updated_doc, error = self.process_doc(doc)
+                try:
+                    chunks = self.yield_rows(not_processed_docs, chunk_size)
+                    for chunk in chunks:
+                        for doc in chunk:
+                            if i % 1000 == 0 and i > 0:
+                                print(i)
+                                gc.collect()
+                            if i % 10000 == 0 and i > 0:
+                                self.LOGGER.info("10k Docs processed...")
+                            if len(doc["text"]) > 0 and not doc["text"].isspace():
+                                updated_doc, error = self.process_doc(doc)
 
-                            if error is None:
-                                self.db_news_update(collection, updated_doc, empty=False)
-                        else:
-                            self.db_news_update(collection, doc, empty=True)
-                        i = i + 1
-                start, end = self.update_dates(start, end)
+                                if error is None:
+                                    self.db_news_update(collection, updated_doc, empty=False)
+                            else:
+                                self.db_news_update(collection, doc, empty=True)
+                            i = i + 1
+                    start, end = self.update_dates(start, end)
+                except (CursorNotFound, ServerSelectionTimeoutError) as e:
+                    self.LOGGER.error("{} occurred. Retry...".format(e))
                 not_processed_docs.close()
 
     def __get_logger(self):
