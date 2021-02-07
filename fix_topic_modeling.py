@@ -24,7 +24,17 @@ class FixTopicProcess:
         self.nlp_utils = None
 
     def build_query(self, start, end):
-        q = {"discoverDate": {"$gte": start, "$lt": end}}
+        q = {
+            "$and": [
+                {"discoverDate": {"$gte": start, "$lt": end}},
+                {
+                    "$or": [
+                        {"processedEncoding": {"$exists": False}},
+                        {"processedEncoding": False},
+                    ]
+                },
+            ]
+        }
         return q
 
     def yield_rows(self, cursor, chunk_size):
@@ -118,7 +128,7 @@ class FixTopicProcess:
         query = {"_id": doc["_id"]}
         if empty:
             newvalues = {
-                "$set": {"parsedText": "", "topicExtraction": {}, "processedEncoding": True}
+                "$set": {"parsedText": "", "topicExtraction": [], "processedEncoding": True}
             }
         else:
             newvalues = {
