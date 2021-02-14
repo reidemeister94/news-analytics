@@ -66,7 +66,7 @@ class DimReductionProcess:
             "$and": [
                 {"discoverDate": {"$gte": self.START, "$lt": self.END}},
                 {"bertEncoding": {"$exists": True}},
-                {"$where": "this.bertEncoding.length > 0"},
+                # {"$where": "this.bertEncoding.length > 0"},
             ]
         }
         return q
@@ -115,8 +115,9 @@ class DimReductionProcess:
                     for chunk in chunks:
                         # print("Processing chunk {}".format(chunk_idx))
                         for doc in chunk:
-                            ids = np.append(ids, doc["_id"])
-                            to_reduce = np.append(to_reduce, doc["bertEncoding"])
+                            if doc["bertEncoding"] is not None:
+                                ids = np.append(ids, doc["_id"])
+                                to_reduce = np.append(to_reduce, doc["bertEncoding"])
                     self.LOGGER.info(
                         "Reducing dims for {}".format(self.START.strftime("%b_%Y"))
                     )
@@ -136,10 +137,10 @@ class DimReductionProcess:
 
     def __get_logger(self):
         # create logger
-        logger = logging.getLogger("FixTopicProcess")
+        logger = logging.getLogger("DimensionalityReduction")
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
-        log_path = "log/fix_topic_process.log"
+        log_path = "log/bert_dim_reduction.log"
         if not os.path.isdir("log/"):
             os.mkdir("log/")
         fh = logging.FileHandler(log_path)
