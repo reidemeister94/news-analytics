@@ -90,6 +90,14 @@ class DimReductionProcess:
         self.START = datetime(self.START_YEAR, self.START_MONTH, 1, 0, 0)
         self.END = datetime(self.END_YEAR, self.END_MONTH, 1, 0, 0)
 
+    def reset_dates(self):
+        self.START_YEAR = 2020
+        self.START_MONTH = 1
+        self.END_YEAR = 2020
+        self.END_MONTH = 2
+        self.START = datetime(self.START_YEAR, self.START_MONTH, 1, 0, 0)
+        self.END = datetime(self.END_YEAR, self.END_MONTH, 1, 0, 0)
+
     def main(self):
         self.LOGGER.info("=" * 120)
         self.LOGGER.info("STARTED DIMENSIONALITY REDUCTION")
@@ -134,6 +142,7 @@ class DimReductionProcess:
                     not_processed_docs.close()
                 except CursorNotFound:
                     print("Lost cursor, retry")
+            self.reset_dates()
 
     def __get_logger(self):
         # create logger
