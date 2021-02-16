@@ -108,7 +108,12 @@ class DimReductionProcess:
 
         for lang in self.CONFIG["collections_lang"]:
             self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
-            while self.END.year <= 2020 or (self.END.year <= 2021 and self.END.month <= 1):
+            # Temporarily skip english, too many articles to process at once...
+            while (
+                lang != "en"
+                and self.END.year <= 2020
+                or (self.END.year <= 2021 and self.END.month <= 1)
+            ):
                 try:
                     query = self.build_query()
                     coll, not_processed_docs = self.db_news_extraction(lang, query, chunk_size)
