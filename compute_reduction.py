@@ -117,6 +117,11 @@ class DimReductionProcess:
                 try:
                     query = self.build_query()
                     coll, not_processed_docs = self.db_news_extraction(lang, query, chunk_size)
+                    count_per_month = coll.count_documents(query)
+                    if count_per_month < n_dims:
+                        n_dims = count_per_month
+                    else:
+                        n_dims = 50
                     self.LOGGER.info(
                         "Starting parsing docs from {}".format(self.START.strftime("%b_%Y"))
                     )
