@@ -66,6 +66,7 @@ class DimReductionProcess:
             "$and": [
                 {"discoverDate": {"$gte": self.START, "$lt": self.END}},
                 {"bertEncoding": {"$exists": True}},
+                {"parsedText": {"$ne": ""}}
                 # {"$where": "this.bertEncoding.length > 0"},
             ]
         }
@@ -133,7 +134,10 @@ class DimReductionProcess:
                     for chunk in chunks:
                         # print("Processing chunk {}".format(chunk_idx))
                         for doc in chunk:
-                            if doc["bertEncoding"] is not None:
+                            if (
+                                doc["bertEncoding"] is not None
+                                and not len(doc["bertEncoding"]) == 0
+                            ):
                                 ids = np.append(ids, doc["_id"])
                                 to_reduce = np.append(to_reduce, doc["bertEncoding"])
                     self.LOGGER.info(

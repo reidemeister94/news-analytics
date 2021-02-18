@@ -190,8 +190,8 @@ class NewsPostProcess:
             newvalues = {
                 "$set": {
                     "parsedText": "",
-                    "topicExtraction": {},
-                    "namedEntityRecognition": {},
+                    "topicExtraction": [],
+                    "namedEntityRecognition": [],
                     "bertEncoding": [],
                     "processedEncoding": True,
                     "triplesExtraction": [],
