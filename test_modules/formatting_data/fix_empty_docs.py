@@ -4,8 +4,8 @@ from pymongo.errors import CursorNotFound
 
 class DimReductionProcess:
     def __init__(self):
-        # mongourl = "mongodb://localhost:27017"
-        mongourl = "mongodb://admin:adminpassword@localhost:27017"
+        mongourl = "mongodb://localhost:27017"
+        # mongourl = "mongodb://admin:adminpassword@localhost:27017"
         self.MONGO_CLIENT = MongoClient(mongourl)
 
     def db_news_extraction(self, lang, query, chunk_size, limit=0):
