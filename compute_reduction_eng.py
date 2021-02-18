@@ -149,7 +149,7 @@ class DimReductionProcess:
                             elem["_id"] = doc["_id"]
                             elem["embedding"] = doc["bertEncoding"]
                             docs = np.append(docs, elem)
-                if alternative:
+                if alternative and count_per_month == 0:
                     # open file for that month
                     try:
                         os.mkdir(folder)
