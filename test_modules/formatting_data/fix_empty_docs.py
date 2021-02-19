@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from pymongo.errors import CursorNotFound
 
 
-class DimReductionProcess:
+class FixEmptyDocsProcess:
     def __init__(self):
         mongourl = "mongodb://localhost:27017"
         # mongourl = "mongodb://admin:adminpassword@localhost:27017"
@@ -71,5 +71,5 @@ class DimReductionProcess:
 
 
 if __name__ == "__main__":
-    dim_red_process = DimReductionProcess()
-    dim_red_process.main()
+    fix_empty_process = FixEmptyDocsProcess()
+    fix_empty_process.main()
