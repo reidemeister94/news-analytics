@@ -8,7 +8,6 @@ import umap
 import logging
 import yaml
 import os
-import json
 
 
 class DimReductionProcess:
@@ -106,8 +105,8 @@ class DimReductionProcess:
         self.END = datetime(self.END_YEAR, self.END_MONTH, 1, 0, 0)
 
     def main(self):
-        self.LOGGER.info("=" * 120)
-        self.LOGGER.info("STARTED DIMENSIONALITY REDUCTION")
+        print("=" * 120)
+        print("STARTED DIMENSIONALITY REDUCTION")
 
         lang = "en"
         n_dims = 50
@@ -117,7 +116,7 @@ class DimReductionProcess:
 
         alternative = False
 
-        self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
+        print("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
         while self.END.year <= 2020 or (self.END.year <= 2021 and self.END.month <= 1):
             try:
                 query = self.build_query()
@@ -127,9 +126,8 @@ class DimReductionProcess:
                     n_dims = count_per_month
                 else:
                     n_dims = 50
-                self.LOGGER.info(
-                    "Starting parsing docs from {}".format(self.START.strftime("%b_%Y"))
-                )
+                print("Found {} articles".format(count_per_month))
+                print("Starting parsing docs from {}".format(self.START.strftime("%b_%Y")))
 
                 chunks = self.yield_rows(not_processed_docs, chunk_size)
 
@@ -153,7 +151,7 @@ class DimReductionProcess:
                     # open file for that month
                     try:
                         os.mkdir(folder)
-                        self.LOGGER.info("Created {}".format(folder))
+                        print("Created {}".format(folder))
                     except Exception:
                         self.LOGGER.error("{} already exists".format(folder))
 
@@ -169,7 +167,7 @@ class DimReductionProcess:
                     for d in docs:
                         self.mark_copied(coll, d["_id"])
 
-                self.LOGGER.info("Reducing dims for {}".format(self.START.strftime("%b_%Y")))
+                print("Reducing dims for {}".format(self.START.strftime("%b_%Y")))
 
                 if alternative:
                     docs = np.load(complete_path, allow_pickle=True)
