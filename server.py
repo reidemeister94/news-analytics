@@ -11,8 +11,6 @@ import sys
 from utils.db_handler import DBHandler
 from functools import wraps
 
-#ciao 
-
 class MyServer:
     def __init__(self):
         with open("configuration/config_server.yaml") as f:
@@ -109,10 +107,14 @@ def make_plot(x, y):
 @check_ip
 def plot():
     p = make_plot("petal_width", "petal_length")
-    return json.dumps(json_item(p, "myplot"))
+
+    response = app.response_class(
+                response=json.dumps(json_item(p, "myplot")), mimetype="application/json"
+            )
+    return response
 
 
-# @app.route("/")
+#@app.route("/")
 # @auth.login_required
 # @check_ip
 # def index():
