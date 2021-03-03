@@ -1,6 +1,9 @@
 import json
+from bokeh.models.annotations import Tooltip
+from bokeh.models.tools import HoverTool
 from bokeh.plotting import figure
-from bokeh.embed import json_item
+from bokeh.embed import json_item, components
+from bokeh.models import ColumnDataSource, formatters
 from bokeh.sampledata.iris import flowers
 import hashlib
 import yaml
@@ -10,6 +13,7 @@ import logging
 import sys
 from utils.db_handler import DBHandler
 from functools import wraps
+
 
 class MyServer:
     def __init__(self):
@@ -91,30 +95,72 @@ def not_found(e):
 ### Utility functions for handling data to return to the client ###
 
 
-def make_plot(x, y):
-    p = figure(title="Iris Morphology", sizing_mode="fixed", plot_width=400, plot_height=400)
-    p.xaxis.axis_label = x
-    p.yaxis.axis_label = y
-    p.circle(flowers[x], flowers[y], color=colors, fill_alpha=0.2, size=10)
-    return p
+# def make_plot_flower(x, y):
+#     p = figure(title="Iris Morphology", sizing_mode="fixed", plot_width=400, plot_height=400)
+#     p.xaxis.axis_label = x
+#     p.yaxis.axis_label = y
+#     p.circle(flowers[x], flowers[y], color=colors, fill_alpha=0.2, size=10)
+#     return p
 
 
 ### Routes ###
 
 
-@app.route("/plot")
+@app.route("/plot_articles")
 @auth.login_required
 @check_ip
-def plot():
-    p = make_plot("petal_width", "petal_length")
+def plot_articles():
+    if "date" not in request.args or "lang" not in request.args:
+        abort(400)
+    else:
 
-    response = app.response_class(
-                response=json.dumps(json_item(p, "myplot")), mimetype="application/json"
+        reduced_articles = db_handler.get_reduced_articles(
+            request.args["date"], request.args["lang"]
+        )
+
+        # my_server.LOGGER.info("data collected")
+        if reduced_articles is not None:
+
+            source = ColumnDataSource(reduced_articles)
+
+            hover = HoverTool(
+                tooltips=[("title", "@title"), ("date", "@date{%F}"),],
+                formatters={"@date": "datetime",},
             )
-    return response
+
+            plot = figure(plot_width=600, plot_height=600, tools=[hover], title="Articles")
+
+            plot.scatter(size=12, color="blue", alpha=0.5, source=source)
+
+            # Testing the results
+            script, div = components(plot)
+
+            my_server.LOGGER.info(script)
+            my_server.LOGGER.info(div)
+
+            response = app.response_class(
+                response=json.dumps(json_item(plot, "myplot")), mimetype="application/json"
+            )
+
+            return response
+        else:
+            my_server.LOGGER.info("Something went wrong")
+            return "Something went wrong"
 
 
-#@app.route("/")
+# @app.route("/plot_flower")
+# @auth.login_required
+# @check_ip
+# def plot():
+#     p = make_plot_flower("petal_width", "petal_length")
+
+#     response = app.response_class(
+#         response=json.dumps(json_item(p, "myplot")), mimetype="application/json"
+#     )
+#     return response
+
+
+# @app.route("/")
 # @auth.login_required
 # @check_ip
 # def index():

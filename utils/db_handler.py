@@ -11,6 +11,7 @@ import pprint
 import datetime
 from dateutil.relativedelta import relativedelta
 import re
+import dateutil.parser as parser
 
 
 class DBHandler:
@@ -45,6 +46,45 @@ class DBHandler:
                 )
             return res
         return None
+
+    def get_reduced_articles(self, start_date, lang):
+        try:
+            if type(start_date) is str:
+                start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+            self.LOGGER.info(start_date)
+            end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
+            if lang == "it":
+                collection = self.MONGO_CLIENT["news"]["article"]
+            else:
+                collection = self.MONGO_CLIENT["news"]["article_" + lang]
+
+            query = {"discoverDate": {"$gte": start_date, "$lte": end_date}}
+
+            documents = collection.find(query, no_cursor_timeout=True)
+
+            x_db = []
+            y_db = []
+            date_db = []
+            title_db = []
+
+            for doc in documents:
+                if len(doc["reducedEmbedding"]) > 0:
+                    x_db.append(doc["reducedEmbedding"][0])
+                    y_db.append(doc["reducedEmbedding"][1])
+                    date_db.append(doc["discoverDate"])
+                    title_db.append(doc["title"])
+
+            data = dict(x=x_db, y=y_db, date=date_db, title=title_db)
+            return data
+        except Exception as e:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}, {}".format(
+                    start_date, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
+            )
+            return None
 
     def __get_logger(self):
         # create logger
