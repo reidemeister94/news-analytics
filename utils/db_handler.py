@@ -47,6 +47,56 @@ class DBHandler:
             return res
         return None
 
+    def get_articles_per_day(self, start_date, lang):
+        try:
+            if type(start_date) is str:
+                start_date = datetime.datetime.strptime(start_date, "%Y-%m")
+            # self.LOGGER.info(start_date)
+            end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
+            # self.LOGGER.info(end_date)
+            if lang == "it":
+                collection = self.MONGO_CLIENT["news"]["article"]
+            else:
+                collection = self.MONGO_CLIENT["news"]["article_" + lang]
+
+            self.LOGGER.info("PRE-QUERY")
+
+            documents = collection.aggregate(
+                [
+                    {"$match": {"discoverDate": {"$gte": start_date, "$lte": end_date}}},
+                    {
+                        "$group": {
+                            "_id": {
+                                "$dateToString": {
+                                    "format": "%Y-%m-%d",
+                                    "date": "$discoverDate",
+                                }
+                            },
+                            "count": {"$sum": 1},
+                        }
+                    },
+                ]
+            )
+
+            date_db = []
+            count_db = []
+
+            for doc in documents:
+                date_db.append(doc["_id"])
+                count_db.append(doc["count"])
+
+            data = dict(date=date_db, count=count_db)
+            return data
+        except Exception as e:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}, {}".format(
+                    start_date, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
+            )
+            return None
+
     def get_reduced_articles(self, start_date, lang):
         try:
             if type(start_date) is str:
@@ -67,6 +117,7 @@ class DBHandler:
             y_db = []
             date_db = []
             title_db = []
+            topic_db = []
 
             for doc in documents:
                 if len(doc["reducedEmbedding"]) > 0:
@@ -74,8 +125,9 @@ class DBHandler:
                     y_db.append(doc["reducedEmbedding"][1])
                     date_db.append(doc["discoverDate"])
                     title_db.append(doc["title"])
+                    topic_db.append(doc["topicExtraction"])
 
-            data = dict(x=x_db, y=y_db, date=date_db, title=title_db)
+            data = dict(x=x_db, y=y_db, date=date_db, title=title_db, topic=topic_db)
             return data
         except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()

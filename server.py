@@ -1,22 +1,14 @@
 import json
 from bokeh.models.annotations import Tooltip
-from bokeh.models.tools import HoverTool
-from bokeh.plotting import figure
-from bokeh.embed import json_item, components
-from bokeh.models import CustomJS, ColumnDataSource, CDSView, IndexFilter
-from bokeh.models.widgets import DateRangeSlider
-from bokeh.layouts import column, row
+from bokeh.embed import json_item
 from bokeh.sampledata.iris import flowers
-from dateutil.relativedelta import relativedelta
-from datetime import date
-import hashlib
 import yaml
-import datetime
 import os
 import logging
 import sys
 from utils.db_handler import DBHandler
 from functools import wraps
+from representations.graphs import Graphs
 
 
 class MyServer:
@@ -52,6 +44,7 @@ app = Flask(__name__)
 auth = HTTPTokenAuth(scheme="Bearer")
 my_server = MyServer()
 db_handler = DBHandler()
+graphs = Graphs()
 colormap = {"setosa": "red", "versicolor": "green", "virginica": "blue"}
 colors = [colormap[x] for x in flowers["species"]]
 
@@ -125,69 +118,41 @@ def plot_articles():
         # my_server.LOGGER.info("data collected")
         if reduced_articles is not None:
 
-            source = ColumnDataSource(reduced_articles)
-
-            hover = HoverTool(
-                tooltips=[("title", "@title"), ("date", "@date{%F}"),],
-                formatters={"@date": "datetime",},
+            layout = graphs.create_article_graph_with_sliders_and_filters(
+                reduced_articles, request.args["date"]
             )
-
-            s_date = datetime.datetime.strptime(request.args["date"], "%Y-%m")
-            e_date = s_date + relativedelta(months=1) - datetime.timedelta(days=1)
-
-            date_range_slider = DateRangeSlider(
-                value=(
-                    date(s_date.year, s_date.month, s_date.day),
-                    date(e_date.year, e_date.month, e_date.day),
-                ),
-                start=date(s_date.year, s_date.month, s_date.day),
-                end=date(e_date.year, e_date.month, e_date.day),
-            )
-
-            filter = IndexFilter(indices=[])
-
-            callback = CustomJS(
-                args=dict(source=source, filter=filter),
-                code="""
-                    var date_range_low = new Date(cb_obj.value[0])
-                    var date_range_high = new Date(cb_obj.value[1])
-                    date_range_low.setHours(0,0,0,0)
-                    date_range_high.setHours(0,0,0,0)
-                    const indices = []
-                    for (var i=0; i < source.get_length(); i++) {
-                        
-                        var date_range_data = new Date(source.data.date[i])
-
-                        if (date_range_data >= date_range_low && date_range_data <= date_range_high) {
-                            indices.push(i)
-                            break
-                        }
-                    }
-                    console.log(indices.length)
-
-                    filter.indices = indices
-                    source.change.emit()
-                """,
-            )
-
-            date_range_slider.js_on_change("value", callback)
-
-            view = CDSView(source=source, filters=[filter])
-
-            plot = figure(plot_width=600, plot_height=600, tools=[hover], title="Articles",)
-
-            plot.scatter(size=8, color="blue", alpha=0.5, source=source, view=view)
-
-            layout = column(plot, column(date_range_slider),)
-
-            # Testing the results
-            script, div = components(layout)
-
-            my_server.LOGGER.info(script)
-            my_server.LOGGER.info(div)
 
             response = app.response_class(
-                response=json.dumps(json_item(plot, "myplot")), mimetype="application/json"
+                response=json.dumps(json_item(layout, "myplot")), mimetype="application/json"
+            )
+
+            return response
+        else:
+            my_server.LOGGER.info("Something went wrong")
+            return "Something went wrong"
+
+
+@app.route("/plot_articles_time_series")
+@auth.login_required
+@check_ip
+def plot_articles_time_series():
+    if "date" not in request.args or "lang" not in request.args:
+        abort(400)
+    else:
+        my_server.LOGGER.info("articles_per_day")
+        articles_per_day = db_handler.get_articles_per_day(
+            request.args["date"], request.args["lang"]
+        )
+
+        my_server.LOGGER.info(articles_per_day)
+
+        # my_server.LOGGER.info("data collected")
+        if articles_per_day is not None:
+
+            layout = graphs.create_article_time_series(articles_per_day, request.args["date"])
+
+            response = app.response_class(
+                response=json.dumps(json_item(layout, "myplot")), mimetype="application/json"
             )
 
             return response
