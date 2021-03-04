@@ -50,9 +50,10 @@ class DBHandler:
     def get_reduced_articles(self, start_date, lang):
         try:
             if type(start_date) is str:
-                start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
-            self.LOGGER.info(start_date)
+                start_date = datetime.datetime.strptime(start_date, "%Y-%m")
+            # self.LOGGER.info(start_date)
             end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
+            # self.LOGGER.info(end_date)
             if lang == "it":
                 collection = self.MONGO_CLIENT["news"]["article"]
             else:

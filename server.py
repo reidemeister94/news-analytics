@@ -3,8 +3,12 @@ from bokeh.models.annotations import Tooltip
 from bokeh.models.tools import HoverTool
 from bokeh.plotting import figure
 from bokeh.embed import json_item, components
-from bokeh.models import ColumnDataSource, formatters
+from bokeh.models import CustomJS, ColumnDataSource, CDSView, IndexFilter
+from bokeh.models.widgets import DateRangeSlider
+from bokeh.layouts import column, row
 from bokeh.sampledata.iris import flowers
+from dateutil.relativedelta import relativedelta
+from datetime import date
 import hashlib
 import yaml
 import datetime
@@ -128,12 +132,56 @@ def plot_articles():
                 formatters={"@date": "datetime",},
             )
 
-            plot = figure(plot_width=600, plot_height=600, tools=[hover], title="Articles")
+            s_date = datetime.datetime.strptime(request.args["date"], "%Y-%m")
+            e_date = s_date + relativedelta(months=1) - datetime.timedelta(days=1)
 
-            plot.scatter(size=12, color="blue", alpha=0.5, source=source)
+            date_range_slider = DateRangeSlider(
+                value=(
+                    date(s_date.year, s_date.month, s_date.day),
+                    date(e_date.year, e_date.month, e_date.day),
+                ),
+                start=date(s_date.year, s_date.month, s_date.day),
+                end=date(e_date.year, e_date.month, e_date.day),
+            )
+
+            filter = IndexFilter(indices=[])
+
+            callback = CustomJS(
+                args=dict(source=source, filter=filter),
+                code="""
+                    var date_range_low = new Date(cb_obj.value[0])
+                    var date_range_high = new Date(cb_obj.value[1])
+                    date_range_low.setHours(0,0,0,0)
+                    date_range_high.setHours(0,0,0,0)
+                    const indices = []
+                    for (var i=0; i < source.get_length(); i++) {
+                        
+                        var date_range_data = new Date(source.data.date[i])
+
+                        if (date_range_data >= date_range_low && date_range_data <= date_range_high) {
+                            indices.push(i)
+                            break
+                        }
+                    }
+                    console.log(indices.length)
+
+                    filter.indices = indices
+                    source.change.emit()
+                """,
+            )
+
+            date_range_slider.js_on_change("value", callback)
+
+            view = CDSView(source=source, filters=[filter])
+
+            plot = figure(plot_width=600, plot_height=600, tools=[hover], title="Articles",)
+
+            plot.scatter(size=8, color="blue", alpha=0.5, source=source, view=view)
+
+            layout = column(plot, column(date_range_slider),)
 
             # Testing the results
-            script, div = components(plot)
+            script, div = components(layout)
 
             my_server.LOGGER.info(script)
             my_server.LOGGER.info(div)

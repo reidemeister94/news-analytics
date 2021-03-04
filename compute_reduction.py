@@ -107,7 +107,8 @@ class DimReductionProcess:
 
         chunk_size = 5000
 
-        for lang in self.CONFIG["collections_lang"]:
+        # for lang in self.CONFIG["collections_lang"]:
+        for lang in ["es"]:
             self.LOGGER.info("CURRENT COLLECTION: ARTICLE {}".format(lang.upper()))
             # Temporarily skip english, too many articles to process at once...
             while (
