@@ -138,13 +138,6 @@ def main():
     passes = CONFIG["topic_extraction"]["model_params"]["passes"]  # 20
     num_topics = CONFIG["topic_extraction"]["model_params"]["num_topics"]  # 3
 
-    # Create folder for LDA models for a given lang
-    # base_folder = "lda_checkpoint"
-    # try:
-    #     os.mkdir(base_folder)
-    # except Exception:
-    #     print("{} already exists".format(base_folder))
-
     for lang in CONFIG["collections_lang"]:
         print("Processing {}".format(lang))
         START_YEAR = 2020
@@ -177,11 +170,6 @@ def main():
             if len(documents) > 0:
                 # Create folder structure
                 subfolder = "lda_{}".format(lang)
-
-                # try:
-                #     os.mkdir("{}/{}".format(base_folder, subfolder))
-                # except Exception:
-                #     print("{}/{} already exists".format(base_folder, subfolder))
 
                 module = LdaModule(
                     lang=lang,
