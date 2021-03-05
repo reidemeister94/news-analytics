@@ -24,8 +24,17 @@ class Graphs:
             formatters={"@date": "datetime",},
         )
 
-        plot = figure(plot_width=600, plot_height=600, tools=[hover], title="Articles",)
-        plot.scatter(size=8, color="colors", source=source)
+        plot = figure(
+            plot_width=600,
+            plot_height=600,
+            tools=[hover],
+            title="Articles per Day",
+            x_axis_type="datetime",
+        )
+        # plot.line(x="date", y="count", line_width=2, source=source) #Funziona
+        plot.quad(
+            x="date", y="count", line_width=2, source=source
+        )  # Non funziona, da sistemare (ovviamente)
 
         layout = column(plot)
 

@@ -115,7 +115,6 @@ def plot_articles():
             request.args["date"], request.args["lang"]
         )
 
-        # my_server.LOGGER.info("data collected")
         if reduced_articles is not None:
 
             layout = graphs.create_article_graph_with_sliders_and_filters(
@@ -139,14 +138,10 @@ def plot_articles_time_series():
     if "date" not in request.args or "lang" not in request.args:
         abort(400)
     else:
-        my_server.LOGGER.info("articles_per_day")
         articles_per_day = db_handler.get_articles_per_day(
             request.args["date"], request.args["lang"]
         )
 
-        my_server.LOGGER.info(articles_per_day)
-
-        # my_server.LOGGER.info("data collected")
         if articles_per_day is not None:
 
             layout = graphs.create_article_time_series(articles_per_day, request.args["date"])

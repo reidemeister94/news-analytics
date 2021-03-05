@@ -59,8 +59,6 @@ class DBHandler:
             else:
                 collection = self.MONGO_CLIENT["news"]["article_" + lang]
 
-            self.LOGGER.info("PRE-QUERY")
-
             documents = collection.aggregate(
                 [
                     {"$match": {"discoverDate": {"$gte": start_date, "$lte": end_date}}},
@@ -75,6 +73,7 @@ class DBHandler:
                             "count": {"$sum": 1},
                         }
                     },
+                    {"$sort": {"_id": pymongo.ASCENDING,}},
                 ]
             )
 
@@ -82,7 +81,7 @@ class DBHandler:
             count_db = []
 
             for doc in documents:
-                date_db.append(doc["_id"])
+                date_db.append(datetime.datetime.strptime(doc["_id"], "%Y-%m-%d"))
                 count_db.append(doc["count"])
 
             data = dict(date=date_db, count=count_db)
