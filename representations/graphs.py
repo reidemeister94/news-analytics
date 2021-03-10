@@ -20,20 +20,30 @@ class Graphs:
         source = ColumnDataSource(articles_per_day)
 
         hover = HoverTool(
-            tooltips=[("date", "@date{%F}"), ("count", "@count"),],
-            formatters={"@date": "datetime",},
+            tooltips=[
+                ("Date", "@right{%F}"),
+                ("Count", "@top"),
+            ],
+            formatters={
+                "@right": "datetime",
+            },
         )
 
         plot = figure(
             plot_width=600,
-            plot_height=600,
+            plot_height=450,
             tools=[hover],
             title="Articles per Day",
             x_axis_type="datetime",
         )
         # plot.line(x="date", y="count", line_width=2, source=source) #Funziona
         plot.quad(
-            x="date", y="count", line_width=2, source=source
+            bottom=0,
+            top=source.data["count"],
+            left=self.fix_date(source.data["date"], "before"),
+            right=self.fix_date(source.data["date"], "after"),
+            fill_color="red",
+            line_color="black",
         )  # Non funziona, da sistemare (ovviamente)
 
         layout = column(plot)
@@ -46,12 +56,29 @@ class Graphs:
 
         return layout
 
+    def fix_date(self, date_array, before_after):
+
+        new_date_array = []
+
+        for el in date_array:
+            if before_after == "before":
+                new_date_array.append(el - relativedelta(hours=12))
+            elif before_after == "after":
+                new_date_array.append(el + relativedelta(hours=12))
+
+        return new_date_array
+
     def create_article_graph_with_sliders_and_filters(self, reduced_articles, start_date):
 
         # Prepare on-hover tooltip
         hover = HoverTool(
-            tooltips=[("title", "@title"), ("date", "@date{%F}"),],
-            formatters={"@date": "datetime",},
+            tooltips=[
+                ("Title", "@title"),
+                ("Date", "@date{%F}"),
+            ],
+            formatters={
+                "@date": "datetime",
+            },
         )
 
         s_date = datetime.datetime.strptime(start_date, "%Y-%m")
@@ -173,7 +200,12 @@ class Graphs:
         view = CDSView(source=source, filters=[index_filter, color_filter])
 
         # Plot
-        plot = figure(plot_width=600, plot_height=600, tools=[hover], title="Articles",)
+        plot = figure(
+            plot_width=600,
+            plot_height=600,
+            tools=[hover],
+            title="Articles",
+        )
         plot.scatter(size=8, color="colors", source=source, view=view)
 
         # Add elements to the final layout to be represented

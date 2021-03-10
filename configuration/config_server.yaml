@@ -4,4 +4,5 @@ api_tokens:
  Cz8ABnYogyCu5KBjs7JfhxAR_WCEPYvdG0UxtLW4AoHoy3yGY5AGRQ: andrea
 allowed_ip:
 - 128.116.133.48
-- 151.30.137.115
+- 151.30.142.168
+- 127.0.0.1
