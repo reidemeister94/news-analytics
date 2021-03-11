@@ -5,7 +5,7 @@ from bokeh.plotting import figure
 from datetime import date
 from bokeh.embed import components
 from bokeh.models import CustomJS, CDSView, IndexFilter, ColumnDataSource
-from bokeh.models.widgets import DateRangeSlider, CheckboxGroup
+from bokeh.models.widgets import DateRangeSlider, CheckboxGroup, widget
 from bokeh.layouts import column, row
 from dateutil.relativedelta import relativedelta
 from bokeh.models.tools import HoverTool
@@ -15,17 +15,57 @@ class Graphs:
     def __init__(self):
         self.LOGGER = self.__get_logger()
 
+    def create_articles_count_per_topic(self, articles_per_month):
+
+        source = ColumnDataSource(articles_per_month)
+
+        self.LOGGER.info(articles_per_month)
+
+        hover = HoverTool(
+            tooltips=[
+                ("Count", "@top"),
+            ],
+        )
+
+        plot = figure(
+            plot_width=600,
+            plot_height=450,
+            tools=[hover],
+            title="Topic Count per Month",
+            x_range=source.data["topic"],
+        )
+        # plot.line(x="date", y="count", line_width=2, source=source) #Funziona
+        plot.vbar(
+            x=source.data["topic"],
+            bottom=0,
+            top=source.data["count"],
+            width=0.5,
+            fill_color=["red", "green", "blue"],
+        )  # Non funziona, da sistemare (ovviamente)
+
+        layout = column(plot)
+
+        # Testing the results
+        script, div = components(layout)
+
+        self.LOGGER.info(script)
+        self.LOGGER.info(div)
+
+        return layout
+
+        return None
+
     def create_article_time_series(self, articles_per_day, start_date):
 
         source = ColumnDataSource(articles_per_day)
 
         hover = HoverTool(
             tooltips=[
-                ("Date", "@right{%F}"),
+                ("Date", "@x{%F}"),
                 ("Count", "@top"),
             ],
             formatters={
-                "@right": "datetime",
+                "@x": "datetime",
             },
         )
 
@@ -36,15 +76,15 @@ class Graphs:
             title="Articles per Day",
             x_axis_type="datetime",
         )
-        # plot.line(x="date", y="count", line_width=2, source=source) #Funziona
-        plot.quad(
+
+        plot.vbar(
+            x=source.data["date"],
             bottom=0,
             top=source.data["count"],
-            left=self.fix_date(source.data["date"], "before"),
-            right=self.fix_date(source.data["date"], "after"),
+            width=60 * 60 * 24 * 1000 * 3 / 4,
             fill_color="red",
             line_color="black",
-        )  # Non funziona, da sistemare (ovviamente)
+        )
 
         layout = column(plot)
 
@@ -100,7 +140,7 @@ class Graphs:
                         max_topic = topic["topic_number"]
 
                 if max_topic is not None:
-                    colors.append(self.choose_color(topic_array[0]["topic_number"]))
+                    colors.append(self.choose_color(max_topic))
 
         reduced_articles["colors"] = colors
 

@@ -1,7 +1,5 @@
 import json
-from bokeh.models.annotations import Tooltip
 from bokeh.embed import json_item
-from bokeh.sampledata.iris import flowers
 import yaml
 import os
 import logging
@@ -45,8 +43,6 @@ auth = HTTPTokenAuth(scheme="Bearer")
 my_server = MyServer()
 db_handler = DBHandler()
 graphs = Graphs()
-colormap = {"setosa": "red", "versicolor": "green", "virginica": "blue"}
-colors = [colormap[x] for x in flowers["species"]]
 
 ### Decorators and error code handlers related functions ###
 
@@ -89,18 +85,32 @@ def not_found(e):
     return jsonify(error=str(e)), 404
 
 
-### Utility functions for handling data to return to the client ###
+@app.route("/plot_topic_count")
+@auth.login_required
+@check_ip
+def plot_topic_count():
+    if "date" not in request.args or "lang" not in request.args:
+        abort(400)
+    else:
 
+        topic_count_per_month = db_handler.get_articles_topic_count(
+            request.args["date"], request.args["lang"]
+        )
 
-# def make_plot_flower(x, y):
-#     p = figure(title="Iris Morphology", sizing_mode="fixed", plot_width=400, plot_height=400)
-#     p.xaxis.axis_label = x
-#     p.yaxis.axis_label = y
-#     p.circle(flowers[x], flowers[y], color=colors, fill_alpha=0.2, size=10)
-#     return p
+        my_server.LOGGER.info(topic_count_per_month)
 
+        if topic_count_per_month is not None:
 
-### Routes ###
+            layout = graphs.create_articles_count_per_topic(topic_count_per_month)
+
+            response = app.response_class(
+                response=json.dumps(json_item(layout, "myplot")), mimetype="application/json"
+            )
+
+            return response
+        else:
+            my_server.LOGGER.info("Something went wrong")
+            return "Something went wrong"
 
 
 @app.route("/plot_articles")

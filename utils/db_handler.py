@@ -73,7 +73,11 @@ class DBHandler:
                             "count": {"$sum": 1},
                         }
                     },
-                    {"$sort": {"_id": pymongo.ASCENDING,}},
+                    {
+                        "$sort": {
+                            "_id": pymongo.ASCENDING,
+                        }
+                    },
                 ]
             )
 
@@ -85,6 +89,69 @@ class DBHandler:
                 count_db.append(doc["count"])
 
             data = dict(date=date_db, count=count_db)
+            return data
+        except Exception as e:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}, {}".format(
+                    start_date, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
+            )
+            return None
+
+    def get_articles_topic_count(self, start_date, lang):
+        try:
+            if type(start_date) is str:
+                start_date = datetime.datetime.strptime(start_date, "%Y-%m")
+            # self.LOGGER.info(start_date)
+            end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
+            # self.LOGGER.info(end_date)
+            if lang == "it":
+                collection = self.MONGO_CLIENT["news"]["article"]
+            else:
+                collection = self.MONGO_CLIENT["news"]["article_" + lang]
+
+            documents = collection.aggregate(
+                [
+                    {"$match": {"discoverDate": {"$gte": start_date, "$lte": end_date}}},
+                ]
+            )
+
+            count_topic_0 = 0
+            count_topic_1 = 0
+            count_topic_2 = 0
+
+            for doc in documents:
+                if len(doc["topicExtraction"]) == 0:
+                    continue
+                if len(doc["topicExtraction"]) == 1:
+                    if int(doc["topicExtraction"][0]["topic_number"]) == 0:
+                        count_topic_0 = count_topic_0 + 1
+                    elif int(doc["topicExtraction"][0]["topic_number"]) == 1:
+                        count_topic_1 = count_topic_1 + 1
+                    elif int(doc["topicExtraction"][0]["topic_number"]) == 2:
+                        count_topic_2 = count_topic_2 + 1
+                else:
+                    max = 0
+                    max_topic = None
+                    for topic in doc["topicExtraction"]:
+                        if topic["topic_prob"] > max:
+                            max = topic["topic_prob"]
+                            max_topic = int(topic["topic_number"])
+
+                    if max_topic is not None:
+                        if max_topic == 0:
+                            count_topic_0 = count_topic_0 + 1
+                        elif max_topic == 1:
+                            count_topic_1 = count_topic_1 + 1
+                        elif max_topic == 2:
+                            count_topic_2 = count_topic_2 + 1
+
+            data = dict(
+                topic=["Topic 1", "Topic 2", "Topic 3"],
+                count=[count_topic_0, count_topic_1, count_topic_2],
+            )
             return data
         except Exception as e:
             exc_type, _, exc_tb = sys.exc_info()
