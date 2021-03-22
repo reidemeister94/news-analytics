@@ -154,7 +154,57 @@ def plot_articles_time_series():
 
         if articles_per_day is not None:
 
-            layout = graphs.create_article_time_series(articles_per_day, request.args["date"])
+            layout = graphs.create_article_time_series(articles_per_day)
+
+            response = app.response_class(
+                response=json.dumps(json_item(layout, "myplot")), mimetype="application/json"
+            )
+
+            return response
+        else:
+            my_server.LOGGER.info("Something went wrong")
+            return "Something went wrong"
+
+
+@app.route("/plot_most_frequent_ner")
+@auth.login_required
+@check_ip
+def plot_most_frequent_ner():
+    if "date" not in request.args or "lang" not in request.args:
+        abort(400)
+    else:
+        most_frequent_ner = db_handler.get_most_frequent_ner(
+            request.args["date"], request.args["lang"]
+        )
+
+        if most_frequent_ner is not None:
+
+            layout = graphs.create_most_frequent_ner(most_frequent_ner)
+
+            response = app.response_class(
+                response=json.dumps(json_item(layout, "myplot")), mimetype="application/json"
+            )
+
+            return response
+        else:
+            my_server.LOGGER.info("Something went wrong")
+            return "Something went wrong"
+
+
+@app.route("/plot_articles_time_series_mfner")
+@auth.login_required
+@check_ip
+def plot_articles_time_series_mfner():
+    if "date" not in request.args or "lang" not in request.args:
+        abort(400)
+    else:
+        articles_mfner = db_handler.time_series_count_most_frequent_ner_articles(
+            request.args["date"], request.args["lang"]
+        )
+
+        if articles_mfner is not None:
+
+            layout = graphs.create_article_ts_mfner(articles_mfner)
 
             response = app.response_class(
                 response=json.dumps(json_item(layout, "myplot")), mimetype="application/json"

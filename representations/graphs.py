@@ -34,14 +34,14 @@ class Graphs:
             title="Topic Count per Month",
             x_range=source.data["topic"],
         )
-        # plot.line(x="date", y="count", line_width=2, source=source) #Funziona
+
         plot.vbar(
             x=source.data["topic"],
             bottom=0,
             top=source.data["count"],
             width=0.5,
             fill_color=["red", "green", "blue"],
-        )  # Non funziona, da sistemare (ovviamente)
+        )
 
         layout = column(plot)
 
@@ -53,9 +53,87 @@ class Graphs:
 
         return layout
 
-        return None
+    def create_most_frequent_ner(self, mf_ner):
 
-    def create_article_time_series(self, articles_per_day, start_date):
+        source = ColumnDataSource(mf_ner)
+
+        self.LOGGER.info(mf_ner)
+
+        hover = HoverTool(
+            tooltips=[
+                ("Count", "@top"),
+            ],
+        )
+
+        plot = figure(
+            plot_width=600,
+            plot_height=450,
+            tools=[hover],
+            title="Most Frequent Named Entity per Month",
+            x_range=source.data["entity_name"],
+        )
+
+        plot.vbar(
+            x=source.data["entity_name"],
+            bottom=0,
+            top=source.data["frequency"],
+            width=0.5,
+            fill_color="red",
+            line_color="black",
+        )
+
+        layout = column(plot)
+
+        # Testing the results
+        script, div = components(layout)
+
+        self.LOGGER.info(script)
+        self.LOGGER.info(div)
+
+        return layout
+
+    def create_article_ts_mfner(self, articles_with_mfner):
+
+        source = ColumnDataSource(articles_with_mfner)
+
+        hover = HoverTool(
+            tooltips=[
+                ("Date", "@x{%F}"),
+                ("Count", "@top"),
+            ],
+            formatters={
+                "@x": "datetime",
+            },
+        )
+
+        plot = figure(
+            plot_width=600,
+            plot_height=450,
+            tools=[hover],
+            title="Articles including most frequent words per Day",
+            x_axis_type="datetime",
+        )
+
+        plot.vbar(
+            x=source.data["date"],
+            bottom=0,
+            top=source.data["count"],
+            width=60 * 60 * 24 * 1000 * 3 / 4,
+            fill_color="red",
+            line_color="black",
+        )
+
+        layout = column(plot)
+
+        # Testing the results
+        script, div = components(layout)
+
+        self.LOGGER.info(script)
+        self.LOGGER.info(div)
+
+        return layout
+
+    def create_article_time_series(self, articles_per_day):
 
         source = ColumnDataSource(articles_per_day)
 
