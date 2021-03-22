@@ -9,6 +9,7 @@ from bokeh.models.widgets import DateRangeSlider, CheckboxGroup, widget
 from bokeh.layouts import column, row
 from dateutil.relativedelta import relativedelta
 from bokeh.models.tools import HoverTool
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 
 
 class Graphs:
@@ -91,6 +92,28 @@ class Graphs:
         self.LOGGER.info(div)
 
         return layout
+
+    def create_most_frequent_ner_wordcloud(self, mf_ner):
+
+        source = ColumnDataSource(mf_ner)
+
+        weights = {}
+        i = 0
+
+        entity_name = source.data["entity_name"]
+        frequency = source.data["frequency"]
+
+        while i < len(entity_name):
+            weights[entity_name[i]] = frequency[i]
+            i += 1
+
+        print(weights)
+
+        wordcloud = WordCloud().generate_from_frequencies(weights)
+
+        wordcloud.to_file("wordcloud/wordcloud.png")
+
+        return None
 
     def create_article_ts_mfner(self, articles_with_mfner):
 

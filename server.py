@@ -166,6 +166,33 @@ def plot_articles_time_series():
             return "Something went wrong"
 
 
+@app.route("/plot_most_frequent_ner_wordcloud")
+@auth.login_required
+@check_ip
+def plot_most_frequent_ner_wordcloud():
+    if "date" not in request.args or "lang" not in request.args:
+        abort(400)
+    else:
+        most_frequent_ner = db_handler.get_most_frequent_ner(
+            request.args["date"], request.args["lang"], 20
+        )
+
+        if most_frequent_ner is not None:
+
+            layout = graphs.create_most_frequent_ner_wordcloud(most_frequent_ner)
+
+            # layout = {}
+
+            # response = app.response_class(
+            #     response=json.dumps(json_item(layout, "myplot")), mimetype="application/json"
+            # )
+
+            # return response
+        else:
+            my_server.LOGGER.info("Something went wrong")
+            return "Something went wrong"
+
+
 @app.route("/plot_most_frequent_ner")
 @auth.login_required
 @check_ip
@@ -174,7 +201,7 @@ def plot_most_frequent_ner():
         abort(400)
     else:
         most_frequent_ner = db_handler.get_most_frequent_ner(
-            request.args["date"], request.args["lang"]
+            request.args["date"], request.args["lang"], 10
         )
 
         if most_frequent_ner is not None:

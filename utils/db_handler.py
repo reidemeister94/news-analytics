@@ -206,7 +206,7 @@ class DBHandler:
             )
             return None
 
-    def group_by_ner(self, entity_name, frequency):
+    def group_by_ner(self, entity_name, frequency, n):
 
         # Creazione Dataframe e Rimozione Duplicati
         data = {"entity_name": entity_name, "frequency": frequency}
@@ -222,15 +222,15 @@ class DBHandler:
         data_df_en_array = []
         data_df_f_array = []
 
-        for en in data_df_no_dups["entity_name"][:10]:
+        for en in data_df_no_dups["entity_name"][:n]:
             data_df_en_array.append(en)
 
-        for f in data_df_no_dups["frequency"][:10]:
+        for f in data_df_no_dups["frequency"][:n]:
             data_df_f_array.append(f)
 
         return (data_df_en_array, data_df_f_array)
 
-    def get_most_frequent_ner(self, start_date, lang):
+    def get_most_frequent_ner(self, start_date, lang, n):
 
         try:
             if type(start_date) is str:
@@ -256,7 +256,7 @@ class DBHandler:
                         entity_name.append(ner_element["entity_name"])
                         frequency.append(ner_element["freq"])
 
-            entity_name, frequency = self.group_by_ner(entity_name, frequency)
+            entity_name, frequency = self.group_by_ner(entity_name, frequency, n)
 
             data = dict(entity_name=entity_name, frequency=frequency)
             return data
