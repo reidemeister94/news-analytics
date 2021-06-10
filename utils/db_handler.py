@@ -12,6 +12,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import re
 import dateutil.parser as parser
+import pandas as pd
 
 
 class DBHandler:
@@ -204,6 +205,167 @@ class DBHandler:
                 )
             )
             return None
+
+    def group_by_ner(self, entity_name, frequency, n):
+
+        # Creazione Dataframe e Rimozione Duplicati
+        data = {"entity_name": entity_name, "frequency": frequency}
+
+        data_df = pd.DataFrame(data, columns=["entity_name", "frequency"])
+        data_df_no_dups = (
+            data_df.groupby(["entity_name"])
+            .sum()
+            .reset_index()
+            .sort_values(["frequency"], ascending=False)
+        )
+
+        data_df_en_array = []
+        data_df_f_array = []
+
+        for en in data_df_no_dups["entity_name"][:n]:
+            data_df_en_array.append(en)
+
+        for f in data_df_no_dups["frequency"][:n]:
+            data_df_f_array.append(f)
+
+        return (data_df_en_array, data_df_f_array)
+
+    def get_most_frequent_ner(self, start_date, lang, n):
+
+        try:
+            if type(start_date) is str:
+                start_date = datetime.datetime.strptime(start_date, "%Y-%m")
+            # self.LOGGER.info(start_date)
+            end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
+            # self.LOGGER.info(end_date)
+            if lang == "it":
+                collection = self.MONGO_CLIENT["news"]["article"]
+            else:
+                collection = self.MONGO_CLIENT["news"]["article_" + lang]
+
+            query = {"discoverDate": {"$gte": start_date, "$lte": end_date}}
+
+            documents = collection.find(query, no_cursor_timeout=True)
+
+            entity_name = []
+            frequency = []
+
+            for doc in documents:
+                for ner_element in doc["namedEntityRecognition"]:
+                    if ner_element["entity_name"] != "":
+                        entity_name.append(ner_element["entity_name"])
+                        frequency.append(ner_element["freq"])
+
+            entity_name, frequency = self.group_by_ner(entity_name, frequency, n)
+
+            data = dict(entity_name=entity_name, frequency=frequency)
+            return data
+        except Exception as e:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}, {}".format(
+                    start_date, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
+            )
+            return None
+
+        return None
+
+    def time_series_count_most_frequent_ner_articles(self, start_date, lang):
+
+        try:
+            if type(start_date) is str:
+                start_date = datetime.datetime.strptime(start_date, "%Y-%m")
+            # self.LOGGER.info(start_date)
+            end_date = start_date + relativedelta(months=1) - datetime.timedelta(days=1)
+            # self.LOGGER.info(end_date)
+            if lang == "it":
+                collection = self.MONGO_CLIENT["news"]["article"]
+            else:
+                collection = self.MONGO_CLIENT["news"]["article_" + lang]
+
+            query = {"discoverDate": {"$gte": start_date, "$lte": end_date}}
+
+            documents = collection.find(query, no_cursor_timeout=True)
+
+            entity_name = []
+            frequency = []
+
+            for doc in documents:
+                for ner_element in doc["namedEntityRecognition"]:
+                    if ner_element["entity_name"] != "":
+                        entity_name.append(ner_element["entity_name"])
+                        frequency.append(ner_element["freq"])
+
+            entity_name, frequency = self.group_by_ner(entity_name, frequency)
+
+            documents_2 = collection.aggregate(
+                [
+                    {
+                        "$match": {
+                            "discoverDate": {"$gte": start_date, "$lte": end_date},
+                            "namedEntityRecognition.entity_name": {"$in": entity_name},
+                        }
+                    },
+                    {
+                        "$group": {
+                            "_id": {
+                                "$dateToString": {
+                                    "format": "%Y-%m-%d",
+                                    "date": "$discoverDate",
+                                }
+                            },
+                            "count": {"$sum": 1},
+                        }
+                    },
+                    {
+                        "$sort": {
+                            "_id": pymongo.ASCENDING,
+                        }
+                    },
+                ]
+            )
+
+            date = []
+            count = []
+
+            for el in documents_2:
+                date.append(el["_id"])
+                count.append(el["count"])
+
+            final_date = []
+            final_count = []
+            s_day = start_date
+            e_day = end_date
+            while s_day < e_day:
+
+                if s_day.strftime("%Y-%m-%d") in date:
+                    pos = date.index(s_day.strftime("%Y-%m-%d"))
+                    final_date.append(datetime.datetime.strptime(date[pos], "%Y-%m-%d"))
+                    final_count.append(count[pos])
+
+                else:
+                    final_date.append(
+                        datetime.datetime.strptime(s_day.strftime("%Y-%m-%d"), "%Y-%m-%d")
+                    )
+                    final_count.append(0)
+
+                s_day += datetime.timedelta(days=1)
+
+            data = dict(date=final_date, count=final_count)
+            return data
+        except Exception as e:
+            exc_type, _, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            self.LOGGER.error(
+                "{}, {}, {}, {}, {}".format(
+                    start_date, exc_type, fname, exc_tb.tb_lineno, str(e)
+                )
+            )
+            return None
+
+        return None
 
     def __get_logger(self):
         # create logger
